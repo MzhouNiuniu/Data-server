@@ -1,4 +1,4 @@
-export default {
+module.exports =  {
     // 开发环境
-    baseUrl: 'route-fbi.dev.oraro.net/fbi-border-service',
+    baseUrl: 'http://route-fbi.dev.oraro.net/fbi-border-service',
 }
