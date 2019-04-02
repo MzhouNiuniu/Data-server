@@ -78,5 +78,153 @@
     "version": "0.0.0",
     "filename": "routes/index.js",
     "groupTitle": "User"
+  },
+  {
+    "type": "post",
+    "url": "/order/checkOrder",
+    "title": "审核订单或企业",
+    "name": "checkOrder",
+    "group": "order",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "checkResult",
+            "description": "<p>审核结果:1通过，0不通过.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>订单或企业id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>类型:buyRequirementOrder求购订单，sellingProduct出售商品，company企业</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/order.js",
+    "groupTitle": "order"
+  },
+  {
+    "type": "get",
+    "url": "/order/getOrderDetail",
+    "title": "获取订单获企业详情",
+    "name": "getOrderDetail",
+    "group": "order",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>订单或企业id.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>类型：order订单，company企业.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/order.js",
+    "groupTitle": "order"
+  },
+  {
+    "type": "get",
+    "url": "/order/getOrderList",
+    "title": "获取订单或企业列表",
+    "name": "getOrderList",
+    "group": "order",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "pageSize",
+            "description": "<p>每页显示数量.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "pageNum",
+            "description": "<p>页数.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>订单类型:awaitPreviewOrder待审核订单，awaitDealOrder待处理订单，endingOrder已结束订单，awaitPreviewCompany待审核企业.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/order.js",
+    "groupTitle": "order"
+  },
+  {
+    "type": "get",
+    "url": "/userCenter/getCustomOrPerformanceList",
+    "title": "获取我的顾客和我的业绩列表",
+    "name": "getCustomOrPerformanceList",
+    "group": "userCenter",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>类型:performance我的业绩，customer我的顾客.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "pageSize",
+            "description": "<p>每页显示数量（顾客列表用到）.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "pageNum",
+            "description": "<p>页码（顾客列表用到）.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "date",
+            "description": "<p>日期（业绩列表用到）.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/userCenter.js",
+    "groupTitle": "userCenter"
   }
 ]
