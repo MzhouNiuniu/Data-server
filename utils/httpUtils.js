@@ -3,7 +3,7 @@ const qs = require('querystring');
 
 function getHeader(token) {
     return {
-        'Authorization':token.cookies.Authorization
+        'Authorization':token.cookies.Authorization?token.cookies.Authorization:''
     };
 }
 

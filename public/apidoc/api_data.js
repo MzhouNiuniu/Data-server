@@ -80,6 +80,59 @@ define({ "api": [
     "groupTitle": "User"
   },
   {
+    "type": "get",
+    "url": "/loginByCode",
+    "title": "验证码登陆",
+    "name": "loginByCode",
+    "group": "login",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "code",
+            "description": "<p>手机验证码.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "phone",
+            "description": "<p>手机号.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/index.js",
+    "groupTitle": "login"
+  },
+  {
+    "type": "get",
+    "url": "/sendMessage",
+    "title": "获取登陆验证码",
+    "name": "sendMessage",
+    "group": "login",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "phone",
+            "description": "<p>手机号.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/index.js",
+    "groupTitle": "login"
+  },
+  {
     "type": "post",
     "url": "/order/checkOrder",
     "title": "审核订单或企业",
