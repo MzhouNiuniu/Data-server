@@ -182,5 +182,49 @@
     "version": "0.0.0",
     "filename": "routes/order.js",
     "groupTitle": "order"
+  },
+  {
+    "type": "get",
+    "url": "/userCenter/getCustomOrPerformanceList",
+    "title": "获取我的顾客和我的业绩列表",
+    "name": "getCustomOrPerformanceList",
+    "group": "userCenter",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>类型:performance我的业绩，customer我的顾客.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "pageSize",
+            "description": "<p>每页显示数量（顾客列表用到）.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "pageNum",
+            "description": "<p>页码（顾客列表用到）.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "date",
+            "description": "<p>日期（业绩列表用到）.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/userCenter.js",
+    "groupTitle": "userCenter"
   }
 ]

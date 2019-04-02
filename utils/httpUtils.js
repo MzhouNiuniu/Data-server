@@ -21,8 +21,8 @@ class HttpUtils {
                 reject(err);
             } else {
                 if (JSON.parse(body).code === 200 || JSON.parse(body).code === 304 || JSON.parse(body).code === 400) {
-                    resolve(JSON.parse(body).data);
-                } else if (JSON.parse(body).code === 500) {
+                    resolve(JSON.parse(body));
+                } else {
                     resolve(JSON.parse(body));
                 }
             }
@@ -39,11 +39,7 @@ class HttpUtils {
             if (err) {
                 reject(err);
             } else {
-                if (JSON.parse(body).code === 200 || JSON.parse(body).code === 304 || JSON.parse(body).code === 400) {
-                    resolve(JSON.parse(body).data);
-                } else if (JSON.parse(body).code === 500) {
-                    resolve(JSON.parse(body));
-                }
+                resolve(JSON.parse(body));
             }
         }))
     }
@@ -57,11 +53,7 @@ class HttpUtils {
             if (err) {
                 reject(err);
             } else {
-                if (JSON.parse(body).code === 200 || JSON.parse(body).code === 304 || JSON.parse(body).code === 400) {
-                    resolve(JSON.parse(body));
-                } else if (JSON.parse(body).code === 500) {
-                    resolve(JSON.parse(body));
-                }
+                resolve(JSON.parse(body));
             }
         }))
     }
@@ -76,7 +68,7 @@ class HttpUtils {
             if (err) {
                 reject(err);
             } else {
-                resolve(body);
+                resolve(JSON.parse(body));
             }
         }))
     }
@@ -92,7 +84,7 @@ class HttpUtils {
             if (err) {
                 reject(err);
             } else {
-                resolve(body);
+                resolve(JSON.parse(body));
             }
         }))
     }
@@ -108,7 +100,7 @@ class HttpUtils {
             if (err) {
                 reject(err);
             } else {
-                resolve(body);
+                resolve(JSON.parse(body));
             }
         }))
     }
