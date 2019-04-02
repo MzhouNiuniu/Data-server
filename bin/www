@@ -3,7 +3,10 @@
 /**
  * Module dependencies.
  */
-
+// require('babel-register') ({
+//     presets: [ 'env' ]
+// })
+require('babel-core/register'); //新增es6功能
 var app = require('../app');
 var debug = require('debug')('node-middle:server');
 var http = require('http');

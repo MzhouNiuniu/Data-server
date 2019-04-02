@@ -3,7 +3,7 @@
 * */
 const API_URL = require('../config/ckApi');
 const httpUtils = require('../utils/httpUtils');
-var token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlIjoib3Jhcm8gbGljZW5zZSIsInVzZXJfbmFtZSI6Ik1UTTVNVE16TXpNME5qTTZNR1ZrTVdFM016UXRZVGhsTXkwME1qUXlMVGcwTURBdE1UUXlNelprWm1Rd1ptVnoiLCJzY29wZSI6WyJzZXJ2ZXIiXSwicm9sZXMiOltdLCJleHAiOjE1NTQxNzU0NzMsImp0aSI6IjBkZWFiNWJiLWNlZDgtNDFjNi1iMTcwLWM5MTVkNjM4NjMwNyIsImNsaWVudF9pZCI6ImY1cjlkMDA3Yzc0MzQwYjY4MGM4NWNmZHNnZGY0M2tqZCIsInVzZXJuYW1lIjoiMTM5MTMzMzM0NjMifQ.AC7KXujtwHPGkLrbyTaDnAu0t98p8n2By5X2l4ZxjUAbcap_yvz58N47MlCCDPQxd3LBrfR-NbWEoth-4nTxvh0dJ4MRPpeVZS6bDVnzxbKmfrARRe_QyxN1IMJdA_pEDnc9E4jZaSTNR8_NkX3fKle-69xee2Cvnl54OIwu97HlLJRJ7UpKdVhm5Hzey_Jh4SCQ1sZShrTFtBR6J4dDh1_z4oDWfkd-kpiUPq8cCOF-8PeB2M6HSi1M5KGCBpSugsY_8RNZjndvAbSjw-rnipQBLj23MXO_ekien2GoYVJXXIt5bw2C9eXiozYcmzUrIT1G9Aw4mapEtxqjgqBhHQ'
+var token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlIjoib3Jhcm8gbGljZW5zZSIsInVzZXJfbmFtZSI6Ik1UTXlNakkwTkRRek1EYzZNR1ZrTVdFM016UXRZVGhsTXkwME1qUXlMVGcwTURBdE1UUXlNelprWm1Rd1ptVnoiLCJzY29wZSI6WyJzZXJ2ZXIiXSwicm9sZXMiOltdLCJleHAiOjE1NTQyNzA1MDMsImp0aSI6ImYyM2E5OTRlLWQwODctNGRkZC1iOWRhLTY4ZDljODUzYTM1MiIsImNsaWVudF9pZCI6ImY1cjlkMDA3Yzc0MzQwYjY4MGM4NWNmZHNnZGY0M2tqZCIsInVzZXJuYW1lIjoiMTMyMjI0NDQzMDcifQ.C4x0PZrg4alVJOX8FaucyfPC8SowjsyRDa1ikqApiy3Alk3ZRvuFerImsGyviMC2Gq5_xHmVDLcuf7Gc1G5glhZ13G3nq39mUCL0QVTZ2Xbue7Qml9HmH7DVaIY3WEFaZprouA022N5tz5fECB45vn3T5ejPs1Btd7F_eNmigR0AqST5MIdskefbd--XYrDR3ZLCpW7fMNbOrwldYdY0BHVr2KCXK7mrxek7MCt67KfodLGPql0QRMsY2rC-oZCn9wNkbCfzmMqsaYTFrOqS7y_xvdk4f4VSYjARF4S_qStVnk4ww7-M19PlDj45Gr7c9aJTGQXuP1phi0Em9N2HmQ'
 
 class Order {
     constructor() {
@@ -50,7 +50,7 @@ class Order {
             return false
         }
         try {
-            const result = await httpUtils.httpGet(API_URL.order.orderDetail, {orderId: orderId}, token);
+            const result = await httpUtils.httpGet(API_URL.order.orderDetail, {orderId: orderId}, req);
             res.send(result)
         }catch (e) {
             console.log(e)

@@ -1,16 +1,15 @@
-const request = require('request');
+const request = require('request').defaults({jar: true});  //允许携带cookies
 const qs = require('querystring');
 
 function getHeader(token) {
     return {
-        'Authorization': 'Bearer ' + token
+        'Authorization':token.cookies.Authorization
     };
 }
 
 class HttpUtils {
     constructor() {
     }
-
     httpGet(url, params, token) {
         return new Promise((resolve, reject) => request.get({
             url: `${url}?${qs.stringify(params)}`,

@@ -1,0 +1,31 @@
+{
+  "code": 200,
+  "data": {
+    "memberInfo": {
+      "id": "79369707844669440",
+      "mobile": "13222444307",
+      "personIcon": "",
+      "name": "",
+      "isPlatUser": 1,
+      "isGeneralizeUser": 0,
+      "isBusinessUser": 1,
+      "generalizerAccount": "",
+      "businessAccount": "13913333463",
+      "unionId": "",
+      "nickName": "",
+      "serveCode": "8E5VC89R",
+      "createdBy": "",
+      "createTime": "2019-02-20 08:40:52",
+      "modifiedBy": "",
+      "modifiedTime": "2019-02-20 08:41:02",
+      "avgEvaluateScore": 0,
+      "evaluateCount": 0,
+      "isDeleted": 0,
+      "gassociationTypes": null,
+      "bassociationTypes": null
+    },
+    "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlIjoib3Jhcm8gbGljZW5zZSIsInVzZXJfbmFtZSI6Ik1UTXlNakkwTkRRek1EYzZNR1ZrTVdFM016UXRZVGhsTXkwME1qUXlMVGcwTURBdE1UUXlNelprWm1Rd1ptVnoiLCJzY29wZSI6WyJzZXJ2ZXIiXSwicm9sZXMiOltdLCJleHAiOjE1NTQyNzA1MDMsImp0aSI6ImYyM2E5OTRlLWQwODctNGRkZC1iOWRhLTY4ZDljODUzYTM1MiIsImNsaWVudF9pZCI6ImY1cjlkMDA3Yzc0MzQwYjY4MGM4NWNmZHNnZGY0M2tqZCIsInVzZXJuYW1lIjoiMTMyMjI0NDQzMDcifQ.C4x0PZrg4alVJOX8FaucyfPC8SowjsyRDa1ikqApiy3Alk3ZRvuFerImsGyviMC2Gq5_xHmVDLcuf7Gc1G5glhZ13G3nq39mUCL0QVTZ2Xbue7Qml9HmH7DVaIY3WEFaZprouA022N5tz5fECB45vn3T5ejPs1Btd7F_eNmigR0AqST5MIdskefbd--XYrDR3ZLCpW7fMNbOrwldYdY0BHVr2KCXK7mrxek7MCt67KfodLGPql0QRMsY2rC-oZCn9wNkbCfzmMqsaYTFrOqS7y_xvdk4f4VSYjARF4S_qStVnk4ww7-M19PlDj45Gr7c9aJTGQXuP1phi0Em9N2HmQ",
+    "refreshToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlIjoib3Jhcm8gbGljZW5zZSIsInVzZXJfbmFtZSI6Ik1UTXlNakkwTkRRek1EYzZNR1ZrTVdFM016UXRZVGhsTXkwME1qUXlMVGcwTURBdE1UUXlNelprWm1Rd1ptVnoiLCJzY29wZSI6WyJzZXJ2ZXIiXSwicm9sZXMiOltdLCJhdGkiOiJmMjNhOTk0ZS1kMDg3LTRkZGQtYjlkYS02OGQ5Yzg1M2EzNTIiLCJleHAiOjE1NTQyNzA1MDMsImp0aSI6IjdkNDcyMzNiLTJhY2QtNGEzNS1iZjE3LTkyMzg4Yjg4MDVjYiIsImNsaWVudF9pZCI6ImY1cjlkMDA3Yzc0MzQwYjY4MGM4NWNmZHNnZGY0M2tqZCIsInVzZXJuYW1lIjoiMTMyMjI0NDQzMDcifQ.M6wGuxn8n_J8wlJvSZSQLCKj5rzUar-1rhChUCqeyfWKm8iEsKTWlXvXC-1Whc0cn05l9Vi67yW7asSgllYYC49wfCWYWO37KhhcxO_GLwRWKkj60D2O5UGY-jD6x4u2DogFKqWHF0iCO3wL6uJr_pMlT6NH8_vAfmjZ3P-k1t8u9WovN-BYyQTsSTiHy6HzEf2uSUoh3TTZo1CrnoR7S4koPdyh3_E_iUFSmLxtU_Hr-kuk0pG9Tl2ztLnFye-LjRmKWdRbVUJGJKscrTKmRegxceJiO5Dv0gO11LhEQNHfSOfwZG45U2b-T-woswSYQWOHTxoOJ0x4HHhW4lQLog"
+  },
+  "message": "ok"
+}
