@@ -5,6 +5,7 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "doc": "apidoc -i ./routes/ -o ./public/apidoc",
+    "docs": "apidoc -i routes/ -o public/apidoc",
     "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files"
   },
   "dependencies": {

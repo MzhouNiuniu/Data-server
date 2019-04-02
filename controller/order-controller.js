@@ -41,10 +41,20 @@ class Order {
 
     /*
     * 获取订单详情
-    * @apiParam {Number} id 订单id.
+    * @apiParam {Number} orderId 订单id.
     * */
     async getOrderDetail(req, res, next) {
-
+        let {orderId} = req.query;
+        if (!orderId) {
+            res.send({code: 500, msg: '缺少必要参数'});
+            return false
+        }
+        try {
+            const result = await httpUtils.httpGet(API_URL.order.orderDetail, {orderId: orderId}, token);
+            res.send(result)
+        }catch (e) {
+            console.log(e)
+        }
     }
 
     /*
@@ -54,8 +64,12 @@ class Order {
     * @apiParam {String} type 订单类型 buyRequirementOrder 求购订单
     * @apiParam {String} type 订单类型 sellingProduct 出售商品
     * */
-    async checkOrder(req, res, next){
-        let {checkResult,id,type} = req.body;
+    async checkOrder(req, res, next) {
+        let {checkResult, id, type} = req.body;
+        if (!checkResult || !id || !type) {
+            res.send({code: 500, msg: '缺少必要参数'})
+            return false
+        }
         let url;
         switch (type) {
             case 'buyRequirementOrder':
@@ -65,7 +79,7 @@ class Order {
                 url = API_URL.order.auditSellProduct;
                 break;
         }
-        const result = await httpUtils.httpPost(url, {checkResult: checkResult, id: id,type:type}, token);
+        const result = await httpUtils.httpPost(url, {checkResult: checkResult, id: id}, token);
         res.send(result)
     }
 }

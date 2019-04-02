@@ -8,8 +8,9 @@ module.exports = {
         provinceList: `${baseURL.baseUrl}/generalize/selectBox/provinceList`,//获取省份列表
     },
     order: {
-        getBuyRequirementInfo: `${baseURL.baseUrl}/generalize/order/getBuyRequirementInfo`,//获取求购待审核订单
+        getBuyRequirementInfo: `${baseURL.baseUrl}/generalize/order/getBuyRequirementInfo`,//获取求购待审核订单详情
         getSellProductInfo: `${baseURL.baseUrl}/generalize/order/getSellProductInfo`,//获取出售待审核商品信息
+        orderDetail: `${baseURL.baseUrl}/generalize/order/orderDetail`,//订单详情
         getWaitAuditOrder: `${baseURL.baseUrl}/generalize/order/getWaitAuditOrder`,//待审核订单列表
         getFinishedOrder: `${baseURL.baseUrl}/generalize/order/getFinishedOrder`,//已结束订单列表
         getWaitDoneOrder: `${baseURL.baseUrl}/generalize/order/getWaitDoneOrder`,//待处理订单列表

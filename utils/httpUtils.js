@@ -3,7 +3,6 @@ const qs = require('querystring');
 
 function getHeader(token) {
     return {
-        "Content-type": "application/json; charset=UTF-8",
         'Authorization': 'Bearer ' + token
     };
 }
@@ -13,11 +12,10 @@ class HttpUtils {
     }
 
     httpGet(url, params, token) {
-        let header = getHeader(token);
         return new Promise((resolve, reject) => request.get({
             url: `${url}?${qs.stringify(params)}`,
             method: 'get',
-            headers: header,
+            headers: Object.assign(getHeader(token),{'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}),
         }, (err, response, body) => {
             if (err) {
                 reject(err);
@@ -32,11 +30,10 @@ class HttpUtils {
     }
 
     httpGetJson(url, params, token) {
-        let header = getHeader(token);
         return new Promise((resolve, reject) => request.get({
             url: url,
             method: 'get',
-            headers: header,
+            headers: Object.assign(getHeader(token),{'Content-Type': 'application/json;charset=UTF-8',}),
             data: params
         }, (err, response, body) => {
             if (err) {
@@ -50,30 +47,30 @@ class HttpUtils {
             }
         }))
     }
+
     httpPost(url, form, token) {
-        let header = getHeader(token);
         return new Promise((resolve, reject) => request.post({
             url: `${url}?${qs.stringify(form)}`,
             method: 'post',
-            headers: header,
+            headers: Object.assign(getHeader(token),{'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}),
         }, (err, response, body) => {
             if (err) {
                 reject(err);
             } else {
                 if (JSON.parse(body).code === 200 || JSON.parse(body).code === 304 || JSON.parse(body).code === 400) {
-                    resolve(JSON.parse(body).data);
+                    resolve(JSON.parse(body));
                 } else if (JSON.parse(body).code === 500) {
                     resolve(JSON.parse(body));
                 }
             }
         }))
     }
+
     httpPostJson(url, form, token) {
-        let header = getHeader(token);
         return new Promise((resolve, reject) => request.post({
             url: url,
             method: 'post',
-            headers: header,
+            headers: Object.assign(getHeader(token),{'Content-Type': 'application/json;charset=UTF-8',}),
             data: form
         }, (err, response, body) => {
             if (err) {
