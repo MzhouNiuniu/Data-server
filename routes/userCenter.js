@@ -12,4 +12,35 @@ const userCenterController = require('../controller/userCenter-controller');
  * @apiParam {String} date 日期（业绩列表用到）.
  */
 router.get('/getCustomOrPerformanceList', userCenterController.getCustomOrPerformanceList);
+
+/**
+ * @api {get} /userCenter/getCustomerList 获取客户详情
+ * @apiName getCustomerList
+ * @apiGroup userCenter
+ *
+ * @apiParam {String} type 类型:customerInfoBuyList客户详情（求购列表），customerInfoSellList客户详情（出售列表）.
+ * @apiParam {Number} pageSize 每页显示数量.
+ * @apiParam {Number} pageNum 页码.
+ * @apiParam {String} memberAccount 客户账户.
+ */
+router.get('/getCustomerList', userCenterController.getCustomerList);
+
+/**
+ * @api {get} /userCenter/getCompanyInfo 企业认证信息
+ * @apiName getCompanyInfo
+ * @apiGroup userCenter
+ *
+ * @apiParam {String} memberAccount 客户账户.
+ */
+router.get('/getCompanyInfo', userCenterController.getCompanyInfo);
+
+/**
+ * @api {post} /userCenter/addCustomer 添加客户
+ * @apiName addCustomer
+ * @apiGroup userCenter
+ *
+ * @apiParam {String} mobile 手机号.
+ */
+router.post('/addCustomer', userCenterController.addCustomer);
+
 module.exports = router;

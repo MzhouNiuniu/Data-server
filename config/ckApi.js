@@ -25,5 +25,9 @@ module.exports = {
     userCenter:{
         getMyCustomer:`${baseURL.baseUrl}/generalize/member/getMyCustomer`,//我的客户
         getPerformance:`${baseURL.baseUrl}/generalize/member/getPerformance`,//我的业绩
+        getCustomerInfoBuyList:`${baseURL.baseUrl}/generalize/member/getCustomerInfoBuyList`,//客户详情（求购列表）
+        getCustomerInfoSellList:`${baseURL.baseUrl}/generalize/member/getCustomerInfoSellList`,//客户详情（出售列表）
+        getCompanyByMemberAccount:`${baseURL.baseUrl}/generalize/member/getCompanyByMemberAccount`,//企业认证信息
+        addCustomer:`${baseURL.baseUrl}/generalize/member/addCustomer`,//添加客户
     }
 }

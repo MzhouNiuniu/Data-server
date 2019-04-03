@@ -44,7 +44,7 @@ class selectData {
         }
     }
 
-    //获取需要入参的下拉框数据
+    //获取城市下拉框
     async getSelectDataByParams(req, res, next) {
         try {
             let {all, code} = req.query;

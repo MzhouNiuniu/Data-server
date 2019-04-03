@@ -22,7 +22,7 @@ class UserCenter {
             res.send(errResponse);
             return false
         }
-        let url,params;
+        let url, params;
         switch (type) {
             case 'performance':
                 let {date} = req.query;
@@ -49,6 +49,83 @@ class UserCenter {
         } catch (e) {
             console.log(e)
         }
+    }
+
+    /*
+    * 获取客户详情
+    * @apiParam {String} type 类型:customerInfoBuyList客户详情（求购列表），customerInfoSellList客户详情（出售列表）
+    * @apiParam {Number} pageSize 每页显示条数
+    * @apiParam {Number} pageNum 页码
+    * @apiParam {String} memberAccount 客户账户
+    * */
+    async getCustomerList(req, res, next) {
+        let {memberAccount, pageNum, pageSize, type} = req.query;
+        if (!memberAccount || !pageNum || !pageSize || !type) {
+            res.send(errResponse);
+            return false
+        }
+        let url;
+        switch (type) {
+            case 'customerInfoBuyList':
+                url = API_URL.userCenter.getCustomerInfoBuyList;
+                break;
+            case 'customerInfoSellList':
+                url = API_URL.userCenter.getCustomerInfoSellList;
+                break;
+        }
+        try {
+            const result = await httpUtils.httpGet(url, {
+                memberAccount: memberAccount,
+                pageNum: pageNum,
+                pageSize: pageSize
+            }, req);
+            res.send(result)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    /*
+    * 企业认证信息
+    * @apiParam {String} memberAccount 客户账户
+    * */
+    async getCompanyInfo(req, res, next) {
+        let {memberAccount} = req.query;
+        if (!memberAccount) {
+            res.send(errResponse);
+            return false
+        }
+        try {
+            const result = await httpUtils.httpGet(API_URL.userCenter.getCompanyByMemberAccount, {memberAccount: memberAccount}, req);
+            res.send(result)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    /*
+    * 添加客户
+    * @apiParam {String} mobile 手机号
+    * */
+    async addCustomer(req, res, next) {
+        let {mobile} = req.body;
+        if (!mobile) {
+            res.send(errResponse);
+            return false
+        }
+        try {
+            const result = await httpUtils.httpPut(API_URL.userCenter.addCustomer, {mobile: mobile}, req);
+            res.send(result)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    /*
+    * 修改个人资料
+    * */
+    async modifyPersonInfo(req,res,next){
+
     }
 }
 

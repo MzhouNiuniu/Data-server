@@ -3,27 +3,24 @@ const qs = require('querystring');
 
 function getHeader(req) {
     return {
-        'Authorization':req.cookies.Authorization?req.cookies.Authorization:''
+        'Authorization': req.cookies.Authorization ? req.cookies.Authorization : ''
     };
 }
 
 class HttpUtils {
     constructor() {
     }
+
     httpGet(url, params, req) {
         return new Promise((resolve, reject) => request.get({
             url: `${url}?${qs.stringify(params)}`,
             method: 'get',
-            headers: Object.assign(getHeader(req),{'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}),
+            headers: Object.assign(getHeader(req), {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}),
         }, (err, response, body) => {
             if (err) {
                 reject(err);
             } else {
-                if (JSON.parse(body).code === 200 || JSON.parse(body).code === 304 || JSON.parse(body).code === 400) {
-                    resolve(JSON.parse(body));
-                } else {
-                    resolve(JSON.parse(body));
-                }
+                resolve(JSON.parse(body));
             }
         }))
     }
@@ -32,7 +29,7 @@ class HttpUtils {
         return new Promise((resolve, reject) => request.get({
             url: url,
             method: 'get',
-            headers: Object.assign(getHeader(req),{'Content-Type': 'application/json;charset=UTF-8',}),
+            headers: Object.assign(getHeader(req), {'Content-Type': 'application/json;charset=UTF-8',}),
             data: params
         }, (err, response, body) => {
             if (err) {
@@ -47,7 +44,7 @@ class HttpUtils {
         return new Promise((resolve, reject) => request.post({
             url: `${url}?${qs.stringify(form)}`,
             method: 'post',
-            headers: Object.assign(getHeader(req),{'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}),
+            headers: Object.assign(getHeader(req), {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}),
         }, (err, response, body) => {
             if (err) {
                 reject(err);
@@ -61,8 +58,22 @@ class HttpUtils {
         return new Promise((resolve, reject) => request.post({
             url: url,
             method: 'post',
-            headers: Object.assign(getHeader(req),{'Content-Type': 'application/json;charset=UTF-8',}),
+            headers: Object.assign(getHeader(req), {'Content-Type': 'application/json;charset=UTF-8',}),
             data: form
+        }, (err, response, body) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(JSON.parse(body));
+            }
+        }))
+    }
+
+    httpPut(url, params, req) {
+        return new Promise((resolve, reject) => request.get({
+            url: `${url}?${qs.stringify(params)}`,
+            method: 'put',
+            headers: Object.assign(getHeader(req), {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}),
         }, (err, response, body) => {
             if (err) {
                 reject(err);

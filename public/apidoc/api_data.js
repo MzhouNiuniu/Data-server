@@ -38,46 +38,33 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/user/:id",
-    "title": "Request User information",
-    "name": "GetUser",
-    "group": "User",
+    "url": "/selectData/getSelectDataByParams",
+    "title": "获取城市下拉框",
+    "name": "getSelectDataByParams",
+    "group": "SelectData",
     "parameter": {
       "fields": {
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "Boolean",
             "optional": false,
-            "field": "id",
-            "description": "<p>Users unique ID.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "firstname",
-            "description": "<p>Firstname of the User.</p>"
+            "field": "all",
+            "description": "<p>是否显示全部.</p>"
           },
           {
-            "group": "Success 200",
+            "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "lastname",
-            "description": "<p>Lastname of the User.</p>"
+            "field": "code",
+            "description": "<p>城市代码.</p>"
           }
         ]
       }
     },
     "version": "0.0.0",
-    "filename": "routes/index.js",
-    "groupTitle": "User"
+    "filename": "routes/selectData.js",
+    "groupTitle": "SelectData"
   },
   {
     "type": "get",
@@ -237,6 +224,52 @@ define({ "api": [
     "groupTitle": "order"
   },
   {
+    "type": "post",
+    "url": "/userCenter/addCustomer",
+    "title": "添加客户",
+    "name": "addCustomer",
+    "group": "userCenter",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>手机号.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/userCenter.js",
+    "groupTitle": "userCenter"
+  },
+  {
+    "type": "get",
+    "url": "/userCenter/getCompanyInfo",
+    "title": "企业认证信息",
+    "name": "getCompanyInfo",
+    "group": "userCenter",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "memberAccount",
+            "description": "<p>客户账户.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/userCenter.js",
+    "groupTitle": "userCenter"
+  },
+  {
     "type": "get",
     "url": "/userCenter/getCustomOrPerformanceList",
     "title": "获取我的顾客和我的业绩列表",
@@ -272,6 +305,50 @@ define({ "api": [
             "optional": false,
             "field": "date",
             "description": "<p>日期（业绩列表用到）.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/userCenter.js",
+    "groupTitle": "userCenter"
+  },
+  {
+    "type": "get",
+    "url": "/userCenter/getCustomerList",
+    "title": "获取客户详情",
+    "name": "getCustomerList",
+    "group": "userCenter",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>类型:customerInfoBuyList客户详情（求购列表），customerInfoSellList客户详情（出售列表）.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "pageSize",
+            "description": "<p>每页显示数量.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "pageNum",
+            "description": "<p>页码.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "memberAccount",
+            "description": "<p>客户账户.</p>"
           }
         ]
       }

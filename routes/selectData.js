@@ -12,6 +12,14 @@ const selectDataController = require('../controller/select-data-controller');
  */
 router.get('/getSelectData',selectDataController.getSelectData);
 
+/**
+ * @api {get} /selectData/getSelectDataByParams 获取城市下拉框
+ * @apiName getSelectDataByParams
+ * @apiGroup SelectData
+ *
+ * @apiParam {Boolean} all 是否显示全部.
+ * @apiParam {String} code  城市代码.
+ */
 router.get('/getSelectDataByParams',selectDataController.getSelectDataByParams);
 
 module.exports = router;
