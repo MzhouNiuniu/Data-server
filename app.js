@@ -5,7 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var ejs = require('ejs');
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var selectDataRouter = require('./routes/selectData');
 var orderRouter = require('./routes/order');
 var userCenterRouter = require('./routes/userCenter');
@@ -40,7 +39,6 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/selectData', selectDataRouter);
 app.use('/order', orderRouter);
 app.use('/userCenter', userCenterRouter);

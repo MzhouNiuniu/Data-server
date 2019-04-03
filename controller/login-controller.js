@@ -41,7 +41,12 @@ class Login {
         }
         try {
             const result = await httpUtils.httpPost(loginByCode,{code,mobile:phone}, req);
-            console.log(result)
+            if(result.code==200){
+                res.cookie("Authorization", `Bearer ${result.data.token}`, {
+                    maxAge: 90000000,
+                    httpOnly: false
+                });
+            }
             res.send(result)
         }catch (e) {
             console.log(e)

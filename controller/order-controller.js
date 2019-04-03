@@ -3,7 +3,6 @@
 * */
 const API_URL = require('../config/ckApi');
 const httpUtils = require('../utils/httpUtils');
-var token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlIjoib3Jhcm8gbGljZW5zZSIsInVzZXJfbmFtZSI6Ik1UTTVNVE16TXpNME5qTTZNR1ZrTVdFM016UXRZVGhsTXkwME1qUXlMVGcwTURBdE1UUXlNelprWm1Rd1ptVnoiLCJzY29wZSI6WyJzZXJ2ZXIiXSwicm9sZXMiOltdLCJleHAiOjE1NTQxNzU0NzMsImp0aSI6IjBkZWFiNWJiLWNlZDgtNDFjNi1iMTcwLWM5MTVkNjM4NjMwNyIsImNsaWVudF9pZCI6ImY1cjlkMDA3Yzc0MzQwYjY4MGM4NWNmZHNnZGY0M2tqZCIsInVzZXJuYW1lIjoiMTM5MTMzMzM0NjMifQ.AC7KXujtwHPGkLrbyTaDnAu0t98p8n2By5X2l4ZxjUAbcap_yvz58N47MlCCDPQxd3LBrfR-NbWEoth-4nTxvh0dJ4MRPpeVZS6bDVnzxbKmfrARRe_QyxN1IMJdA_pEDnc9E4jZaSTNR8_NkX3fKle-69xee2Cvnl54OIwu97HlLJRJ7UpKdVhm5Hzey_Jh4SCQ1sZShrTFtBR6J4dDh1_z4oDWfkd-kpiUPq8cCOF-8PeB2M6HSi1M5KGCBpSugsY_8RNZjndvAbSjw-rnipQBLj23MXO_ekien2GoYVJXXIt5bw2C9eXiozYcmzUrIT1G9Aw4mapEtxqjgqBhHQ'
 var errResponse = {code: 500, msg: '缺少必要参数'};
 
 class Order {
@@ -41,7 +40,7 @@ class Order {
                 break;
         }
         try {
-            const result = await httpUtils.httpGet(url, {pageNum: pageNum, pageSize: pageSize}, token);
+            const result = await httpUtils.httpGet(url, {pageNum: pageNum, pageSize: pageSize}, req);
             res.send(result)
         } catch (e) {
             console.log(e)
@@ -72,7 +71,7 @@ class Order {
                 break;
         }
         try {
-            const result = await httpUtils.httpGet(API_URL.order.orderDetail, {orderId: orderId}, token);
+            const result = await httpUtils.httpGet(API_URL.order.orderDetail, params, req);
             res.send(result)
         }catch (e) {
             console.log(e)
@@ -90,7 +89,7 @@ class Order {
     async checkOrder(req, res, next) {
         let {checkResult, id, type} = req.body;
         if (!checkResult || !id || !type) {
-            res.send(errResponse)
+            res.send(errResponse);
             return false
         }
         let url;
@@ -112,7 +111,7 @@ class Order {
                 url = API_URL.company.auditCompany;
                 break;
         }
-        const result = await httpUtils.httpPost(url, form, token);
+        const result = await httpUtils.httpPost(url, form, req);
         res.send(result)
     }
 }
