@@ -1,6 +1,9 @@
 const baseURL = require('./baseUrl')
 module.exports = {
     //ck
+    home: {
+        home: `${baseURL.baseUrl}/generalize/index`,//首页数据
+    },
     selectApi: {
         getCityData: `${baseURL.baseUrl}/generalize/selectBox/getCityData`,//获取城市
         getCustoms: `${baseURL.baseUrl}/generalize/selectBox/getCustoms`,//获取客户列表（不带企业名称）
@@ -17,17 +20,17 @@ module.exports = {
         auditBuyRequirement: `${baseURL.baseUrl}/generalize/order/auditBuyRequirement`,//审核求购订单
         auditSellProduct: `${baseURL.baseUrl}/generalize/order/auditSellProduct`,//审核出售商品
     },
-    company:{
-        getWaitAuditCompany:`${baseURL.baseUrl}/generalize/company/getWaitAuditCompany`,//待审核企业列表
-        getWaitAuditCompanyInfo:`${baseURL.baseUrl}/generalize/company/getWaitAuditCompanyInfo`,//待审核企业详情
-        auditCompany:`${baseURL.baseUrl}/generalize/company/auditCompany`,//审核企业
+    company: {
+        getWaitAuditCompany: `${baseURL.baseUrl}/generalize/company/getWaitAuditCompany`,//待审核企业列表
+        getWaitAuditCompanyInfo: `${baseURL.baseUrl}/generalize/company/getWaitAuditCompanyInfo`,//待审核企业详情
+        auditCompany: `${baseURL.baseUrl}/generalize/company/auditCompany`,//审核企业
     },
-    userCenter:{
-        getMyCustomer:`${baseURL.baseUrl}/generalize/member/getMyCustomer`,//我的客户
-        getPerformance:`${baseURL.baseUrl}/generalize/member/getPerformance`,//我的业绩
-        getCustomerInfoBuyList:`${baseURL.baseUrl}/generalize/member/getCustomerInfoBuyList`,//客户详情（求购列表）
-        getCustomerInfoSellList:`${baseURL.baseUrl}/generalize/member/getCustomerInfoSellList`,//客户详情（出售列表）
-        getCompanyByMemberAccount:`${baseURL.baseUrl}/generalize/member/getCompanyByMemberAccount`,//企业认证信息
-        addCustomer:`${baseURL.baseUrl}/generalize/member/addCustomer`,//添加客户
+    userCenter: {
+        getMyCustomer: `${baseURL.baseUrl}/generalize/member/getMyCustomer`,//我的客户
+        getPerformance: `${baseURL.baseUrl}/generalize/member/getPerformance`,//我的业绩
+        getCustomerInfoBuyList: `${baseURL.baseUrl}/generalize/member/getCustomerInfoBuyList`,//客户详情（求购列表）
+        getCustomerInfoSellList: `${baseURL.baseUrl}/generalize/member/getCustomerInfoSellList`,//客户详情（出售列表）
+        getCompanyByMemberAccount: `${baseURL.baseUrl}/generalize/member/getCompanyByMemberAccount`,//企业认证信息
+        addCustomer: `${baseURL.baseUrl}/generalize/member/addCustomer`,//添加客户
     }
 }

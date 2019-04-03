@@ -121,12 +121,6 @@ class UserCenter {
         }
     }
 
-    /*
-    * 修改个人资料
-    * */
-    async modifyPersonInfo(req,res,next){
-
-    }
 }
 
 module.exports = new UserCenter();

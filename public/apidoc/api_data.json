@@ -68,6 +68,36 @@
   },
   {
     "type": "get",
+    "url": "/home/getHomeData",
+    "title": "获取首页数据",
+    "name": "getHomeData",
+    "group": "home",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "goodsNum",
+            "description": "<p>优质好货数量</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "orderNum",
+            "description": "<p>订单推荐数量</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/home.js",
+    "groupTitle": "home"
+  },
+  {
+    "type": "get",
     "url": "/loginByCode",
     "title": "验证码登陆",
     "name": "loginByCode",

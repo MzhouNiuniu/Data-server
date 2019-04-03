@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var selectDataRouter = require('./routes/selectData');
 var orderRouter = require('./routes/order');
 var userCenterRouter = require('./routes/userCenter');
+var homeRouter = require('./routes/home');
 
 var app = express();
 app.use(cookieParser());
@@ -42,6 +43,7 @@ app.use('/', indexRouter);
 app.use('/selectData', selectDataRouter);
 app.use('/order', orderRouter);
 app.use('/userCenter', userCenterRouter);
+app.use('/home', homeRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
