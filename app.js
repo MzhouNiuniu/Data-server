@@ -9,6 +9,7 @@ var selectDataRouter = require('./routes/selectData');
 var orderRouter = require('./routes/order');
 var userCenterRouter = require('./routes/userCenter');
 var homeRouter = require('./routes/home');
+import goods from './routes/goods'
 
 var app = express();
 app.use(cookieParser());
@@ -44,7 +45,7 @@ app.use('/selectData', selectDataRouter);
 app.use('/order', orderRouter);
 app.use('/userCenter', userCenterRouter);
 app.use('/home', homeRouter);
-
+app.use('/goods',goods)
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));

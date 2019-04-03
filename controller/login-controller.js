@@ -3,7 +3,6 @@
 * */
 import API from '../config/zyApi'
 const {sendMessage,loginByCode} =API.login
-const API_URL = require('../config/zyApi');
 const httpUtils = require('../utils/httpUtils');
 var errResponse = {code: 500, msg: '缺少必要参数'};
 class Login {
