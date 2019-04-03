@@ -3,6 +3,8 @@
 * */
 const API_URL = require('../config/ckApi');
 const httpUtils = require('../utils/httpUtils');
+const signUpModel = require('../model/signUp');
+const releaseRequirementInsteadCustomerModel = require('../model/releaseRequirementInsteadCustomer');
 var errResponse = {code: 500, msg: '缺少必要参数'};
 
 class Order {
@@ -102,7 +104,7 @@ class Order {
                 break;
         }
         try {
-            const result = await httpUtils.httpGet(API_URL.order.orderDetail, params, req);
+            const result = await httpUtils.httpGet(url, params, req);
             res.send(result)
         } catch (e) {
             console.log(e)
@@ -144,6 +146,52 @@ class Order {
         }
         const result = await httpUtils.httpPost(url, form, req);
         res.send(result)
+    }
+
+    /*
+    * 代客报名
+    * @apiParam {String} contactMan 联系人（必填）
+    * @apiParam {String} contactPhone 联系电话（必填）
+    * @apiParam {Number} isSpot 是否现货0否1是（必填）
+    * @apiParam {String} productAddr 产地详细地址
+    * @apiParam {String} productCity 产地市
+    * @apiParam {String} productDescription 产品描述
+    * @apiParam {Number} productPrice 商品单价（必填）
+    * @apiParam {String} productPriceUnit 商品单价单位
+    * @apiParam {String} productProvince 产地省
+    * @apiParam {String} supplierAccount 供应商账号（必填）
+    * @apiParam {Number} supplyQuantity 供货量（必填）
+    * @apiParam {String} supplyQuantityUnit 供货量单位（必填）
+    * */
+    async applyInsteadCustomer(req, res, next) {
+        let schema = new signUpModel(req.body)
+        if (!schema.validatorRequired()) {
+            res.send(errResponse);
+            return false
+        }
+        try {
+            const result = await httpUtils.httpPostJson(API_URL.order.applyInsteadCustomer, req.body, req);
+            res.send(result)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    /*
+    * 代客发布订单
+    * */
+    async releaseRequirementInsteadCustomer(req, res, next) {
+        let schema = new releaseRequirementInsteadCustomerModel(req.body);
+        if (!schema.validatorRequired()) {
+            res.send(errResponse);
+            return false
+        }
+        try {
+            const result = await httpUtils.httpPostJson(API_URL.order.releaseRequirementInsteadCustomer, req.body, req);
+            res.send(result)
+        }catch (e) {
+            console.log(e)
+        }
     }
 }
 

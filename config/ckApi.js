@@ -23,6 +23,8 @@ module.exports = {
         getWaitDoneOrder: `${baseURL.baseUrl}/generalize/order/getWaitDoneOrder`,//待处理订单列表
         auditBuyRequirement: `${baseURL.baseUrl}/generalize/order/auditBuyRequirement`,//审核求购订单
         auditSellProduct: `${baseURL.baseUrl}/generalize/order/auditSellProduct`,//审核出售商品
+        applyInsteadCustomer: `${baseURL.baseUrl}/generalize/order/applyInsteadCustomer`,//代客报名
+        releaseRequirementInsteadCustomer: `${baseURL.baseUrl}/generalize/order/releaseRequirementInsteadCustomer`,//代客发布订单
     },
     company: {
         getWaitAuditCompany: `${baseURL.baseUrl}/generalize/company/getWaitAuditCompany`,//待审核企业列表
