@@ -151,6 +151,106 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "/order/applyInsteadCustomer",
+    "title": "代客报名",
+    "name": "applyInsteadCustomer",
+    "group": "order",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "contactMan",
+            "description": "<p>联系人（必填）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "contactPhone",
+            "description": "<p>联系电话（必填）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "isSpot",
+            "description": "<p>是否现货0否1是（必填）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "productAddr",
+            "description": "<p>产地详细地址</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "productCity",
+            "description": "<p>产地市</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "productDescription",
+            "description": "<p>产品描述</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "productPrice",
+            "description": "<p>商品单价（必填）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "productPriceUnit",
+            "description": "<p>商品单价单位</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "productProvince",
+            "description": "<p>产地省</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "supplierAccount",
+            "description": "<p>供应商账号（必填）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "supplyQuantity",
+            "description": "<p>供货量（必填）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "supplyQuantityUnit",
+            "description": "<p>供货量单位（必填）</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/order.js",
+    "groupTitle": "order"
+  },
+  {
+    "type": "post",
     "url": "/order/checkOrder",
     "title": "审核订单或企业",
     "name": "checkOrder",
@@ -273,6 +373,176 @@ define({ "api": [
             "optional": false,
             "field": "searchContent",
             "description": "<p>搜索条件（type为order时用到）.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/order.js",
+    "groupTitle": "order"
+  },
+  {
+    "type": "post",
+    "url": "/order/releaseRequirementInsteadCustomer",
+    "title": "代客发布订单",
+    "name": "releaseRequirementInsteadCustomer",
+    "group": "order",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "businessAccount",
+            "description": "<p>业务员账号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "buyAmount",
+            "description": "<p>购买数量（必填）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "buyAmountUnit",
+            "description": "<p>购买数量单位（必填）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "buyDeadline",
+            "description": "<p>采购截止时间</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "companyName",
+            "description": "<p>公司名称</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "contactMan",
+            "description": "<p>联系人</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "contactPhone",
+            "description": "<p>联系人电话</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "deliveryAddr",
+            "description": "<p>交货详细地址</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "deliveryCity",
+            "description": "<p>交货地址市</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "deliveryDeadline",
+            "description": "<p>交货截止时间</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "deliveryDistrict",
+            "description": "<p>交货地址区</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "deliveryProvince",
+            "description": "<p>交货地址省</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "expectPrice",
+            "description": "<p>期望单价</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "expectPriceUnit",
+            "description": "<p>期望单价单位</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "generalizeAccount",
+            "description": "<p>居间人账号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "memberAccount",
+            "description": "<p>会员账号（必填）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "predictAmount",
+            "description": "<p>预计供货量</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "productClass",
+            "description": "<p>商品分类（必填）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "productName",
+            "description": "<p>商品名称（必填）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "productStandard",
+            "description": "<p>产品标准</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Array",
+            "optional": false,
+            "field": "productionPlace",
+            "description": "<p>产地 [ { city: String,//产地市 province: String,//产地省 regionCode: String,//产地省编码 requirementNumber: String,//买货需求单编号 } ],</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "regionCode",
+            "description": "<p>交货地区编码</p>"
           }
         ]
       }
