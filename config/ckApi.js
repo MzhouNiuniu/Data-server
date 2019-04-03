@@ -14,6 +14,10 @@ module.exports = {
         getBuyRequirementInfo: `${baseURL.baseUrl}/generalize/order/getBuyRequirementInfo`,//获取求购待审核订单详情
         getSellProductInfo: `${baseURL.baseUrl}/generalize/order/getSellProductInfo`,//获取出售待审核商品信息
         orderDetail: `${baseURL.baseUrl}/generalize/order/orderDetail`,//订单详情
+        goodsDetail: `${baseURL.baseUrl}/generalize/order/goodsDetail`,//商品详情
+        getSellOrderTrading: `${baseURL.baseUrl}/generalize/order/getSellOrderTrading`,//出售交易中订单信息
+        getSubBuyOrderInfo: `${baseURL.baseUrl}/generalize/order/getSubBuyOrderInfo`,//求购子订单信息
+        orderList: `${baseURL.baseUrl}/generalize/order/orderList`,//订单列表
         getWaitAuditOrder: `${baseURL.baseUrl}/generalize/order/getWaitAuditOrder`,//待审核订单列表
         getFinishedOrder: `${baseURL.baseUrl}/generalize/order/getFinishedOrder`,//已结束订单列表
         getWaitDoneOrder: `${baseURL.baseUrl}/generalize/order/getWaitDoneOrder`,//待处理订单列表

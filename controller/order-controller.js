@@ -17,6 +17,10 @@ class Order {
     * @apiParam {String} type 订单类型 'awaitDealOrder':待处理订单.
     * @apiParam {String} type 订单类型 'endingOrder':已结束订单.
     * @apiParam {String} type 订单类型 'awaitPreviewCompany':待审核企业.
+    * @apiParam {String} type 订单类型 'order':求购订单.
+    * @apiParam {Number} productClass 产品分类（type为order时用到）.
+    * @apiParam {String} productionArea 产品地区编码（type为order时用到）.
+    * @apiParam {String} searchContent 搜索条件（type为order时用到）.
     * */
     async getOrderList(req, res, next) {
         let {pageSize, pageNum, type} = req.query;
@@ -24,23 +28,38 @@ class Order {
             res.send(errResponse);
             return false
         }
-        let url;
+        let url, params;
         switch (type) {
             case 'awaitPreviewOrder':
+                params = {pageNum: pageNum, pageSize: pageSize};
                 url = API_URL.order.getWaitAuditOrder;
                 break;
             case 'awaitDealOrder':
+                params = {pageNum: pageNum, pageSize: pageSize};
                 url = API_URL.order.getWaitDoneOrder;
                 break;
             case 'endingOrder':
+                params = {pageNum: pageNum, pageSize: pageSize};
                 url = API_URL.order.getFinishedOrder;
                 break;
             case 'awaitPreviewCompany':
+                params = {pageNum: pageNum, pageSize: pageSize};
                 url = API_URL.company.getWaitAuditCompany;
+                break;
+            case 'order':
+                let {productClass, productionArea, searchContent} = req.query;
+                params = {
+                    pageNum: pageNum,
+                    pageSize: pageSize,
+                    productClass: productClass,
+                    productionArea: productionArea,
+                    searchContent: searchContent
+                };
+                url = API_URL.order.orderList;
                 break;
         }
         try {
-            const result = await httpUtils.httpGet(url, {pageNum: pageNum, pageSize: pageSize}, req);
+            const result = await httpUtils[type == 'order' ? 'httpPostJson' : 'httpGet'](url, params, req);
             res.send(result)
         } catch (e) {
             console.log(e)
@@ -50,30 +69,42 @@ class Order {
     /*
     * 获取订单详情
     * @apiParam {Number} id 订单或企业id.
-    * @apiParam {String} type 类型：order订单，company企业.
+    * @apiParam {String} type 类型：order求购订单，goods出售订单，company企业，childOrder求购子订单，sellingOrder出售交易中订单.
+    * @apiParam {String} roleType 身份信息（采购商：buyer，供应商：supplier）
     * */
     async getOrderDetail(req, res, next) {
-        let {id, type} = req.query;
+        let {id, type, roleType} = req.query;
         if (!id || !type) {
             res.send(errResponse);
             return false
         }
-        let url;
-        let params = {};
+        let url, params;
         switch (type) {
             case 'order':
                 url = API_URL.order.orderDetail;
-                params.orderId = id;
+                params = {orderId: id};
+                break;
+            case 'goods':
+                url = API_URL.order.goodsDetail;
+                params = {goodsId: id};
                 break;
             case 'company':
                 url = API_URL.company.getWaitAuditCompanyInfo;
-                params.memberAccount = id;
+                params = {memberAccount: id};
+                break;
+            case 'childOrder':
+                url = API_URL.order.getSubBuyOrderInfo;
+                params = {orderId: id, roleType: roleType};
+                break;
+            case 'sellingOrder':
+                url = API_URL.order.getSellOrderTrading;
+                params = {id: id, roleType: roleType};
                 break;
         }
         try {
             const result = await httpUtils.httpGet(API_URL.order.orderDetail, params, req);
             res.send(result)
-        }catch (e) {
+        } catch (e) {
             console.log(e)
         }
     }

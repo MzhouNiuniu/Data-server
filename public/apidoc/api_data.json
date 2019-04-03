@@ -207,7 +207,14 @@
             "type": "String",
             "optional": false,
             "field": "type",
-            "description": "<p>类型：order订单，company企业.</p>"
+            "description": "<p>类型：order订单，goods商品，company企业，childOrder求购子订单，sellingOrder出售交易中订单.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "roleType",
+            "description": "<p>身份信息:采购商buyer，供应商supplier（type为childOrder和sellingOrder时用到）</p>"
           }
         ]
       }
@@ -244,7 +251,28 @@
             "type": "String",
             "optional": false,
             "field": "type",
-            "description": "<p>订单类型:awaitPreviewOrder待审核订单，awaitDealOrder待处理订单，endingOrder已结束订单，awaitPreviewCompany待审核企业.</p>"
+            "description": "<p>订单类型:awaitPreviewOrder待审核订单，awaitDealOrder待处理订单，endingOrder已结束订单，awaitPreviewCompany待审核企业，order求购订单.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "productClass",
+            "description": "<p>产品分类（type为order时用到）.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "productionArea",
+            "description": "<p>产品地区编码（type为order时用到）.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "searchContent",
+            "description": "<p>搜索条件（type为order时用到）.</p>"
           }
         ]
       }
