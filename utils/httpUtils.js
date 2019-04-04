@@ -4,7 +4,6 @@ const qs = require('querystring');
 function getHeader(req) {
     return {
          'Authorization': req.cookies.Authorization ? req.cookies.Authorization : ''
-        // 'Authorization': "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlIjoib3Jhcm8gbGljZW5zZSIsInVzZXJfbmFtZSI6Ik1UYzJNalU1TXpJd05qVTZNR1ZrTVdFM016UXRZVGhsTXkwME1qUXlMVGcwTURBdE1UUXlNelprWm1Rd1ptVnoiLCJzY29wZSI6WyJzZXJ2ZXIiXSwicm9sZXMiOltdLCJleHAiOjE1NTQzNDMxNjIsImp0aSI6IjFhMjA4YmZhLTE4ZDYtNDkxZC05MGMwLTU3Y2UyMDBkNTUxYyIsImNsaWVudF9pZCI6ImY1cjlkMDA3Yzc0MzQwYjY4MGM4NWNmZHNnZGY0M2tqZCIsInVzZXJuYW1lIjoiMTc2MjU5MzIwNjUifQ.YU5MyVub4L9ux8xsTsDkmQ-norEyFwPNloP34TWoueIrA5xhKCIt-TfG6cmea3R00HR7T30aYUuM0zw-0FiRC4iDSP-8GueAHHIPFMrf1-zk89dD3zo9Ylo_v8H3gW-3kyqd6deoO0XBpjC7haExm2HUnri6ZMMVKchCViE1Nfz3biQ_FvC4MChe_IQ68cWIbbdyT7oeMg7EXXz-ZQTggXseZPYgIC_AU3_h0Z8UJ3I9tJDBmjjYrm9NGDcVvW9fqBeyGK1mpTaQfABUgoQAP8KkTD-idfTrPt2JL-hOeTjTnuhU-Mk-USUNQuTM2AP4nBuuclHJGFz9urngblGesA"
     };
 }
 

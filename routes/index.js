@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-import {sendMessage, loginByCode} from '../controller/login-controller'
+import {sendMessage, loginByCode,getMemberInfo} from '../controller/login-controller'
 
 router.get('/index',(req, res, next)=>{
     res.send('success')
@@ -31,5 +31,12 @@ router.get('/sendMessage', sendMessage);
  * @apiParam {Number} phone 手机号.
  */
 router.get('/loginByCode', loginByCode);
+
+/**
+ * @api {get} /getMemberInfo  获取用户信息
+ * @apiName getMemberInfo
+ * @apiGroup login
+ */
+router.get('/getMemberInfo',getMemberInfo)
 
 module.exports = router;

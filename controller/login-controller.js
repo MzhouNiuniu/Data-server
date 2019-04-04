@@ -2,7 +2,7 @@
 * 登陆模块controller
 * */
 import API from '../config/zyApi'
-const {sendMessage,loginByCode} =API.login
+const {sendMessage,loginByCode,getMemberInfo} =API.login
 const httpUtils = require('../utils/httpUtils');
 var errResponse = {code: 500, msg: '缺少必要参数'};
 class Login {
@@ -48,6 +48,15 @@ class Login {
             }
             res.send(result)
         }catch (e) {
+            console.log(e)
+        }
+    }
+
+    async getMemberInfo(req,res,next){
+        try{
+            const result = await httpUtils.httpGet(getMemberInfo,{}, req);
+            res.send(result)
+        }catch(e){
             console.log(e)
         }
     }
