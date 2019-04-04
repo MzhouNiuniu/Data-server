@@ -1,15 +1,28 @@
 var express = require('express');
 var router = express.Router();
-import {goodList,goodsDetail} from '../controller/goods-controller'
+import {goodList, goodsDetail} from '../controller/goods-controller'
+
 
 /**
- * @api {get} /sendMessage 获取登陆验证码
- * @apiName sendMessage
- * @apiGroup login
- *
- * @apiParam {Number} phone 手机号.
+ * @apiGroup goods
+ * @apiName goodList
+ * @api {get} /goodsList 优质好货列表
+ * @apiParam {string} cityCode 城市code.
+ * @apiParam {string} content 模糊关键字查询
+ * @apiParam {Number} isSpotGoods 分类
+ * @apiParam {Number} pageNum 当前页面
+ * @apiParam {Number} pageSize 页面尺寸
+ * @apiParam {Number} type 类型
  */
-router.get('/goodList', goodList);
-router.get('/goodDetail', goodsDetail);
+router.get('/goodsList', goodList);
+
+
+/**
+ * @apiGroup goods
+ * @apiName goodsDetail
+ * @api {get} /goodsDetail 优质好货详情
+ * @apiParam {string} goodsId 订单id.
+ */
+router.get('/goodsDetail', goodsDetail);
 
 module.exports = router;

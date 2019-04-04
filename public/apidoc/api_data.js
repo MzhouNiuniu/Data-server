@@ -67,6 +67,87 @@ define({ "api": [
     "groupTitle": "SelectData"
   },
   {
+    "group": "goods",
+    "name": "goodList",
+    "type": "get",
+    "url": "/goodsList",
+    "title": "优质好货列表",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "cityCode",
+            "description": "<p>城市code.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "content",
+            "description": "<p>模糊关键字查询</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "isSpotGoods",
+            "description": "<p>分类</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "pageNum",
+            "description": "<p>当前页面</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "pageSize",
+            "description": "<p>页面尺寸</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "type",
+            "description": "<p>类型</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/goods.js",
+    "groupTitle": "goods"
+  },
+  {
+    "group": "goods",
+    "name": "goodsDetail",
+    "type": "get",
+    "url": "/goodsDetail",
+    "title": "优质好货详情",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "goodsId",
+            "description": "<p>订单id.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/goods.js",
+    "groupTitle": "goods"
+  },
+  {
     "type": "get",
     "url": "/home/getHomeData",
     "title": "获取首页数据",
@@ -124,6 +205,29 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "routes/index.js",
+    "groupTitle": "login"
+  },
+  {
+    "type": "get",
+    "url": "/sendMessage",
+    "title": "获取登陆验证码",
+    "name": "sendMessage",
+    "group": "login",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "phone",
+            "description": "<p>手机号.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/goods.js",
     "groupTitle": "login"
   },
   {

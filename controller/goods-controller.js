@@ -6,28 +6,39 @@ const {goodsList,goodsDetail} = API.goods
 const httpUtils = require('../utils/httpUtils');
 var errResponse = {code: 500, msg: '缺少必要参数'};
 
-class good {
+class goods {
     constructor() {
     }
 
-    /*
-    * 获取登陆验证码
-    * @apiParam {Number} phone 手机号.
-
-    * */
+    /**
+     * @apiName goodList
+     *
+     * @apiParam {string} cityCode 城市code.
+     * @apiParam {string} content 模糊关键字查询
+     * @apiParam {Number} isSpotGoods 分类
+     * @apiParam {Number} pageNum 当前页面
+     * @apiParam {Number} pageSize 页面尺寸
+     * @apiParam {Number} type 类型
+     */
     async goodList(req, res, next) {
-        let {pageNum,pageSize} = req.query;
-        if (!pageNum||!pageSize) {
+        let {pageNum,pageSize,cityCode,content,isSpotGoods,type} = req.query;
+        if (!pageNum||!pageSize||!cityCode||!content||!isSpotGoods||!type) {
             res.send(errResponse);
             return false
         }
         try {
-            const result = await httpUtils.httpGet(goodsList,req.query, req);
+            const result = await httpUtils.httpPostJson(goodsList,req.query, req);
             res.send(result)
         } catch (e) {
             console.log(e)
         }
     }
+    /**
+     * @apiName goodList
+     *
+     * @apiParam {string} goodsId 订单id.
+
+     */
     async goodsDetail(req, res, next) {
         let {goodsId} = req.query;
         if (!goodsId) {
@@ -35,7 +46,7 @@ class good {
             return false
         }
         try {
-            const result = await httpUtils.httpGet(goodsId,goodsId, req);
+            const result = await httpUtils.httpGet(goodsDetail,goodsId, req);
             res.send(result)
         } catch (e) {
             console.log(e)
@@ -44,4 +55,4 @@ class good {
 
 }
 
-module.exports = new good();
+module.exports = new goods();
