@@ -1,4 +1,4 @@
-import baseURL from './baseURL'
+import baseURL from './baseUrl'
 export default {
     login:{
         sendMessage: `${baseURL.baseUrl}/generalize/sendMessage`,//获取短信
