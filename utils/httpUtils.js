@@ -3,7 +3,7 @@ const qs = require('querystring');
 
 function getHeader(req) {
     return {
-         'Authorization': req.cookies.Authorization ? req.cookies.Authorization : ''
+         'Authorization': req?(req.cookies.Authorization ? req.cookies.Authorization : ''):''
     };
 }
 
@@ -59,7 +59,7 @@ class HttpUtils {
             url: url,
             method: 'post',
             headers: Object.assign(getHeader(req), {'Content-Type': 'application/json;charset=UTF-8',}),
-            data: form
+            body: form
         }, (err, response, body) => {
             if (err) {
                 reject(err);

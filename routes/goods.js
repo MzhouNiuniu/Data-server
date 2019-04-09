@@ -6,7 +6,7 @@ import {goodList, goodsDetail} from '../controller/goods-controller'
 /**
  * @apiGroup goods
  * @apiName goodList
- * @api {get} /goodsList 优质好货列表
+ * @api {get} /goods/goodsList 优质好货列表
  * @apiParam {string} cityCode 城市code.
  * @apiParam {string} content 模糊关键字查询
  * @apiParam {Number} isSpotGoods 分类

@@ -20,7 +20,7 @@ class Login {
             return false
         }
         try {
-            const result = await httpUtils.httpGet(sendMessage,{phone}, req);
+            const result = await httpUtils.httpGet(sendMessage,{phone});
             res.send(result)
         } catch (e) {
             console.log(e)
@@ -39,7 +39,7 @@ class Login {
             return false
         }
         try {
-            const result = await httpUtils.httpPost(loginByCode,{code,mobile:phone}, req);
+            const result = await httpUtils.httpPost(loginByCode,{code,mobile:phone});
             if(result.code==200){
                 res.cookie("Authorization", `Bearer ${result.data.token}`, {
                     maxAge: 90000000,

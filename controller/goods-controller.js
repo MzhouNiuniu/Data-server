@@ -22,7 +22,7 @@ class goods {
      */
     async goodList(req, res, next) {
         let {pageNum,pageSize,cityCode,content,isSpotGoods,type} = req.query;
-        if (!pageNum||!pageSize||!cityCode||!content||!isSpotGoods||!type) {
+        if (!pageNum||!pageSize||!cityCode||!isSpotGoods||!type) {
             res.send(errResponse);
             return false
         }

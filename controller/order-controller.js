@@ -50,16 +50,17 @@ class Order {
                 break;
             case 'order':
                 let {productClass, productionArea, searchContent} = req.query;
-                params = {
-                    pageNum: pageNum,
-                    pageSize: pageSize,
-                    productClass: productClass,
-                    productionArea: productionArea,
-                    searchContent: searchContent
-                };
+                params = JSON.stringify({
+                    "pageNum": Number(pageNum),
+                    "pageSize":  Number(pageSize),
+                    "productClass":  Number(productClass),
+                    "productionArea": productionArea,
+                    "searchContent": searchContent
+                });
                 url = API_URL.order.orderList;
                 break;
         }
+        console.log(params)
         try {
             const result = await httpUtils[type == 'order' ? 'httpPostJson' : 'httpGet'](url, params, req);
             res.send(result)

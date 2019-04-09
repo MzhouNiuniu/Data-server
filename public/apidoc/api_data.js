@@ -179,6 +179,16 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/getMemberInfo",
+    "title": "获取用户信息",
+    "name": "getMemberInfo",
+    "group": "login",
+    "version": "0.0.0",
+    "filename": "routes/index.js",
+    "groupTitle": "login"
+  },
+  {
+    "type": "get",
     "url": "/loginByCode",
     "title": "验证码登陆",
     "name": "loginByCode",
@@ -205,29 +215,6 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "routes/index.js",
-    "groupTitle": "login"
-  },
-  {
-    "type": "get",
-    "url": "/sendMessage",
-    "title": "获取登陆验证码",
-    "name": "sendMessage",
-    "group": "login",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "phone",
-            "description": "<p>手机号.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "routes/goods.js",
     "groupTitle": "login"
   },
   {

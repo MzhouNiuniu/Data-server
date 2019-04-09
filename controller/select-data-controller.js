@@ -14,6 +14,7 @@ function provinceFormat(array) {
 
 function changeCityFormat(array) {
     let newArr = [];
+    console.log(array)
     array.forEach(item => {
         newArr.push({code: item.cityCode, value: item.cityName})
     });
@@ -37,7 +38,7 @@ class selectData {
             res.send({
                 customsHasNoCompanyName: customsHasNoCompanyName,
                 customsHasCompanyName: customsHasCompanyName,
-                provinceList: provinceFormat(provinceList.list)
+                provinceList: provinceFormat(provinceList.data.list)
             })
         } catch (e) {
             console.log(e)
@@ -49,7 +50,7 @@ class selectData {
         try {
             let {all, code} = req.query;
             const result = await httpUtils.httpGet(API_URL.selectApi.getCityData, {all: all, code: code}, req);
-            res.send(changeCityFormat(result.list))
+            res.send(changeCityFormat(result.data.list))
         } catch (e) {
             console.log(e)
         }
