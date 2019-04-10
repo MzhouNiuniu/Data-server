@@ -55,8 +55,9 @@ class goods {
 
 
     async releaseSellProductInsteadCustomer(req, res, next) {
+        console.log(req.body)
         try {
-            const result = await httpUtils.httpPostJson(releaseSellProductInsteadCustomer,req.body, req);
+            const result = await httpUtils.httpPostJson(releaseSellProductInsteadCustomer,JSON.stringify(req.body), req);
             res.send(result)
         } catch (e) {
             console.log(e)

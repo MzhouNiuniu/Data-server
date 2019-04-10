@@ -38,8 +38,7 @@ module.exports = {
         getCustomerInfoSellList: `${baseURL.baseUrl}/generalize/member/getCustomerInfoSellList`,//客户详情（出售列表）
         getCompanyByMemberAccount: `${baseURL.baseUrl}/generalize/member/getCompanyByMemberAccount`,//企业认证信息
         addCustomer: `${baseURL.baseUrl}/generalize/member/addCustomer`,//添加客户，
-        registerInsteadCustomer: `${baseURL.baseUrl}/generalize/member/registerInsteadCustomer`,//带客注册
+        registerInsteadCustomer: `${baseURL.baseUrl}/generalize/member/registerInsteadCustomer`,//代客注册
         userCenterController: `${baseURL.baseUrl}/generalize/member/userCenterController`,//代客认证
-
     }
 }

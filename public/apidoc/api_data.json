@@ -68,9 +68,81 @@
   },
   {
     "group": "goods",
+    "name": "buyInsteadCustomer",
+    "type": "post",
+    "url": "/goods/buyInsteadCustomer",
+    "title": "代客购买",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "buyerName",
+            "description": "<p>客户名称</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "addressId",
+            "description": "<p>收货地址id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "realPrice",
+            "description": "<p>商品单价</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "realPriceUnit",
+            "description": "<p>商品单位</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "realAmount",
+            "description": "<p>采购量</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "buyerMessage",
+            "description": "<p>买家留言</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "totalPrice",
+            "description": "<p>商品单位</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "totalPriceUnit",
+            "description": "<p>商品总价单位</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/goods.js",
+    "groupTitle": "goods"
+  },
+  {
+    "group": "goods",
     "name": "goodList",
     "type": "get",
-    "url": "/goodsList",
+    "url": "/goods/goodsList",
     "title": "优质好货列表",
     "parameter": {
       "fields": {
@@ -128,7 +200,7 @@
     "group": "goods",
     "name": "goodsDetail",
     "type": "get",
-    "url": "/goodsDetail",
+    "url": "/goods/goodsDetail",
     "title": "优质好货详情",
     "parameter": {
       "fields": {
@@ -139,6 +211,148 @@
             "optional": false,
             "field": "goodsId",
             "description": "<p>订单id.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/goods.js",
+    "groupTitle": "goods"
+  },
+  {
+    "group": "goods",
+    "name": "releaseSellProductInsteadCustomer",
+    "type": "post",
+    "url": "/goods/releaseSellProductInsteadCustomer",
+    "title": "代客发布商品",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "businessAccount",
+            "description": "<p>业务员账号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "companyName",
+            "description": "<p>公司名称</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "productPics",
+            "description": "<p>商品名称</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "supplyNum",
+            "description": "<p>供货量</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "supplyUnit",
+            "description": "<p>供货单位</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "productClass",
+            "description": "<p>商品分类</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "productPrice",
+            "description": "<p>商品单价</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "productPriceUnit",
+            "description": "<p>商品单位</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "isSpotGoods",
+            "description": "<p>是否现货</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "contactMan",
+            "description": "<p>联系人</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "contactPhone",
+            "description": "<p>联系电话</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "predictDeliveryTime",
+            "description": "<p>预计交货时间</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "originPlacePrince",
+            "description": "<p>产地省</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "originPlaceCity",
+            "description": "<p>产地市</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "originPlaceAddr",
+            "description": "<p>详细地址</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "minBranch",
+            "description": "<p>最少起批量</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "minBranchUnit",
+            "description": "<p>最小起批量单位</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "orderBranchs",
+            "description": "<p>分批次定价</p>"
           }
         ]
       }
@@ -657,6 +871,57 @@
             "optional": false,
             "field": "mobile",
             "description": "<p>手机号.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "code",
+            "description": "<p>验证码.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/userCenter.js",
+    "groupTitle": "userCenter"
+  },
+  {
+    "type": "post",
+    "url": "/userCenter/auditInsteadCustomer",
+    "title": "代客认证",
+    "name": "auditInsteadCustomer",
+    "group": "userCenter",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "province",
+            "description": "<p>省.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "city",
+            "description": "<p>市.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "district",
+            "description": "<p>区.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "detailAddr",
+            "description": "<p>详细地址.</p>"
           }
         ]
       }
@@ -768,6 +1033,36 @@
             "optional": false,
             "field": "memberAccount",
             "description": "<p>客户账户.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/userCenter.js",
+    "groupTitle": "userCenter"
+  },
+  {
+    "type": "post",
+    "url": "/userCenter/registerInsteadCustomer",
+    "title": "代客注册",
+    "name": "registerInsteadCustomer",
+    "group": "userCenter",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>手机号.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "code",
+            "description": "<p>手机号.</p>"
           }
         ]
       }

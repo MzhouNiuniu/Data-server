@@ -183,6 +183,7 @@ class Order {
     * 代客发布订单
     * */
     async releaseRequirementInsteadCustomer(req, res, next) {
+        console.log(req.body)
         let schema = new releaseRequirementInsteadCustomerModel(req.body);
         if (!schema.validatorRequired()) {
             res.send(errResponse);

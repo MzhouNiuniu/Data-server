@@ -124,11 +124,12 @@ class UserCenter {
     }
 
     /*
-  * 带客注册
+  * 代客注册
   * @apiParam {String} mobile 手机号
   * @apiParam {String} code 验证码
   * */
     async registerInsteadCustomer(req, res, next) {
+        console.log(req.body)
         let {mobile,code} = req.body;
         if (!mobile||!code) {
             res.send(errResponse);

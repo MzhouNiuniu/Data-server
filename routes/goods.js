@@ -20,13 +20,14 @@ router.get('/goodsList', goodList);
 /**
  * @apiGroup goods
  * @apiName goodsDetail
+ * @api {get} /goods/goodsDetail 优质好货详情
  * @apiParam {string} goodsId 订单id.
  */
 router.get('/goodsDetail', goodsDetail);
 
 /**
  * @apiGroup goods
- * @apiName goodsDetail
+ * @apiName releaseSellProductInsteadCustomer
  * @api {post} /goods/releaseSellProductInsteadCustomer 代客发布商品
  * @apiParam {string} businessAccount 业务员账号
  * @apiParam {string} companyName 公司名称
