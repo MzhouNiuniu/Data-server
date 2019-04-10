@@ -8,5 +8,7 @@ export default {
     goods:{
         goodsList:`${baseURL.baseUrl}/generalize/order/goodsList`,//货源列表
         goodsDetail:`${baseURL.baseUrl}/generalize/order/goodsDetail`,//货源详情
-    }
+        releaseSellProductInsteadCustomer:`${baseURL.baseUrl}/generalize/order/releaseSellProductInsteadCustomer`,//货源详情
+        buyInsteadCustomer:`${baseURL.baseUrl}/generalize/order/buyInsteadCustomer`,//货源详情
+    },
 }

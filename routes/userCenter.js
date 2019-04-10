@@ -44,4 +44,15 @@ router.get('/getCompanyInfo', userCenterController.getCompanyInfo);
  */
 router.post('/addCustomer', userCenterController.addCustomer);
 
+/**
+ * @api {post} /userCenter/registerInsteadCustomer 代客注册
+ * @apiName registerInsteadCustomer
+ * @apiGroup userCenter
+ *
+ * @apiParam {String} mobile 手机号.
+ *  * @apiParam {String} serveCode 手机号.
+ */
+router.post('/registerInsteadCustomer',userCenterController.registerInsteadCustomer)
+
+
 module.exports = router;

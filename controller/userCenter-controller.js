@@ -2,6 +2,7 @@
 * 个人中心
 * */
 const API_URL = require('../config/ckApi');
+
 const httpUtils = require('../utils/httpUtils');
 var errResponse = {code: 500, msg: '缺少必要参数'};
 
@@ -116,6 +117,24 @@ class UserCenter {
         }
         try {
             const result = await httpUtils.httpPut(API_URL.userCenter.addCustomer, {mobile, code}, req);
+            res.send(result)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+    /*
+  * 带客注册
+  * @apiParam {String} mobile 手机号
+  * @apiParam {String} code 验证码
+  * */
+    async registerInsteadCustomer(req, res, next) {
+        let {mobile} = req.body;
+        if (!mobile) {
+            res.send(errResponse);
+            return false
+        }
+        try {
+            const result = await httpUtils.httpPost(API_URL.userCenter.registerInsteadCustomer, req.body, req);
             res.send(result)
         } catch (e) {
             console.log(e)

@@ -2,10 +2,10 @@
 * 登陆模块controller
 * */
 import API from '../config/zyApi'
-const {goodsList,goodsDetail} = API.goods
+const {goodsList,goodsDetail,releaseSellProductInsteadCustomer,buyInsteadCustomer} = API.goods
 const httpUtils = require('../utils/httpUtils');
 var errResponse = {code: 500, msg: '缺少必要参数'};
-
+import customer from '../model/releaseSellProductInsteadCustomer'
 class goods {
     constructor() {
     }
@@ -52,6 +52,41 @@ class goods {
             console.log(e)
         }
     }
+
+
+    async releaseSellProductInsteadCustomer(req, res, next) {
+        try {
+            const result = await httpUtils.httpPostJson(releaseSellProductInsteadCustomer,req.body, req);
+            res.send(result)
+        } catch (e) {
+            console.log(e)
+        }
+        // test()
+        //
+        // res.send(test())
+        // v.validate(req.query, schema)
+        // const  verify=customer(req)
+        // // console.log(verify.error)
+        // if(verify.status){
+        //     res.send('1231')
+        // }
+        // else{
+        //     console.log(verify.error)
+        //     res.send('312')
+        // }
+
+
+    }
+    async buyInsteadCustomer(req, res, next) {
+        try {
+            const result = await httpUtils.httpPostJson(buyInsteadCustomer,req.body, req);
+            res.send(result)
+        } catch (e) {
+            console.log(e)
+        }
+
+    }
+
 
 }
 

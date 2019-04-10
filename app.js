@@ -10,7 +10,6 @@ var orderRouter = require('./routes/order');
 var userCenterRouter = require('./routes/userCenter');
 var homeRouter = require('./routes/home');
 import goods from './routes/goods'
-
 var app = express();
 app.use(cookieParser());
 app.use(function (req, res, next) {
