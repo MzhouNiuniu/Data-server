@@ -27,7 +27,7 @@ class goods {
             return false
         }
         try {
-            const result = await httpUtils.httpPostJson(goodsList,req.query, req);
+            const result = await httpUtils.httpPostJson(goodsList,JSON.stringify(req.query), req);
             res.send(result)
         } catch (e) {
             console.log(e)

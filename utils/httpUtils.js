@@ -70,7 +70,7 @@ class HttpUtils {
     }
 
     httpPut(url, params, req) {
-        return new Promise((resolve, reject) => request.get({
+        return new Promise((resolve, reject) => request.put({
             url: `${url}?${qs.stringify(params)}`,
             method: 'put',
             headers: Object.assign(getHeader(req), {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}),

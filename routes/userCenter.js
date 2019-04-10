@@ -40,6 +40,7 @@ router.get('/getCompanyInfo', userCenterController.getCompanyInfo);
  * @apiGroup userCenter
  *
  * @apiParam {String} mobile 手机号.
+ * @apiParam {String} code 验证码.
  */
 router.post('/addCustomer', userCenterController.addCustomer);
 

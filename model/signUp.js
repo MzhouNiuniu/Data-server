@@ -20,7 +20,7 @@ let signUpModel = new SchemaObject({
     methods: {
         //验证必填项
         validatorRequired: function () {
-            if (!this.contactMan || !this.contactPhone || !this.supplyQuantity || !this.supplyQuantityUnit || !this.isSpot || !this.productPrice || !this.supplierAccount) {
+            if (!this.contactMan || !this.contactPhone || !this.supplyQuantity || !this.isSpot || !this.productPrice || !this.supplierAccount) {
                 return false
             } else {
                 return true

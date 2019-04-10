@@ -51,11 +51,11 @@ class Order {
             case 'order':
                 let {productClass, productionArea, searchContent} = req.query;
                 params = JSON.stringify({
-                    "pageNum": Number(pageNum),
-                    "pageSize":  Number(pageSize),
-                    "productClass":  Number(productClass),
-                    "productionArea": productionArea,
-                    "searchContent": searchContent
+                    pageNum: pageNum,
+                    pageSize:  pageSize,
+                    productClass:  productClass,
+                    productionArea: productionArea,
+                    searchContent: searchContent
                 });
                 url = API_URL.order.orderList;
                 break;
@@ -165,13 +165,14 @@ class Order {
     * @apiParam {String} supplyQuantityUnit 供货量单位（必填）
     * */
     async applyInsteadCustomer(req, res, next) {
+        console.log(req.body)
         let schema = new signUpModel(req.body)
         if (!schema.validatorRequired()) {
             res.send(errResponse);
             return false
         }
         try {
-            const result = await httpUtils.httpPostJson(API_URL.order.applyInsteadCustomer, req.body, req);
+            const result = await httpUtils.httpPostJson(API_URL.order.applyInsteadCustomer, JSON.stringify(req.body), req);
             res.send(result)
         } catch (e) {
             console.log(e)
@@ -188,7 +189,7 @@ class Order {
             return false
         }
         try {
-            const result = await httpUtils.httpPostJson(API_URL.order.releaseRequirementInsteadCustomer, req.body, req);
+            const result = await httpUtils.httpPostJson(API_URL.order.releaseRequirementInsteadCustomer, JSON.stringify(req.body), req);
             res.send(result)
         }catch (e) {
             console.log(e)

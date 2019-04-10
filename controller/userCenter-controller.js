@@ -108,13 +108,14 @@ class UserCenter {
     * @apiParam {String} mobile 手机号
     * */
     async addCustomer(req, res, next) {
-        let {mobile} = req.body;
-        if (!mobile) {
+        console.log(req.body)
+        let {mobile, code} = req.body;
+        if (!mobile || !code) {
             res.send(errResponse);
             return false
         }
         try {
-            const result = await httpUtils.httpPut(API_URL.userCenter.addCustomer, {mobile: mobile}, req);
+            const result = await httpUtils.httpPut(API_URL.userCenter.addCustomer, {mobile, code}, req);
             res.send(result)
         } catch (e) {
             console.log(e)
