@@ -39,6 +39,7 @@ module.exports = {
         getCompanyByMemberAccount: `${baseURL.baseUrl}/generalize/member/getCompanyByMemberAccount`,//企业认证信息
         addCustomer: `${baseURL.baseUrl}/generalize/member/addCustomer`,//添加客户，
         registerInsteadCustomer: `${baseURL.baseUrl}/generalize/member/registerInsteadCustomer`,//带客注册
+        userCenterController: `${baseURL.baseUrl}/generalize/member/userCenterController`,//代客认证
 
     }
 }

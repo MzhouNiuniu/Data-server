@@ -54,5 +54,20 @@ router.post('/addCustomer', userCenterController.addCustomer);
  */
 router.post('/registerInsteadCustomer',userCenterController.registerInsteadCustomer)
 
+/**
+ * @api {post} /userCenter/auditInsteadCustomer 代客认证
+ * @apiName auditInsteadCustomer
+ * @apiGroup userCenter
+ *
+ * @apiParam {String} province 省.
+ * @apiParam {String} city 市.
+ * @apiParam {String} district 区.
+ * @apiParam {String} province 省.
+ * @apiParam {String} detailAddr 详细地址.
+ *
+ */
+
+router.post('/auditInsteadCustomer',userCenterController.auditInsteadCustomer)
+
 
 module.exports = router;

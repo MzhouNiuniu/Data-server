@@ -122,6 +122,7 @@ class UserCenter {
             console.log(e)
         }
     }
+
     /*
   * 带客注册
   * @apiParam {String} mobile 手机号
@@ -140,6 +141,23 @@ class UserCenter {
             console.log(e)
         }
     }
+
+    /*
+* 代客认证
+*
+* @apiParam {String} mobile 手机号
+* @apiParam {String} code 验证码
+* */
+    async auditInsteadCustomer(req, res, next) {
+        try {
+            const result = await httpUtils.httpPost(API_URL.userCenter.auditInsteadCustomer, req.body, req);
+            res.send(result)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+
 
 }
 
