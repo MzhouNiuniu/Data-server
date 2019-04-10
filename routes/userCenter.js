@@ -50,7 +50,7 @@ router.post('/addCustomer', userCenterController.addCustomer);
  * @apiGroup userCenter
  *
  * @apiParam {String} mobile 手机号.
- *  * @apiParam {String} serveCode 手机号.
+ * @apiParam {String} code 手机号.
  */
 router.post('/registerInsteadCustomer',userCenterController.registerInsteadCustomer)
 
