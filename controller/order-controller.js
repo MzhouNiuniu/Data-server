@@ -52,8 +52,8 @@ class Order {
                 let {productClass, productionArea, searchContent} = req.query;
                 params = JSON.stringify({
                     pageNum: pageNum,
-                    pageSize:  pageSize,
-                    productClass:  productClass,
+                    pageSize: pageSize,
+                    productClass: productClass,
                     productionArea: productionArea,
                     searchContent: searchContent
                 });
@@ -192,7 +192,7 @@ class Order {
         try {
             const result = await httpUtils.httpPostJson(API_URL.order.releaseRequirementInsteadCustomer, JSON.stringify(req.body), req);
             res.send(result)
-        }catch (e) {
+        } catch (e) {
             console.log(e)
         }
     }
@@ -202,8 +202,23 @@ class Order {
     *
     * */
     async auditInsteadCustomer(req, res, next) {
+        let {
+            custAccount,
+            name,
+            businessLicense,
+            legalPerson,
+            province,
+            city,
+            district,
+            detailAddr,
+            businessScope
+        } = req.body;
+        if (!custAccount || !name || !businessLicense || !legalPerson || !province || !city || !district || !detailAddr||!businessScope) {
+            res.send(errResponse)
+            return false
+        }
         try {
-            const result = await httpUtils.httpPostJson(API_URL.userCenter.auditInsteadCustomer, JSON.stringify(req.body), req);
+            const result = await httpUtils.httpPostJson(API_URL.order.auditInsteadCustomer, JSON.stringify(req.body), req);
             res.send(result)
         } catch (e) {
             console.log(e)
@@ -213,14 +228,14 @@ class Order {
     /*
     * 代客购买
     * */
-    async buyInsteadCustomer(req, res, next){
-        let {buyerAccount,realAmount} = req.body;
-        if(!buyerAccount||!realAmount){
+    async buyInsteadCustomer(req, res, next) {
+        let {buyerAccount, realAmount} = req.body;
+        if (!buyerAccount || !realAmount) {
             res.send(errResponse)
             return false
         }
         try {
-            const result = await httpUtils.httpPostJson(API_URL.userCenter.buyInsteadCustomer, JSON.stringify(req.body), req);
+            const result = await httpUtils.httpPostJson(API_URL.order.buyInsteadCustomer, JSON.stringify(req.body), req);
             res.send(result)
         } catch (e) {
             console.log(e)
