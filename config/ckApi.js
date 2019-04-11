@@ -40,5 +40,6 @@ module.exports = {
         addCustomer: `${baseURL.baseUrl}/generalize/member/addCustomer`,//添加客户，
         registerInsteadCustomer: `${baseURL.baseUrl}/generalize/member/registerInsteadCustomer`,//代客注册
         userCenterController: `${baseURL.baseUrl}/generalize/member/userCenterController`,//代客认证
+        updateMember: `${baseURL.baseUrl}/generalize/member/updateMember`,//修改个人资料
     }
 }

@@ -124,14 +124,14 @@ class UserCenter {
     }
 
     /*
-  * 代客注册
-  * @apiParam {String} mobile 手机号
-  * @apiParam {String} code 验证码
-  * */
+    * 代客注册
+    * @apiParam {String} mobile 手机号
+    * @apiParam {String} code 验证码
+    * */
     async registerInsteadCustomer(req, res, next) {
         console.log(req.body)
-        let {mobile,code} = req.body;
-        if (!mobile||!code) {
+        let {mobile, code} = req.body;
+        if (!mobile || !code) {
             res.send(errResponse);
             return false
         }
@@ -144,11 +144,11 @@ class UserCenter {
     }
 
     /*
-* 代客认证
-*
-* @apiParam {String} mobile 手机号
-* @apiParam {String} code 验证码
-* */
+    * 代客认证
+    *
+    * @apiParam {String} mobile 手机号
+    * @apiParam {String} code 验证码
+    * */
     async auditInsteadCustomer(req, res, next) {
         try {
             const result = await httpUtils.httpPost(API_URL.userCenter.auditInsteadCustomer, req.body, req);
@@ -158,8 +158,20 @@ class UserCenter {
         }
     }
 
-
-
+    /*
+    * 修改个人资料
+    *
+    * @apiParam {String} personIcon 头像
+    * @apiParam {String} nickname 昵称
+    * */
+    async updateUserInfo(req,res,next){
+        try {
+            const result = await httpUtils.httpPostJson(API_URL.userCenter.updateMember, JSON.stringify(req.body), req);
+            res.send(result)
+        } catch (e) {
+            console.log(e)
+        }
+    }
 }
 
 module.exports = new UserCenter();

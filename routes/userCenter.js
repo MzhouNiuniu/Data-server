@@ -69,5 +69,16 @@ router.post('/registerInsteadCustomer',userCenterController.registerInsteadCusto
 
 router.post('/auditInsteadCustomer',userCenterController.auditInsteadCustomer)
 
+/**
+ * @api {post} /userCenter/updateUserInfo 修改个人资料
+ * @apiName updateUserInfo
+ * @apiGroup userCenter
+ *
+ * @apiParam {String} personIcon 头像.
+ * @apiParam {String} nickname 昵称.
+ *
+ */
+router.post('/updateUserInfo',userCenterController.updateUserInfo)
+
 
 module.exports = router;
