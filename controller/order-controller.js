@@ -196,6 +196,36 @@ class Order {
             console.log(e)
         }
     }
+
+    /*
+    * 代客认证
+    *
+    * */
+    async auditInsteadCustomer(req, res, next) {
+        try {
+            const result = await httpUtils.httpPostJson(API_URL.userCenter.auditInsteadCustomer, JSON.stringify(req.body), req);
+            res.send(result)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    /*
+    * 代客购买
+    * */
+    async buyInsteadCustomer(req, res, next){
+        let {buyerAccount,realAmount} = req.body;
+        if(!buyerAccount||!realAmount){
+            res.send(errResponse)
+            return false
+        }
+        try {
+            const result = await httpUtils.httpPostJson(API_URL.userCenter.buyInsteadCustomer, JSON.stringify(req.body), req);
+            res.send(result)
+        } catch (e) {
+            console.log(e)
+        }
+    }
 }
 
 module.exports = new Order();

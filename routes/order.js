@@ -93,4 +93,31 @@ router.post('/applyInsteadCustomer', orderController.applyInsteadCustomer);
  * @apiParam {String} regionCode 交货地区编码
  */
 router.post('/releaseRequirementInsteadCustomer', orderController.releaseRequirementInsteadCustomer);
+
+/**
+ * @api {post} /order/auditInsteadCustomer 代客认证
+ * @apiName auditInsteadCustomer
+ * @apiGroup order
+ *
+ * @apiParam {String} custAccount 客户.
+ * @apiParam {String} name 公司名称.
+ * @apiParam {String} businessLicense 营业执照.
+ * @apiParam {String} legalPerson 法人.
+ * @apiParam {String} province 省.
+ * @apiParam {String} city 市.
+ * @apiParam {String} district 区.
+ * @apiParam {String} detailAddr 详细地址.
+ * @apiParam {String} businessScope 经营范围.
+ *
+ */
+
+router.post('/auditInsteadCustomer',orderController.auditInsteadCustomer)
+
+/**
+ * @api {post} /order/buyInsteadCustomer 代客购买
+ * @apiName buyInsteadCustomer
+ * @apiGroup order
+ *
+ */
+router.post('/buyInsteadCustomer',orderController.buyInsteadCustomer)
 module.exports = router;

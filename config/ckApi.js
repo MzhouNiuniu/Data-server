@@ -25,6 +25,8 @@ module.exports = {
         auditSellProduct: `${baseURL.baseUrl}/generalize/order/auditSellProduct`,//审核出售商品
         applyInsteadCustomer: `${baseURL.baseUrl}/generalize/order/applyInsteadCustomer`,//代客报名
         releaseRequirementInsteadCustomer: `${baseURL.baseUrl}/generalize/order/releaseRequirementInsteadCustomer`,//代客发布订单
+        auditInsteadCustomer: `${baseURL.baseUrl}/generalize/order/auditInsteadCustomer`,//代客认证
+        buyInsteadCustomer: `${baseURL.baseUrl}/generalize/order/buyInsteadCustomer`,//代客购买
     },
     company: {
         getWaitAuditCompany: `${baseURL.baseUrl}/generalize/company/getWaitAuditCompany`,//待审核企业列表

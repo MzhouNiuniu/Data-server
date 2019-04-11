@@ -129,7 +129,6 @@ class UserCenter {
     * @apiParam {String} code 验证码
     * */
     async registerInsteadCustomer(req, res, next) {
-        console.log(req.body)
         let {mobile, code} = req.body;
         if (!mobile || !code) {
             res.send(errResponse);
@@ -143,20 +142,7 @@ class UserCenter {
         }
     }
 
-    /*
-    * 代客认证
-    *
-    * @apiParam {String} mobile 手机号
-    * @apiParam {String} code 验证码
-    * */
-    async auditInsteadCustomer(req, res, next) {
-        try {
-            const result = await httpUtils.httpPost(API_URL.userCenter.auditInsteadCustomer, req.body, req);
-            res.send(result)
-        } catch (e) {
-            console.log(e)
-        }
-    }
+
 
     /*
     * 修改个人资料
