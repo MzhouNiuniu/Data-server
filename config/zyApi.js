@@ -10,5 +10,8 @@ export default {
         goodsDetail:`${baseURL.baseUrl}/generalize/order/goodsDetail`,//货源详情
         releaseSellProductInsteadCustomer:`${baseURL.baseUrl}/generalize/order/releaseSellProductInsteadCustomer`,//货源详情
         buyInsteadCustomer:`${baseURL.baseUrl}/generalize/order/buyInsteadCustomer`,//货源详情
+        addDeliveryAddr:`${baseURL.baseUrl}/generalize/address/addDeliveryAddr`,//新增地址
+        getDefaultAddress:`${baseURL.baseUrl}/generalize/address/getDefaultAddress`,//获取默认地址
+        getDeliveryAddrs:`${baseURL.baseUrl}/generalize/address/getDeliveryAddrs`,//获取地址列表
     },
 }

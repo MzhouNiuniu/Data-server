@@ -151,8 +151,9 @@ class UserCenter {
     * @apiParam {String} nickname 昵称
     * */
     async updateUserInfo(req,res,next){
+        console.log(req.body)
         try {
-            const result = await httpUtils.httpPostJson(API_URL.userCenter.updateMember, JSON.stringify(req.body), req);
+            const result = await httpUtils.httpPutJson(API_URL.userCenter.updateMember, JSON.stringify(req.body), req);
             res.send(result)
         } catch (e) {
             console.log(e)

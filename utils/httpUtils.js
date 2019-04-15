@@ -84,12 +84,11 @@ class HttpUtils {
     }
 
     httpPutJson(url, data, req) {
-        let header = getHeader(req);
         return new Promise((resolve, reject) => request.put({
             url: url,
             method: 'put',
-            headers: header,
-            data: data
+            headers: Object.assign(getHeader(req), {'Content-Type': 'application/json;charset=UTF-8',}),
+            body: data
         }, (err, response, body) => {
             if (err) {
                 reject(err);

@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-import {goodList, goodsDetail,releaseSellProductInsteadCustomer,buyInsteadCustomer} from '../controller/goods-controller'
+import {goodList, goodsDetail,releaseSellProductInsteadCustomer,buyInsteadCustomer,addDeliveryAddr,getDefaultAddress,getDeliveryAddrs} from '../controller/goods-controller'
 
 
 /**
@@ -55,17 +55,49 @@ router.post('/releaseSellProductInsteadCustomer', releaseSellProductInsteadCusto
  * @apiGroup goods
  * @apiName buyInsteadCustomer
  * @api {post} /goods/buyInsteadCustomer 代客购买
- * @apiParam {string} buyerName  客户名称
+ * @apiParam {string} buyerAccount  客户账号
  * @apiParam {string} addressId  收货地址id
  * @apiParam {string} realPrice 商品单价
  * @apiParam {string} realPriceUnit 商品单位
- * @apiParam {Number}    realAmount 采购量
- * @apiParam {string}    realPriceUnit 采购单位
- * @apiParam {string}   realPrice 采购总价
- * @apiParam {Number}     buyerMessage 买家留言
- * @apiParam {string}    totalPrice 商品单位
- * @apiParam {string}    totalPriceUnit 商品总价单位
+ * @apiParam {Number} realAmount 采购量
+ * @apiParam {string} realPriceUnit 采购单位
+ * @apiParam {string} realPrice 采购总价
+ * @apiParam {Number} buyerMessage 买家留言
+ * @apiParam {string} totalPrice 商品单位
+ * @apiParam {string} totalPriceUnit 商品总价单位
  */
 
 router.post('/buyInsteadCustomer',buyInsteadCustomer)
+
+/**
+ * @apiGroup goods
+ * @apiName addDeliveryAddr
+ * @api {post} /goods/addDeliveryAddr 增加地址
+ * @apiParam {string} address  地址
+ * @apiParam {string} city  城市
+ * @apiParam {string} contactName 联系人
+ * @apiParam {string} contactPhone 联系电话
+ * @apiParam {string} counties 区
+ * @apiParam {string} province 省
+ */
+router.post('/addDeliveryAddr',addDeliveryAddr)
+
+/**
+ * @apiGroup goods
+ * @apiName getDefaultAddress
+ * @api {get} /goods/getDefaultAddress 获取该用户默认地址
+ * @apiParam {string} mobile  客户电话
+ */
+router.get('/getDefaultAddress',getDefaultAddress)
+
+/**
+ * @apiGroup goods
+ * @apiName getDeliveryAddrs
+ * @api {get} /goods/getDeliveryAddrs 获取该用户地址列表
+ * @apiParam {string} mobile  客户电话
+ * @apiParam {string} pageNum  页码
+ * @apiParam {string} pageSize 一页几条
+ */
+router.get('/getDeliveryAddrs',getDeliveryAddrs)
+
 module.exports = router;

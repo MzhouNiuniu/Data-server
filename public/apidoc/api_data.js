@@ -68,6 +68,64 @@ define({ "api": [
   },
   {
     "group": "goods",
+    "name": "addDeliveryAddr",
+    "type": "post",
+    "url": "/goods/addDeliveryAddr",
+    "title": "增加地址",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "address",
+            "description": "<p>地址</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "city",
+            "description": "<p>城市</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "contactName",
+            "description": "<p>联系人</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "contactPhone",
+            "description": "<p>联系电话</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "counties",
+            "description": "<p>区</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "province",
+            "description": "<p>省</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/goods.js",
+    "groupTitle": "goods"
+  },
+  {
+    "group": "goods",
     "name": "buyInsteadCustomer",
     "type": "post",
     "url": "/goods/buyInsteadCustomer",
@@ -130,6 +188,66 @@ define({ "api": [
             "optional": false,
             "field": "totalPriceUnit",
             "description": "<p>商品总价单位</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/goods.js",
+    "groupTitle": "goods"
+  },
+  {
+    "group": "goods",
+    "name": "getDefaultAddress",
+    "type": "post",
+    "url": "/goods/getDefaultAddress",
+    "title": "获取该用户默认地址",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>客户电话</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/goods.js",
+    "groupTitle": "goods"
+  },
+  {
+    "group": "goods",
+    "name": "getDeliveryAddrs",
+    "type": "post",
+    "url": "/goods/getDeliveryAddrs",
+    "title": "获取该用户地址列表",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>客户电话</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "pageNum",
+            "description": "<p>页码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "pageSize",
+            "description": "<p>一页几条</p>"
           }
         ]
       }
@@ -556,6 +674,95 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "/order/auditInsteadCustomer",
+    "title": "代客认证",
+    "name": "auditInsteadCustomer",
+    "group": "order",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "custAccount",
+            "description": "<p>客户.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>公司名称.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "businessLicense",
+            "description": "<p>营业执照.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "legalPerson",
+            "description": "<p>法人.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "province",
+            "description": "<p>省.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "city",
+            "description": "<p>市.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "district",
+            "description": "<p>区.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "detailAddr",
+            "description": "<p>详细地址.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "businessScope",
+            "description": "<p>经营范围.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/order.js",
+    "groupTitle": "order"
+  },
+  {
+    "type": "post",
+    "url": "/order/buyInsteadCustomer",
+    "title": "代客购买",
+    "name": "buyInsteadCustomer",
+    "group": "order",
+    "version": "0.0.0",
+    "filename": "routes/order.js",
+    "groupTitle": "order"
+  },
+  {
+    "type": "post",
     "url": "/order/checkOrder",
     "title": "审核订单或企业",
     "name": "checkOrder",
@@ -887,50 +1094,6 @@ define({ "api": [
     "groupTitle": "userCenter"
   },
   {
-    "type": "post",
-    "url": "/userCenter/auditInsteadCustomer",
-    "title": "代客认证",
-    "name": "auditInsteadCustomer",
-    "group": "userCenter",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "province",
-            "description": "<p>省.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "city",
-            "description": "<p>市.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "district",
-            "description": "<p>区.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "detailAddr",
-            "description": "<p>详细地址.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "routes/userCenter.js",
-    "groupTitle": "userCenter"
-  },
-  {
     "type": "get",
     "url": "/userCenter/getCompanyInfo",
     "title": "企业认证信息",
@@ -1063,6 +1226,36 @@ define({ "api": [
             "optional": false,
             "field": "code",
             "description": "<p>手机号.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/userCenter.js",
+    "groupTitle": "userCenter"
+  },
+  {
+    "type": "post",
+    "url": "/userCenter/updateUserInfo",
+    "title": "修改个人资料",
+    "name": "updateUserInfo",
+    "group": "userCenter",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "personIcon",
+            "description": "<p>头像.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "nickname",
+            "description": "<p>昵称.</p>"
           }
         ]
       }

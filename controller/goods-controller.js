@@ -2,7 +2,7 @@
 * 登陆模块controller
 * */
 import API from '../config/zyApi'
-const {goodsList,goodsDetail,releaseSellProductInsteadCustomer,buyInsteadCustomer} = API.goods
+const {goodsList,goodsDetail,releaseSellProductInsteadCustomer,buyInsteadCustomer,addDeliveryAddr,getDefaultAddress,getDeliveryAddrs} = API.goods
 const httpUtils = require('../utils/httpUtils');
 var errResponse = {code: 500, msg: '缺少必要参数'};
 import customer from '../model/releaseSellProductInsteadCustomer'
@@ -80,7 +80,7 @@ class goods {
     }
     async buyInsteadCustomer(req, res, next) {
         try {
-            const result = await httpUtils.httpPostJson(buyInsteadCustomer,req.body, req);
+            const result = await httpUtils.httpPostJson(buyInsteadCustomer,JSON.stringify(req.body), req);
             res.send(result)
         } catch (e) {
             console.log(e)
@@ -88,7 +88,47 @@ class goods {
 
     }
 
+    async addDeliveryAddr(req, res, next) {
+        try {
+            const result = await httpUtils.httpPostJson(addDeliveryAddr,JSON.stringify(req.query), req);
+            res.send(result)
+        } catch (e) {
+            console.log(e)
+        }
 
+    }
+
+    async getDefaultAddress(req, res, next) {
+        let {mobile} = req.query;
+        if (!mobile) {
+            res.send(errResponse);
+            return false
+        }
+        console.log({mobile})
+        try {
+            const result = await httpUtils.httpGet(getDefaultAddress,{mobile}, req);
+            console.log(result)
+            res.send(result)
+        } catch (e) {
+            console.log(e)
+        }
+
+    }
+
+    async getDeliveryAddrs(req, res, next) {
+        let {mobile, pageNum,pageSize} = req.query;
+        if (!mobile) {
+            res.send(errResponse);
+            return false
+        }
+        try {
+            const result = await httpUtils.httpGet(getDeliveryAddrs,{mobile, pageNum,pageSize}, req);
+            res.send(result)
+        } catch (e) {
+            console.log(e)
+        }
+
+    }
 }
 
 module.exports = new goods();
