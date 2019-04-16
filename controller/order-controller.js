@@ -241,6 +241,25 @@ class Order {
             console.log(e)
         }
     }
+
+    /*
+    * 最终成交
+    * */
+    async finalDeal(req, res, next) {
+        console.log(req.body)
+        let {actualAmount,actualPrice,actualTotalPrice,id} = req.body;
+        if (!actualAmount || !actualTotalPrice ||!id) {
+            res.send(errResponse)
+            return false
+        }
+        try {
+            const result = await httpUtils.httpPostJson(API_URL.order.finalDeal, JSON.stringify(req.body), req);
+            res.send(result)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
 }
 
 module.exports = new Order();

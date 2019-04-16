@@ -120,4 +120,16 @@ router.post('/auditInsteadCustomer',orderController.auditInsteadCustomer)
  *
  */
 router.post('/buyInsteadCustomer',orderController.buyInsteadCustomer)
+
+/**
+ * @api {post} /order/finalDeal 最终成交
+ * @apiName finalDeal
+ * @apiGroup order
+ *
+ * @apiParam {String} actualAmount 实际成交数量.
+ * @apiParam {String} actualPrice 实际成交单价.
+ * @apiParam {String} actualTotalPrice 实际成交总额.
+ * @apiParam {String} id 订单id.
+ */
+router.post('/finalDeal',orderController.finalDeal)
 module.exports = router;
