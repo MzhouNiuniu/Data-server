@@ -166,11 +166,6 @@ class Order {
     * */
     async applyInsteadCustomer(req, res, next) {
         console.log(req.body)
-        let schema = new signUpModel(req.body)
-        if (!schema.validatorRequired()) {
-            res.send(errResponse);
-            return false
-        }
         try {
             const result = await httpUtils.httpPostJson(API_URL.order.applyInsteadCustomer, JSON.stringify(req.body), req);
             res.send(result)
