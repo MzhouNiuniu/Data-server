@@ -103,6 +103,7 @@ class Order {
                 url = API_URL.order.getSellOrderTrading;
                 params = {id: id, roleType: roleType};
                 break;
+
         }
         try {
             const result = await httpUtils.httpGet(url, params, req);
@@ -249,6 +250,23 @@ class Order {
         }
         try {
             const result = await httpUtils.httpPostJson(API_URL.order.finalDeal, JSON.stringify(req.body), req);
+            res.send(result)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    /*
+    * 获取求购订单报名中（供应商）
+    * */
+    async getSupplierBuyOrderApplying(req,res,next){
+        let {id} = req.query;
+        if(!id){
+            res.send(errResponse);
+            return false
+        }
+        try {
+            const result = await httpUtils.httpGet(API_URL.order.getSupplierBuyOrderApplying, params, req);
             res.send(result)
         } catch (e) {
             console.log(e)
