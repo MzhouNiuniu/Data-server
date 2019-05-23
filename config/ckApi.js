@@ -11,6 +11,7 @@ module.exports = {
         provinceList: `${baseURL.baseUrl}/generalize/selectBox/provinceList`,//获取省份列表
     },
     order: {
+        getSupplierBuyOrderApplying:`${baseURL.baseUrl}/generalize/order/getSupplierBuyOrderApplying`,//获取求购订单报名中（供应商）
         getBuyRequirementInfo: `${baseURL.baseUrl}/generalize/order/getBuyRequirementInfo`,//获取求购待审核订单详情
         getSellProductInfo: `${baseURL.baseUrl}/generalize/order/getSellProductInfo`,//获取出售待审核商品信息
         orderDetail: `${baseURL.baseUrl}/generalize/order/orderDetail`,//订单详情

@@ -132,4 +132,13 @@ router.post('/buyInsteadCustomer',orderController.buyInsteadCustomer)
  * @apiParam {String} id 订单id.
  */
 router.post('/finalDeal',orderController.finalDeal)
+
+/**
+ * @api {post} /order/getSupplierBuyOrderApplying 获取求购订单报名中（供应商）
+ * @apiName getSupplierBuyOrderApplying
+ * @apiGroup order
+ *
+ * @apiParam {String} id  订单id
+ */
+router.get('/getSupplierBuyOrderApplying',orderController.getSupplierBuyOrderApplying)
 module.exports = router;
