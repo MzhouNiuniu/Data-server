@@ -73,7 +73,7 @@ class User {
     /**
      * @apiGroup User
      * @updateUser 修改密码
-     * @api {post} /user/updateUser 修改密码
+     * @api {post} /user/updateUser 新增用户
      * @apiParam {string} password  密码
      * @apiSampleRequest /user/updateUser
      */
@@ -93,7 +93,6 @@ class User {
             res.send(siteFunc.renderApiErr(req, res, 500, err))
         }
     }
-
 
 }
 
