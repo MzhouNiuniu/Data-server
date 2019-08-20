@@ -4,6 +4,19 @@ define({ "api": [
     "type": "get",
     "url": "/news/getDetails",
     "title": "获取新闻详情",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          }
+        ]
+      }
+    },
     "sampleRequest": [
       {
         "url": "http://192.168.9.105:3000/news/getDetails"
@@ -19,6 +32,33 @@ define({ "api": [
     "type": "get",
     "url": "/news/getList",
     "title": "获取新闻列表",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>本页多少条</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "page",
+            "description": "<p>第几页    （现成框架字段忍受一下）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "keyWords",
+            "description": "<p>关键字</p>"
+          }
+        ]
+      }
+    },
     "sampleRequest": [
       {
         "url": "http://192.168.9.105:3000/news/getList"
@@ -43,6 +83,34 @@ define({ "api": [
     "filename": "src/controller/news.js",
     "groupTitle": "News",
     "name": "PostNewsDelbyid"
+  },
+  {
+    "group": "News",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "file",
+            "description": "<p>form-data  key为file  value excel</p>"
+          }
+        ]
+      }
+    },
+    "type": "post",
+    "url": "/news/importExcel",
+    "title": "导入新闻",
+    "version": "0.0.0",
+    "filename": "src/controller/news.js",
+    "groupTitle": "News",
+    "name": "PostNewsImportexcel",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/news/importExcel"
+      }
+    ]
   },
   {
     "group": "News",
@@ -109,23 +177,58 @@ define({ "api": [
       }
     },
     "type": "post",
-    "url": "/news/updataById",
+    "url": "/news/updateById",
     "title": "更新某条新闻",
     "sampleRequest": [
       {
-        "url": "http://192.168.9.105:3000/news/updataById"
+        "url": "http://192.168.9.105:3000/news/updateById"
       }
     ],
     "version": "0.0.0",
     "filename": "src/controller/news.js",
     "groupTitle": "News",
-    "name": "PostNewsUpdatabyid"
+    "name": "PostNewsUpdatebyid"
+  },
+  {
+    "group": "News",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "status",
+            "description": "<p>状态  （0未审核   1通过  2未通过 ）</p>"
+          }
+        ]
+      }
+    },
+    "type": "post",
+    "url": "/news/updateStatusById",
+    "title": "更新某条的状态（审核）",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/news/updateStatusById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/news.js",
+    "groupTitle": "News",
+    "name": "PostNewsUpdatestatusbyid"
   },
   {
     "group": "User",
     "type": "post",
     "url": "/user/updateUser",
-    "title": "修改密码",
+    "title": "新增用户",
     "parameter": {
       "fields": {
         "Parameter": [

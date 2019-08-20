@@ -28,7 +28,7 @@ var NewsSchema = new Schema({
     },
 
 });
-
+NewsSchema.plugin(mongoosePaginate);
 var News = mongoose.model("News", NewsSchema);
 
 
