@@ -6,24 +6,21 @@ var Schema = mongoose.Schema;
 var shortid = require('shortid');
 var moment = require('moment')
 var mongoosePaginate = require('mongoose-paginate');
-var ExpertSchema = new Schema({
+var OrganizationSchema = new Schema({
     _id: {
         type: String,
         'default': shortid.generate
     },
     name: String,
-    sex: String,
-    education:String, //学历
-    degree:String,//学位
-    organization:String,//工作单位
-    mailbox:String,//邮箱
-    experType:String,//专家类型
-    speciality:String,//擅长领域
-    photos:String,//头像
-    languages:Array, //语言能力
-    professional:Array, //专家技术职称
-    registered:Array,//注册职业资格
-    achievement:Array,//科研成果
+    province:String,
+    city:String,
+    adress:String,
+    district:String,
+    website:String,
+    speciality:String,
+    service:String,
+    experience:Array,
+    intro:String,
     status:{
         type:String,
         default:0
@@ -38,8 +35,8 @@ var ExpertSchema = new Schema({
     },
 
 });
-ExpertSchema.plugin(mongoosePaginate);
-var Expert = mongoose.model("Expert", ExpertSchema);
+OrganizationSchema.plugin(mongoosePaginate);
+var Organization = mongoose.model("Organization", OrganizationSchema);
 
 
-module.exports = Expert;
+module.exports = Organization;

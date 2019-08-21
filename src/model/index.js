@@ -28,5 +28,9 @@ exports.Content = require('./Centent');
 exports.User = require('./User');
 exports.News = require('./News');
 exports.Expert = require('./Expert');
+exports.Organization = require('./Organization');
+
+
+
 
 

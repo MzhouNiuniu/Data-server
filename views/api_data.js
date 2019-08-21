@@ -571,6 +571,287 @@ define({ "api": [
     "name": ""
   },
   {
+    "group": "Organization",
+    "type": "get",
+    "url": "/organization/getDetails",
+    "title": "获取详情",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/organization/getDetails"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/organizetion.js",
+    "groupTitle": "Organization",
+    "name": "GetOrganizationGetdetails"
+  },
+  {
+    "group": "Organization",
+    "type": "get",
+    "url": "/organization/getList",
+    "title": "获取列表",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>本页多少条</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "page",
+            "description": "<p>第几页    （现成框架字段忍受一下）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "keyWords",
+            "description": "<p>关键字</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/organization/getList"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/organizetion.js",
+    "groupTitle": "Organization",
+    "name": "GetOrganizationGetlist"
+  },
+  {
+    "group": "Organization",
+    "type": "post",
+    "url": "/organization/delById",
+    "title": "删除",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/organization/delById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/organizetion.js",
+    "groupTitle": "Organization",
+    "name": "PostOrganizationDelbyid"
+  },
+  {
+    "group": "Organization",
+    "type": "post",
+    "url": "/organization/publish",
+    "title": "发布",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "name",
+            "description": "<p>姓名</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "province",
+            "description": "<p>省</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "city",
+            "description": "<p>市</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "district",
+            "description": "<p>区</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "website",
+            "description": "<p>机构网站</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "service",
+            "description": "<p>服务内容</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "experience",
+            "description": "<p>经验</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "intro",
+            "description": "<p>简介</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/expert/publish"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/organizetion.js",
+    "groupTitle": "Organization",
+    "name": "PostOrganizationPublish"
+  },
+  {
+    "group": "Organization",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "name",
+            "description": "<p>姓名</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "province",
+            "description": "<p>省</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "city",
+            "description": "<p>市</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "district",
+            "description": "<p>区</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "website",
+            "description": "<p>机构网站</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "service",
+            "description": "<p>服务内容</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "array",
+            "optional": false,
+            "field": "experience",
+            "description": "<p>经验</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "intro",
+            "description": "<p>简介</p>"
+          }
+        ]
+      }
+    },
+    "type": "post",
+    "url": "/organization/updateById",
+    "title": "更新某条",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/organization/updateById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/organizetion.js",
+    "groupTitle": "Organization",
+    "name": "PostOrganizationUpdatebyid"
+  },
+  {
+    "group": "Organization",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "status",
+            "description": "<p>状态  （0未审核   1通过  2未通过 ）</p>"
+          }
+        ]
+      }
+    },
+    "type": "post",
+    "url": "/organization/updateStatusById",
+    "title": "更新某条的状态（审核）",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/organization/updateStatusById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/organizetion.js",
+    "groupTitle": "Organization",
+    "name": "PostOrganizationUpdatestatusbyid"
+  },
+  {
     "group": "User",
     "type": "post",
     "url": "/user/updateUser",

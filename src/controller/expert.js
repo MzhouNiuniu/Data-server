@@ -26,7 +26,7 @@ class Expert {
      * @apiParam {string} photos  头像
      * @apiParam {array} languages  语言能力
      * @apiParam {array} professional  专家技术职称
-     * @apiParam {string} registered  注册职业资格
+     * @apiParam {Array} registered  注册职业资格
      * @apiParam {array} achievement  科研成果
      * @apiSampleRequest  /expert/publish
      *
