@@ -10,6 +10,7 @@ var ejs = require('ejs');
 var indexRouter = require('./routes/index');
 import userRouter from './routes/user'
 import newRouter from './routes/news'
+import expertRouter from './routes/expert'
 var app = express();
 var bodyParser = require('body-parser')
 import config from './config/settings'
@@ -59,6 +60,8 @@ app.use(express.static(path.join(__dirname, 'views')));
 app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/news', newRouter)
+app.use('/expert', expertRouter)
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));

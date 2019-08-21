@@ -27,6 +27,6 @@ db.on('close', function () {
 exports.Content = require('./Centent');
 exports.User = require('./User');
 exports.News = require('./News');
-
+exports.Expert = require('./Expert');
 
 

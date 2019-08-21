@@ -140,7 +140,7 @@ class News {
             form.encoding = 'utf-8';
             // form.uploadDir = path.join(__dirname, '../../public/upload/stuUpload/');
             form.keepExtensions = true;//保留后缀
-            form.maxFieldsSize = 2 * 1024 * 1024;
+            form.maxFieldsSize = 2 * 1024 * 1024;  //大小限制
             form.parse(req, function (err, fields, files) {
                 if (err) {
                     res.send(siteFunc.renderApiErr(req, res, 500, err))
