@@ -24,7 +24,7 @@ let sessionConfig = {
         maxAge: 1000 * 60 * 60
     },
     store: new MongoStore({
-        url: 'mongodb://127.0.0.1:27017/test',
+        url: `mongodb://${config.HOST}:${config.PORT}/${config.DB}`,
     }),
     resave: false,
     saveUninitialized: true,
