@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 import controller from '../src/controller'
-const model=controller.Organization
+const model=controller.Organizetion
 router.post('/publish',model.publish)
 router.get('/getList',model.getList)
 router.post('/delById',model.delById)
