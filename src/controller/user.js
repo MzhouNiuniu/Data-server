@@ -22,7 +22,6 @@ class User {
         let user = await UserModel.findOne(req.query);
         if (!_.isEmpty(user)) {
             let auth_token = user._id
-            console.log(auth_token)
             req.session.adminlogined = true;
             req.session.adminUserInfo = user;
             res.cookie(config.auth_cookie_name, auth_token, { path: '/', maxAge: 1000 * 60 * 60 * 24 * 30,sign:true,  httpOnly: true }); //cookie 有效期30天
@@ -55,7 +54,6 @@ class User {
                 })
                 let  user = await UserModel.find({'userName': req.body.userName})
                 if (_.isEmpty(user)) {
-                        console.log(Vuser)
                     Vuser.save()
                     res.send(siteFunc.renderApiData(res, 200, '插入成功'))
                 }
@@ -81,10 +79,8 @@ class User {
         try {
             const  newPsd= server.encrypt(req.body.password,  config.encrypt_key);
             req.body.password=newPsd
-            console.log(req.session.adminUserInfo.password)
             UserModel.updateOne({'password': req.session.adminUserInfo.password},{'password':req.body.password})
             let  user = await UserModel.find({'password':req.body.password})
-            console.log( user)
             req.session.adminUserInfo=user
             res.send(siteFunc.renderApiData(res, 200,'ok',user ))
 

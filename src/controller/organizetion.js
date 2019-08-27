@@ -54,7 +54,6 @@ class Organization {
 
         try {
             let model = await Model.paginate({name: {$regex: keyWords, $options: 'i'}}, {limit: limit, page: page})
-            console.log(model)
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
         }
         catch (err) {
@@ -113,7 +112,6 @@ class Organization {
     async updateById(req, res, next) {
         try {
             let model = await Model.findByIdAndUpdate(req.body.id, req.body)
-            console.log(model)
             res.send(siteFunc.renderApiData(req, 200, 'ok'))
         }
         catch (err) {

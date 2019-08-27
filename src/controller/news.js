@@ -47,7 +47,6 @@ class News {
 
         try {
             let news = await NewModel.paginate({title: {$regex: keyWords, $options: 'i'}}, {limit: limit, page: page})
-            console.log(news)
             res.send(siteFunc.renderApiData(req, 200, 'ok', news))
         }
         catch (err) {
@@ -66,7 +65,6 @@ class News {
         try {
 
             let news = await NewModel.find({'_id': req.query.id})
-            console.log(news)
             res.send(siteFunc.renderApiData(req, 200, 'ok', news))
         }
         catch (err) {
@@ -83,7 +81,6 @@ class News {
     async delById(req, res, next) {
         try {
             let news = await NewModel.remove({'_id': req.body.id})
-            console.log(news)
             res.send(siteFunc.renderApiData(req, 200, 'ok'))
         }
         catch (err) {
@@ -103,7 +100,6 @@ class News {
     async updateById(req, res, next) {
         try {
             let news = await NewModel.findByIdAndUpdate(req.body.id, req.body)
-            console.log(news)
             res.send(siteFunc.renderApiData(req, 200, 'ok'))
         }
         catch (err) {
@@ -153,7 +149,6 @@ class News {
                         obj[0].data[0].map((key,indexs)=>{
                             params[key]=item[indexs]
                         })
-                        console.log(params)
                         let model = new NewModel(params)
                         model.save()
 
