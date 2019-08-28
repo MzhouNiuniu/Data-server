@@ -16,6 +16,7 @@ import collaborateRouter from './routes/collaborate'
 import statuteRouter from './routes/statute'
 import researchReportRouter from './routes/researchReport'
 import researchScripturesRouter from './routes/researchScriptures'
+import magazineRouter from './routes/magazine'
 var app = express();
 var bodyParser = require('body-parser')
 import config from './config/settings'
@@ -69,8 +70,10 @@ app.use('/expert', expertRouter)
 app.use('/organization', organizationRouter)//机构
 app.use('/collaborate', collaborateRouter)//项目合作
 app.use('/statute', statuteRouter)//法律法规
-app.use('/researchReport', researchReportRouter)//法律法规
-app.use('/researchScriptures', researchScripturesRouter)//法律法规
+app.use('/researchReport', researchReportRouter)//研究报告
+app.use('/researchScriptures', researchScripturesRouter)//经典案例
+app.use('/magazine', magazineRouter)//杂志
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));

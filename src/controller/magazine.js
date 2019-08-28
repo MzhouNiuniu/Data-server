@@ -1,4 +1,4 @@
-const Model = require("../model").Statute;
+const Model = require("../model").Magazine;
 const formidable = require('formidable');
 const {server, siteFunc} = require('../../utils');
 var moment = require('moment')
@@ -6,26 +6,23 @@ var node_xlsx = require('node-xlsx');
 const _ = require('lodash')
 import config from '../../config/settings'
 
-class ResearchScriptures {
+class Magazine {
     constructor() {
         // super()
     }
 
     /**
-     *
-     * @apiGroup ResearchScriptures
+     * @apiGroup Magazine
      * @publish 发布
-     * @api {post} /researchScriptures/publish 发布
-     * @apiParam {string} name  文字名字
-     * @apiParam {string} content  内容
-     * @apiParam {string} brief  简介
-     * @apiParam {string} cover  封面
-     * @apiSampleRequest  /researchScriptures/publish
+     * @api {post} /magazine/publish 发布
+     * @apiParam {string} name  姓名
+     * @apiParam {string} url  链接
+     * @apiParam {string} photos  头像
+     * @apiSampleRequest  /magazine/publish
      *
      */
     async publish(req, res, next) {
         try {
-            req.body.author = req.session.adminUserInfo
             let model = new Model(req.body)
             model.save()
             res.send(siteFunc.renderApiData(res, 200, '插入成功'))
@@ -36,18 +33,19 @@ class ResearchScriptures {
     }
 
     /**
-     * @apiGroup ResearchScriptures
+     * @apiGroup Magazine
      * @getList 获取列表
-     * @api {get} /researchScriptures/getList 获取列表
+     * @api {get} /magazine/getList 获取列表
      * @apiParam {string} limit  本页多少条
      * @apiParam {string} page  第几页    （现成框架字段忍受一下）
      * @apiParam {string} keyWords  关键字
-     * @apiSampleRequest  /researchScriptures/getList
+     * @apiSampleRequest  /magazine/getList
      */
     async getList(req, res, next) {
         var keyWords = req.query.keyWords || ''
         var limit = Number(req.query.limit || 10)
         var page = Number(req.query.page || 1)
+
         try {
             let model = await Model.paginate({name: {$regex: keyWords, $options: 'i'}}, {limit: limit, page: page,sort:{stick:-1,releaseTime:-1}})
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
@@ -58,11 +56,11 @@ class ResearchScriptures {
     }
 
     /**
-     * @apiGroup ResearchScriptures
+     * @apiGroup Magazine
      * @getList 获取详情
-     * @api {get} /researchScriptures/getDetails 获取详情
+     * @api {get} /magazine/getDetails 获取详情
      * @apiParam {string} id  id
-     * @apiSampleRequest  /researchScriptures/getDetails
+     * @apiSampleRequest  /magazine/getDetails
      */
     async getDetails(req, res, next) {
         try {
@@ -75,10 +73,10 @@ class ResearchScriptures {
     }
 
     /**
-     * @apiGroup ResearchScriptures
+     * @apiGroup Magazine
      * @delById 删除
-     * @api {post} /researchScriptures/delById 删除
-     * @apiSampleRequest  /researchScriptures/delById
+     * @api {post} /magazine/delById 删除
+     * @apiSampleRequest  /magazine/delById
      */
     async delById(req, res, next) {
         try {
@@ -91,15 +89,14 @@ class ResearchScriptures {
     }
 
     /**
-     * @apiGroup ResearchScriptures
+     * @apiGroup Magazine
      * @updateById 更新某条
      * @apiParam {string} id  id
-     * @apiParam {string} name  文字名字
-     * @apiParam {string} content  内容
-     * @apiParam {string} brief  简介
-     * @apiParam {string} cover  封面
-     * @api {post} /researchScriptures/updateById 更新某条
-     * @apiSampleRequest  /researchScriptures/updateById
+     * @api {post} /magazine/updateById 更新某条
+     * @apiParam {string} name  姓名
+     * @apiParam {string} url  链接
+     * @apiParam {string} photos  头像
+     * @apiSampleRequest  /magazine/updateById
      */
     async updateById(req, res, next) {
 
@@ -114,40 +111,12 @@ class ResearchScriptures {
     }
 
     /**
-     * @apiGroup ResearchScriptures
-     * @updateStatusById 更新某条的状态（审核）
-     * @apiParam {string} id  id
-     * @api {post} /researchScriptures/updateStatusById 更新某条的状态（审核）
-     * @apiParam {string} message 拒绝信息
-     * @apiParam {string} status  状态  （0未审核   1通过  2未通过 ）
-     * @apiSampleRequest  /researchScriptures/updateStatusById
-     */
-    async updateStatusById(req, res, next) {
-        try {
-
-            if(req.body.status==2){
-                let model = await Model.findById(req.body.id)
-                model.status=req.body.status
-                model.auditList.push({author:req.session.adminUserInfo,message:req.body.message,releaseTime:moment(new Date()).format('YYYY-MM-DD HH:mm:ss')})
-                let models = await Model.findByIdAndUpdate(req.body.id, model)
-            }
-            else{
-                let model = await Model.findByIdAndUpdate(req.body.id, {'status': req.body.status})
-            }
-
-            res.send(siteFunc.renderApiData(req, 200, 'ok'))
-        }
-        catch (err) {
-            res.send(siteFunc.renderApiErr(req, res, 500, err))
-        }
-    }
-    /**
-     * @apiGroup ResearchScriptures
+     * @apiGroup Magazine
      * @updateStatusById 置顶
      * @apiParam {string} id  id
-     * @api {post} /researchScriptures/stickById 置顶
+     * @api {post} /magazine/stickById 置顶
      * @apiParam {string} stick   0未置顶  1置顶
-     * @apiSampleRequest  /researchScriptures/stickById
+     * @apiSampleRequest  /magazine/stickById
      */
     async stickById(req, res, next) {
         try {
@@ -162,4 +131,4 @@ class ResearchScriptures {
 
 }
 
-module.exports = new ResearchScriptures();
+module.exports = new Magazine();

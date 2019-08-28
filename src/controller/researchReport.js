@@ -1,4 +1,4 @@
-const Model = require("../model").Statute;
+const Model = require("../model").ResearchReport;
 const formidable = require('formidable');
 const {server, siteFunc} = require('../../utils');
 var moment = require('moment')

@@ -30,6 +30,7 @@ exports.Expert = require('./Expert');
 exports.Organization = require('./Organization');
 exports.Collaborate = require('./Collaborate');
 exports.Statute = require('./Statute');
-
-
-
+exports.Collaborate = require('./Collaborate');
+exports.ResearchReport = require('./ResearchReport');
+exports.ResearchScriptures = require('./ResearchScriptures');
+exports.Magazine = require('./Magazine');

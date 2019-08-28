@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var shortid = require('shortid');
 var moment = require('moment')
 var mongoosePaginate = require('mongoose-paginate');
-var ResearchScripturesSchema = new Schema({
+var ResearchReportSchema = new Schema({
     _id: {
         type: String,
         'default': shortid.generate
@@ -38,8 +38,8 @@ var ResearchScripturesSchema = new Schema({
     },
 
 });
-ResearchScripturesSchema.plugin(mongoosePaginate);
-var ResearchScriptures = mongoose.model("ResearchScriptures", ResearchScripturesSchema);
+ResearchReportSchema.plugin(mongoosePaginate);
+var ResearchReport = mongoose.model("ResearchReport", ResearchReportSchema);
 
 
-module.exports = ResearchScriptures;
+module.exports = ResearchReport;

@@ -611,6 +611,217 @@ define({ "api": [
     "name": "PostExpertUpdatestatusbyid"
   },
   {
+    "group": "Magazine",
+    "type": "get",
+    "url": "/magazine/getDetails",
+    "title": "获取详情",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/magazine/getDetails"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/magazine.js",
+    "groupTitle": "Magazine",
+    "name": "GetMagazineGetdetails"
+  },
+  {
+    "group": "Magazine",
+    "type": "get",
+    "url": "/magazine/getList",
+    "title": "获取列表",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>本页多少条</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "page",
+            "description": "<p>第几页    （现成框架字段忍受一下）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "keyWords",
+            "description": "<p>关键字</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/magazine/getList"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/magazine.js",
+    "groupTitle": "Magazine",
+    "name": "GetMagazineGetlist"
+  },
+  {
+    "group": "Magazine",
+    "type": "post",
+    "url": "/magazine/delById",
+    "title": "删除",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/magazine/delById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/magazine.js",
+    "groupTitle": "Magazine",
+    "name": "PostMagazineDelbyid"
+  },
+  {
+    "group": "Magazine",
+    "type": "post",
+    "url": "/magazine/publish",
+    "title": "发布",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "name",
+            "description": "<p>姓名</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "url",
+            "description": "<p>链接</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "photos",
+            "description": "<p>头像</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/magazine/publish"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/magazine.js",
+    "groupTitle": "Magazine",
+    "name": "PostMagazinePublish"
+  },
+  {
+    "group": "Magazine",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "stick",
+            "description": "<p>0未置顶  1置顶</p>"
+          }
+        ]
+      }
+    },
+    "type": "post",
+    "url": "/magazine/stickById",
+    "title": "置顶",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/magazine/stickById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/magazine.js",
+    "groupTitle": "Magazine",
+    "name": "PostMagazineStickbyid"
+  },
+  {
+    "group": "Magazine",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "name",
+            "description": "<p>姓名</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "url",
+            "description": "<p>链接</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "photos",
+            "description": "<p>头像</p>"
+          }
+        ]
+      }
+    },
+    "type": "post",
+    "url": "/magazine/updateById",
+    "title": "更新某条",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/magazine/updateById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/magazine.js",
+    "groupTitle": "Magazine",
+    "name": "PostMagazineUpdatebyid"
+  },
+  {
     "group": "News",
     "type": "get",
     "url": "/news/getDetails",
@@ -1259,7 +1470,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/controller/ResearchReport.js",
+    "filename": "src/controller/researchReport.js",
     "groupTitle": "ResearchReport",
     "name": "GetResearchreportGetdetails"
   },
@@ -1308,7 +1519,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/controller/ResearchReport.js",
+    "filename": "src/controller/researchReport.js",
     "groupTitle": "ResearchReport",
     "name": "GetResearchreportGetlist"
   },
@@ -1323,7 +1534,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/controller/ResearchReport.js",
+    "filename": "src/controller/researchReport.js",
     "groupTitle": "ResearchReport",
     "name": "PostResearchreportDelbyid"
   },
@@ -1407,7 +1618,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/controller/ResearchReport.js",
+    "filename": "src/controller/researchReport.js",
     "groupTitle": "ResearchReport",
     "name": "PostResearchreportPublish"
   },
@@ -1442,7 +1653,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/controller/ResearchReport.js",
+    "filename": "src/controller/researchReport.js",
     "groupTitle": "ResearchReport",
     "name": "PostResearchreportStickbyid"
   },
@@ -1519,7 +1730,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/controller/ResearchReport.js",
+    "filename": "src/controller/researchReport.js",
     "groupTitle": "ResearchReport",
     "name": "PostResearchreportUpdatebyid"
   },
@@ -1561,7 +1772,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/controller/ResearchReport.js",
+    "filename": "src/controller/researchReport.js",
     "groupTitle": "ResearchReport",
     "name": "PostResearchreportUpdatestatusbyid"
   },
@@ -1589,7 +1800,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/controller/ResearchScriptures.js",
+    "filename": "src/controller/researchScriptures.js",
     "groupTitle": "ResearchScriptures",
     "name": "GetResearchscripturesGetdetails"
   },
@@ -1631,7 +1842,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/controller/ResearchScriptures.js",
+    "filename": "src/controller/researchScriptures.js",
     "groupTitle": "ResearchScriptures",
     "name": "GetResearchscripturesGetlist"
   },
@@ -1646,7 +1857,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/controller/ResearchScriptures.js",
+    "filename": "src/controller/researchScriptures.js",
     "groupTitle": "ResearchScriptures",
     "name": "PostResearchscripturesDelbyid"
   },
@@ -1695,7 +1906,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/controller/ResearchScriptures.js",
+    "filename": "src/controller/researchScriptures.js",
     "groupTitle": "ResearchScriptures",
     "name": "PostResearchscripturesPublish"
   },
@@ -1730,7 +1941,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/controller/ResearchScriptures.js",
+    "filename": "src/controller/researchScriptures.js",
     "groupTitle": "ResearchScriptures",
     "name": "PostResearchscripturesStickbyid"
   },
@@ -1786,7 +1997,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/controller/ResearchScriptures.js",
+    "filename": "src/controller/researchScriptures.js",
     "groupTitle": "ResearchScriptures",
     "name": "PostResearchscripturesUpdatebyid"
   },
@@ -1828,7 +2039,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "src/controller/ResearchScriptures.js",
+    "filename": "src/controller/researchScriptures.js",
     "groupTitle": "ResearchScriptures",
     "name": "PostResearchscripturesUpdatestatusbyid"
   },

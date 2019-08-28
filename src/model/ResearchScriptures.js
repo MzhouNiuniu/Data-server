@@ -1,4 +1,3 @@
-
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var shortid = require('shortid');
@@ -30,8 +29,8 @@ var ResearchScripturesSchema = new Schema({
         default:moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
     },
     author: {
-        type: Object,
-    },
+        type: Object
+    }
 
 });
 ResearchScripturesSchema.plugin(mongoosePaginate);
