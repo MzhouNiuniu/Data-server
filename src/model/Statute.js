@@ -4,18 +4,15 @@ var Schema = mongoose.Schema;
 var shortid = require('shortid');
 var moment = require('moment')
 var mongoosePaginate = require('mongoose-paginate');
-var ExpertSchema = new Schema({
+var StatuteSchema = new Schema({
     _id: {
         type: String,
         'default': shortid.generate
     },
     name: String,
-    sex: String,
-    current:String,//现状
-    photos:String,//头像
-    experience:String,//经历
-    direction:String,//研究方向
-    achievement:Array,//科研成果
+    content:String,
+    reference:String,
+    type:Number, //0  政策法规  1 指南标准  2 国家性规范文件 3 地方规范文件 4 部门规范文件
     stick:{
         type:Number,
         enum : [0,1],//枚举
@@ -31,14 +28,10 @@ var ExpertSchema = new Schema({
     releaseTime:{
         type:String,
         default:moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
-    },
-    author: {
-        type: Object,
-    },
-
+    }
 });
-ExpertSchema.plugin(mongoosePaginate);
-var Expert = mongoose.model("Expert", ExpertSchema);
+StatuteSchema.plugin(mongoosePaginate);
+var Statute = mongoose.model("Statute", StatuteSchema);
 
 
-module.exports = Expert;
+module.exports = Statute;

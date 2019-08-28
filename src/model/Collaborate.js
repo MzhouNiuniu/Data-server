@@ -4,18 +4,18 @@ var Schema = mongoose.Schema;
 var shortid = require('shortid');
 var moment = require('moment')
 var mongoosePaginate = require('mongoose-paginate');
-var ExpertSchema = new Schema({
+var CollaborateSchema = new Schema({
     _id: {
         type: String,
         'default': shortid.generate
     },
     name: String,
-    sex: String,
-    current:String,//现状
-    photos:String,//头像
-    experience:String,//经历
-    direction:String,//研究方向
-    achievement:Array,//科研成果
+    content:String,
+    company:String,
+    accessory:Array,
+    Tcompany:String,
+    Tcontact:String,
+    Tphotos:String,
     stick:{
         type:Number,
         enum : [0,1],//枚举
@@ -31,14 +31,10 @@ var ExpertSchema = new Schema({
     releaseTime:{
         type:String,
         default:moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
-    },
-    author: {
-        type: Object,
-    },
-
+    }
 });
-ExpertSchema.plugin(mongoosePaginate);
-var Expert = mongoose.model("Expert", ExpertSchema);
+CollaborateSchema.plugin(mongoosePaginate);
+var Collaborate = mongoose.model("Collaborate", CollaborateSchema);
 
 
-module.exports = Expert;
+module.exports = Collaborate;

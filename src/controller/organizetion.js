@@ -1,7 +1,7 @@
 const Model = require("../model").Organization;
 const formidable = require('formidable');
 const {server, siteFunc} = require('../../utils');
-
+var moment = require('moment')
 var node_xlsx = require('node-xlsx');
 const _ = require('lodash')
 import config from '../../config/settings'
@@ -53,7 +53,7 @@ class Organization {
         var page = Number(req.query.page || 1)
 
         try {
-            let model = await Model.paginate({name: {$regex: keyWords, $options: 'i'}}, {limit: limit, page: page})
+            let model = await Model.paginate({name: {$regex: keyWords, $options: 'i'}}, {limit: limit, page: page,sort:{stick:-1,releaseTime:-1}})
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
         }
         catch (err) {
@@ -111,6 +111,7 @@ class Organization {
      */
     async updateById(req, res, next) {
         try {
+            req.body.releaseTime=moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
             let model = await Model.findByIdAndUpdate(req.body.id, req.body)
             res.send(siteFunc.renderApiData(req, 200, 'ok'))
         }
@@ -123,13 +124,38 @@ class Organization {
      * @apiGroup Organization
      * @updateStatusById 更新某条的状态（审核）
      * @apiParam {string} id  id
+     * @apiParam {string} message 拒绝信息
      * @api {post} /organization/updateStatusById 更新某条的状态（审核）
      * @apiParam {string} status  状态  （0未审核   1通过  2未通过 ）
      * @apiSampleRequest  /organization/updateStatusById
      */
     async updateStatusById(req, res, next) {
         try {
-            let model = await Model.findByIdAndUpdate(req.body.id, {'status': req.body.status})
+            if(req.body.status==2){
+                let model = await Model.findById(req.body.id)
+                model.status=req.body.status
+                model.auditList.push({author:req.session.adminUserInfo,message:req.body.message,releaseTime:moment(new Date()).format('YYYY-MM-DD HH:mm:ss')})
+                let models = await Model.findByIdAndUpdate(req.body.id, model)
+            }
+            else{
+                let model = await Model.findByIdAndUpdate(req.body.id, {'status': req.body.status})
+            }
+        }
+        catch (err) {
+            res.send(siteFunc.renderApiErr(req, res, 500, err))
+        }
+    }
+    /**
+     * @apiGroup Organization
+     * @updateStatusById 置顶
+     * @apiParam {string} id  id
+     * @api {post} /organization/stickById 置顶
+     * @apiParam {string} stick   0未置顶  1置顶
+     * @apiSampleRequest  /organization/stickById
+     */
+    async stickById(req, res, next) {
+        try {
+            let model = await Model.findByIdAndUpdate(req.body.id, {'stick': req.body.stick})
             res.send(siteFunc.renderApiData(req, 200, 'ok'))
         }
         catch (err) {

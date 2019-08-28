@@ -12,11 +12,13 @@ import userRouter from './routes/user'
 import newRouter from './routes/news'
 import expertRouter from './routes/expert'
 import organizationRouter from './routes/organization'
+import collaborateRouter from './routes/collaborate'
+import statuteRouter from './routes/statute'
 var app = express();
 var bodyParser = require('body-parser')
 import config from './config/settings'
-
-app.use(bodyParser.json())
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true})); //
 app.use(cookieParser(config.session_secret));
 let sessionConfig = {
     secret: config.encrypt_key,
@@ -62,7 +64,9 @@ app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/news', newRouter)
 app.use('/expert', expertRouter)
-app.use('/organization', organizationRouter)
+app.use('/organization', organizationRouter)//机构
+app.use('/collaborate', collaborateRouter)//项目合作
+app.use('/statute', statuteRouter)//法律法规
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));

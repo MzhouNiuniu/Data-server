@@ -4,18 +4,15 @@ var Schema = mongoose.Schema;
 var shortid = require('shortid');
 var moment = require('moment')
 var mongoosePaginate = require('mongoose-paginate');
-var ExpertSchema = new Schema({
+var ResearchScripturesSchema = new Schema({
     _id: {
         type: String,
         'default': shortid.generate
     },
     name: String,
-    sex: String,
-    current:String,//现状
-    photos:String,//头像
-    experience:String,//经历
-    direction:String,//研究方向
-    achievement:Array,//科研成果
+    content:String,
+    brief:String,//简介
+    cover:String,//封面
     stick:{
         type:Number,
         enum : [0,1],//枚举
@@ -37,8 +34,8 @@ var ExpertSchema = new Schema({
     },
 
 });
-ExpertSchema.plugin(mongoosePaginate);
-var Expert = mongoose.model("Expert", ExpertSchema);
+ResearchScripturesSchema.plugin(mongoosePaginate);
+var ResearchScriptures = mongoose.model("ResearchScriptures", ResearchScripturesSchema);
 
 
-module.exports = Expert;
+module.exports = ResearchScriptures;

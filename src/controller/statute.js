@@ -1,4 +1,4 @@
-const Model = require("../model").Expert;
+const Model = require("../model").Statute;
 const formidable = require('formidable');
 const {server, siteFunc} = require('../../utils');
 var moment = require('moment')
@@ -6,23 +6,21 @@ var node_xlsx = require('node-xlsx');
 const _ = require('lodash')
 import config from '../../config/settings'
 
-class Expert {
+class Statute {
     constructor() {
         // super()
     }
 
     /**
-     * @apiGroup Expert
+     *
+     * @apiGroup Statute
      * @publish 发布
-     * @api {post} /expert/publish 发布
-     * @apiParam {string} name  姓名
-     * @apiParam {string} sex  性别
-     * @apiParam {string} direction  研究方向
-     * @apiParam {string} current  现状
-     * @apiParam {string} experience  经历
-     * @apiParam {string} achievement  科研成果
-     * @apiParam {string} photos  头像
-     * @apiSampleRequest  /expert/publish
+     * @api {post} /statute/publish 发布
+     * @apiParam {string} name  文字名字
+     * @apiParam {string} content  内容
+     * @apiParam {string} reference  文号
+     * @apiParam {string} type  0  政策法规  1 指南标准  2 国家性规范文件 3 地方规范文件 4 部门规范文件
+     * @apiSampleRequest  /statute/publish
      *
      */
     async publish(req, res, next) {
@@ -38,21 +36,22 @@ class Expert {
     }
 
     /**
-     * @apiGroup Expert
+     * @apiGroup Statute
      * @getList 获取列表
-     * @api {get} /expert/getList 获取列表
+     * @api {get} /statute/getList 获取列表
      * @apiParam {string} limit  本页多少条
      * @apiParam {string} page  第几页    （现成框架字段忍受一下）
      * @apiParam {string} keyWords  关键字
-     * @apiSampleRequest  /expert/getList
+     * @apiParam {string} type  0  政策法规  1 指南标准  2 国家性规范文件 3 地方规范文件 4 部门规范文件
+     * @apiSampleRequest  /statute/getList
      */
     async getList(req, res, next) {
         var keyWords = req.query.keyWords || ''
         var limit = Number(req.query.limit || 10)
         var page = Number(req.query.page || 1)
-
+        var type = Number(req.query.type)
         try {
-            let model = await Model.paginate({name: {$regex: keyWords, $options: 'i'}}, {limit: limit, page: page,sort:{stick:-1,releaseTime:-1}})
+            let model = await Model.paginate({name: {$regex: keyWords, $options: 'i',$regex:type}}, {limit: limit, page: page,sort:{stick:-1,releaseTime:-1}})
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
         }
         catch (err) {
@@ -61,11 +60,11 @@ class Expert {
     }
 
     /**
-     * @apiGroup Expert
+     * @apiGroup Statute
      * @getList 获取详情
-     * @api {get} /expert/getDetails 获取详情
+     * @api {get} /statute/getDetails 获取详情
      * @apiParam {string} id  id
-     * @apiSampleRequest  /expert/getDetails
+     * @apiSampleRequest  /statute/getDetails
      */
     async getDetails(req, res, next) {
         try {
@@ -78,10 +77,10 @@ class Expert {
     }
 
     /**
-     * @apiGroup Expert
+     * @apiGroup Statute
      * @delById 删除
-     * @api {post} /expert/delById 删除
-     * @apiSampleRequest  /expert/delById
+     * @api {post} /statute/delById 删除
+     * @apiSampleRequest  /statute/delById
      */
     async delById(req, res, next) {
         try {
@@ -94,17 +93,18 @@ class Expert {
     }
 
     /**
-     * @apiGroup Expert
+     * @apiGroup Statute
      * @updateById 更新某条
      * @apiParam {string} id  id
-     * @api {post} /expert/updateById 更新某条
-     * @apiParam {string} name  姓名
-     * @apiParam {string} sex  性别
-     * @apiParam {string} current  现状
-     * @apiParam {string} experience  经历
-     * @apiParam {string} achievement  科研成果
-     * @apiParam {string} photos  头像
-     * @apiSampleRequest  /expert/updateById
+     * @apiParam {string} name  项目名称
+     * @apiParam {string} content  内容
+     * @apiParam {string} company  公司
+     * @apiParam {string} accessory  附件  这里存一个字符串 文件服务正在建
+     * @apiParam {string} Tcompany  推广公司
+     * @apiParam {string} Tcontact  推广联系方式
+     * @apiParam {string} Tphotos  推广二维码
+     * @api {post} /statute/updateById 更新某条
+     * @apiSampleRequest  /statute/updateById
      */
     async updateById(req, res, next) {
 
@@ -119,13 +119,13 @@ class Expert {
     }
 
     /**
-     * @apiGroup Expert
+     * @apiGroup Statute
      * @updateStatusById 更新某条的状态（审核）
      * @apiParam {string} id  id
-     * @api {post} /expert/updateStatusById 更新某条的状态（审核）
+     * @api {post} /statute/updateStatusById 更新某条的状态（审核）
      * @apiParam {string} message 拒绝信息
      * @apiParam {string} status  状态  （0未审核   1通过  2未通过 ）
-     * @apiSampleRequest  /expert/updateStatusById
+     * @apiSampleRequest  /statute/updateStatusById
      */
     async updateStatusById(req, res, next) {
         try {
@@ -147,12 +147,12 @@ class Expert {
         }
     }
     /**
-     * @apiGroup Expert
+     * @apiGroup Statute
      * @updateStatusById 置顶
      * @apiParam {string} id  id
-     * @api {post} /expert/stickById 置顶
+     * @api {post} /statute/stickById 置顶
      * @apiParam {string} stick   0未置顶  1置顶
-     * @apiSampleRequest  /expert/stickById
+     * @apiSampleRequest  /statute/stickById
      */
     async stickById(req, res, next) {
         try {
@@ -167,4 +167,4 @@ class Expert {
 
 }
 
-module.exports = new Expert();
+module.exports = new Statute();

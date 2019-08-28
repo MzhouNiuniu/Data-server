@@ -1,5 +1,314 @@
 [
   {
+    "group": "Collaborate",
+    "type": "get",
+    "url": "/collaborate/getDetails",
+    "title": "获取详情",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/collaborate/getDetails"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/collaborate.js",
+    "groupTitle": "Collaborate",
+    "name": "GetCollaborateGetdetails"
+  },
+  {
+    "group": "Collaborate",
+    "type": "get",
+    "url": "/collaborate/getList",
+    "title": "获取列表",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>本页多少条</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "page",
+            "description": "<p>第几页    （现成框架字段忍受一下）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "keyWords",
+            "description": "<p>关键字</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/collaborate/getList"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/collaborate.js",
+    "groupTitle": "Collaborate",
+    "name": "GetCollaborateGetlist"
+  },
+  {
+    "group": "Collaborate",
+    "type": "post",
+    "url": "/collaborate/delById",
+    "title": "删除",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/collaborate/delById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/collaborate.js",
+    "groupTitle": "Collaborate",
+    "name": "PostCollaborateDelbyid"
+  },
+  {
+    "group": "Collaborate",
+    "type": "post",
+    "url": "/collaborate/publish",
+    "title": "发布",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "name",
+            "description": "<p>项目名称</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "content",
+            "description": "<p>内容</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "company",
+            "description": "<p>公司</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "accessory",
+            "description": "<p>附件  这里存一个字符串 文件服务正在建</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "Tcompany",
+            "description": "<p>推广公司</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "Tcontact",
+            "description": "<p>推广联系方式</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "Tphotos",
+            "description": "<p>推广二维码</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/collaborate/publish"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/collaborate.js",
+    "groupTitle": "Collaborate",
+    "name": "PostCollaboratePublish"
+  },
+  {
+    "group": "Collaborate",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "stick",
+            "description": "<p>0未置顶  1置顶</p>"
+          }
+        ]
+      }
+    },
+    "type": "post",
+    "url": "/collaborate/stickById",
+    "title": "置顶",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/collaborate/stickById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/collaborate.js",
+    "groupTitle": "Collaborate",
+    "name": "PostCollaborateStickbyid"
+  },
+  {
+    "group": "Collaborate",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "name",
+            "description": "<p>项目名称</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "content",
+            "description": "<p>内容</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "company",
+            "description": "<p>公司</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "accessory",
+            "description": "<p>附件  这里存一个字符串 文件服务正在建</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "Tcompany",
+            "description": "<p>推广公司</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "Tcontact",
+            "description": "<p>推广联系方式</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "Tphotos",
+            "description": "<p>推广二维码</p>"
+          }
+        ]
+      }
+    },
+    "type": "post",
+    "url": "/collaborate/updateById",
+    "title": "更新某条",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/collaborate/updateById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/collaborate.js",
+    "groupTitle": "Collaborate",
+    "name": "PostCollaborateUpdatebyid"
+  },
+  {
+    "group": "Collaborate",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>拒绝信息</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "status",
+            "description": "<p>状态  （0未审核   1通过  2未通过 ）</p>"
+          }
+        ]
+      }
+    },
+    "type": "post",
+    "url": "/collaborate/updateStatusById",
+    "title": "更新某条的状态（审核）",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/collaborate/updateStatusById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/collaborate.js",
+    "groupTitle": "Collaborate",
+    "name": "PostCollaborateUpdatestatusbyid"
+  },
+  {
     "group": "Expert",
     "type": "get",
     "url": "/expert/getDetails",
@@ -110,36 +419,29 @@
             "group": "Parameter",
             "type": "string",
             "optional": false,
-            "field": "education",
-            "description": "<p>学历</p>"
+            "field": "direction",
+            "description": "<p>研究方向</p>"
           },
           {
             "group": "Parameter",
             "type": "string",
             "optional": false,
-            "field": "degree",
-            "description": "<p>学位</p>"
+            "field": "current",
+            "description": "<p>现状</p>"
           },
           {
             "group": "Parameter",
             "type": "string",
             "optional": false,
-            "field": "mailbox",
-            "description": "<p>邮箱</p>"
+            "field": "experience",
+            "description": "<p>经历</p>"
           },
           {
             "group": "Parameter",
             "type": "string",
             "optional": false,
-            "field": "experType",
-            "description": "<p>专家类型</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "speciality",
-            "description": "<p>擅长领域</p>"
+            "field": "achievement",
+            "description": "<p>科研成果</p>"
           },
           {
             "group": "Parameter",
@@ -147,34 +449,6 @@
             "optional": false,
             "field": "photos",
             "description": "<p>头像</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "array",
-            "optional": false,
-            "field": "languages",
-            "description": "<p>语言能力</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "array",
-            "optional": false,
-            "field": "professional",
-            "description": "<p>专家技术职称</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "registered",
-            "description": "<p>注册职业资格</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "array",
-            "optional": false,
-            "field": "achievement",
-            "description": "<p>科研成果</p>"
           }
         ]
       }
@@ -188,6 +462,41 @@
     "filename": "src/controller/expert.js",
     "groupTitle": "Expert",
     "name": "PostExpertPublish"
+  },
+  {
+    "group": "Expert",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "stick",
+            "description": "<p>0未置顶  1置顶</p>"
+          }
+        ]
+      }
+    },
+    "type": "post",
+    "url": "/expert/stickById",
+    "title": "置顶",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/expert/stickById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/expert.js",
+    "groupTitle": "Expert",
+    "name": "PostExpertStickbyid"
   },
   {
     "group": "Expert",
@@ -219,36 +528,22 @@
             "group": "Parameter",
             "type": "string",
             "optional": false,
-            "field": "education",
-            "description": "<p>学历</p>"
+            "field": "current",
+            "description": "<p>现状</p>"
           },
           {
             "group": "Parameter",
             "type": "string",
             "optional": false,
-            "field": "degree",
-            "description": "<p>学位</p>"
+            "field": "experience",
+            "description": "<p>经历</p>"
           },
           {
             "group": "Parameter",
             "type": "string",
             "optional": false,
-            "field": "mailbox",
-            "description": "<p>邮箱</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "experType",
-            "description": "<p>专家类型</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "speciality",
-            "description": "<p>擅长领域</p>"
+            "field": "achievement",
+            "description": "<p>科研成果</p>"
           },
           {
             "group": "Parameter",
@@ -256,34 +551,6 @@
             "optional": false,
             "field": "photos",
             "description": "<p>头像</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "array",
-            "optional": false,
-            "field": "languages",
-            "description": "<p>语言能力</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "array",
-            "optional": false,
-            "field": "professional",
-            "description": "<p>专家技术职称</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "registered",
-            "description": "<p>注册职业资格</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "array",
-            "optional": false,
-            "field": "achievement",
-            "description": "<p>科研成果</p>"
           }
         ]
       }
@@ -312,6 +579,13 @@
             "optional": false,
             "field": "id",
             "description": "<p>id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>拒绝信息</p>"
           },
           {
             "group": "Parameter",
@@ -392,6 +666,13 @@
             "optional": false,
             "field": "keyWords",
             "description": "<p>关键字</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "type",
+            "description": "<p>新闻类型</p>"
           }
         ]
       }
@@ -470,6 +751,27 @@
             "optional": false,
             "field": "content",
             "description": "<p>内容</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "source",
+            "description": "<p>来源</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "type",
+            "description": "<p>0  行业动态  1 智库新闻  2 智库动态 3 项目动态</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "cover",
+            "description": "<p>封面</p>"
           }
         ]
       }
@@ -483,6 +785,41 @@
     "filename": "src/controller/news.js",
     "groupTitle": "News",
     "name": "PostNewsPublish"
+  },
+  {
+    "group": "News",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "stick",
+            "description": "<p>0未置顶  1置顶</p>"
+          }
+        ]
+      }
+    },
+    "type": "post",
+    "url": "/news/stickById",
+    "title": "置顶",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/news/stickById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/news.js",
+    "groupTitle": "News",
+    "name": "PostNewsStickbyid"
   },
   {
     "group": "News",
@@ -542,6 +879,13 @@
             "group": "Parameter",
             "type": "string",
             "optional": false,
+            "field": "message",
+            "description": "<p>拒绝信息</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
             "field": "status",
             "description": "<p>状态  （0未审核   1通过  2未通过 ）</p>"
           }
@@ -560,15 +904,6 @@
     "filename": "src/controller/news.js",
     "groupTitle": "News",
     "name": "PostNewsUpdatestatusbyid"
-  },
-  {
-    "group": "News_______importExcel___________________apiParam__string__file_form_data_key_file_value_excel_______api__post___news_importExcel________",
-    "type": "",
-    "url": "",
-    "version": "0.0.0",
-    "filename": "src/controller/expert.js",
-    "groupTitle": "News_______importExcel___________________apiParam__string__file_form_data_key_file_value_excel_______api__post___news_importExcel________",
-    "name": ""
   },
   {
     "group": "Organization",
@@ -748,6 +1083,41 @@
             "group": "Parameter",
             "type": "string",
             "optional": false,
+            "field": "stick",
+            "description": "<p>0未置顶  1置顶</p>"
+          }
+        ]
+      }
+    },
+    "type": "post",
+    "url": "/organization/stickById",
+    "title": "置顶",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/organization/stickById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/organizetion.js",
+    "groupTitle": "Organization",
+    "name": "PostOrganizationStickbyid"
+  },
+  {
+    "group": "Organization",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
             "field": "name",
             "description": "<p>姓名</p>"
           },
@@ -832,6 +1202,13 @@
             "group": "Parameter",
             "type": "string",
             "optional": false,
+            "field": "message",
+            "description": "<p>拒绝信息</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
             "field": "status",
             "description": "<p>状态  （0未审核   1通过  2未通过 ）</p>"
           }
@@ -850,6 +1227,301 @@
     "filename": "src/controller/organizetion.js",
     "groupTitle": "Organization",
     "name": "PostOrganizationUpdatestatusbyid"
+  },
+  {
+    "group": "Statute",
+    "type": "get",
+    "url": "/statute/getDetails",
+    "title": "获取详情",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/statute/getDetails"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/statute.js",
+    "groupTitle": "Statute",
+    "name": "GetStatuteGetdetails"
+  },
+  {
+    "group": "Statute",
+    "type": "get",
+    "url": "/statute/getList",
+    "title": "获取列表",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>本页多少条</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "page",
+            "description": "<p>第几页    （现成框架字段忍受一下）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "keyWords",
+            "description": "<p>关键字</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "type",
+            "description": "<p>0  政策法规  1 指南标准  2 国家性规范文件 3 地方规范文件 4 部门规范文件</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/statute/getList"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/statute.js",
+    "groupTitle": "Statute",
+    "name": "GetStatuteGetlist"
+  },
+  {
+    "group": "Statute",
+    "type": "post",
+    "url": "/statute/delById",
+    "title": "删除",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/statute/delById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/statute.js",
+    "groupTitle": "Statute",
+    "name": "PostStatuteDelbyid"
+  },
+  {
+    "group": "Statute",
+    "type": "post",
+    "url": "/statute/publish",
+    "title": "发布",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "name",
+            "description": "<p>文字名字</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "content",
+            "description": "<p>内容</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "reference",
+            "description": "<p>文号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "type",
+            "description": "<p>0  政策法规  1 指南标准  2 国家性规范文件 3 地方规范文件 4 部门规范文件</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/statute/publish"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/statute.js",
+    "groupTitle": "Statute",
+    "name": "PostStatutePublish"
+  },
+  {
+    "group": "Statute",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "stick",
+            "description": "<p>0未置顶  1置顶</p>"
+          }
+        ]
+      }
+    },
+    "type": "post",
+    "url": "/statute/stickById",
+    "title": "置顶",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/statute/stickById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/statute.js",
+    "groupTitle": "Statute",
+    "name": "PostStatuteStickbyid"
+  },
+  {
+    "group": "Statute",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "name",
+            "description": "<p>项目名称</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "content",
+            "description": "<p>内容</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "company",
+            "description": "<p>公司</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "accessory",
+            "description": "<p>附件  这里存一个字符串 文件服务正在建</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "Tcompany",
+            "description": "<p>推广公司</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "Tcontact",
+            "description": "<p>推广联系方式</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "Tphotos",
+            "description": "<p>推广二维码</p>"
+          }
+        ]
+      }
+    },
+    "type": "post",
+    "url": "/statute/updateById",
+    "title": "更新某条",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/statute/updateById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/statute.js",
+    "groupTitle": "Statute",
+    "name": "PostStatuteUpdatebyid"
+  },
+  {
+    "group": "Statute",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>拒绝信息</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "status",
+            "description": "<p>状态  （0未审核   1通过  2未通过 ）</p>"
+          }
+        ]
+      }
+    },
+    "type": "post",
+    "url": "/statute/updateStatusById",
+    "title": "更新某条的状态（审核）",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/statute/updateStatusById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/statute.js",
+    "groupTitle": "Statute",
+    "name": "PostStatuteUpdatestatusbyid"
   },
   {
     "group": "User",

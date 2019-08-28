@@ -1,6 +1,4 @@
-/**
- * Created by Administrator on 2017/5/19.
- */
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var shortid = require('shortid');
@@ -20,9 +18,16 @@ var OrganizationSchema = new Schema({
     speciality:String,
     service:String,
     experience:Array,
+    stick:{
+        type:Number,
+        enum : [0,1],//枚举
+        default:0
+        //0不置顶  1置顶
+    },
+    auditList:Array, //审核记录
     intro:String,
     status:{
-        type:String,
+        type:Number,
         default:0
         //0待审核  1审核通过  2审核未通过
     },

@@ -1,4 +1,4 @@
-const Model = require("../model").Expert;
+const Model = require("../model").Collaborate;
 const formidable = require('formidable');
 const {server, siteFunc} = require('../../utils');
 var moment = require('moment')
@@ -6,23 +6,23 @@ var node_xlsx = require('node-xlsx');
 const _ = require('lodash')
 import config from '../../config/settings'
 
-class Expert {
+class Collaborate {
     constructor() {
         // super()
     }
 
     /**
-     * @apiGroup Expert
+     * @apiGroup Collaborate
      * @publish 发布
-     * @api {post} /expert/publish 发布
-     * @apiParam {string} name  姓名
-     * @apiParam {string} sex  性别
-     * @apiParam {string} direction  研究方向
-     * @apiParam {string} current  现状
-     * @apiParam {string} experience  经历
-     * @apiParam {string} achievement  科研成果
-     * @apiParam {string} photos  头像
-     * @apiSampleRequest  /expert/publish
+     * @api {post} /collaborate/publish 发布
+     * @apiParam {string} name  项目名称
+     * @apiParam {string} content  内容
+     * @apiParam {string} company  公司
+     * @apiParam {string} accessory  附件  这里存一个字符串 文件服务正在建
+     * @apiParam {string} Tcompany  推广公司
+     * @apiParam {string} Tcontact  推广联系方式
+     * @apiParam {string} Tphotos  推广二维码
+     * @apiSampleRequest  /collaborate/publish
      *
      */
     async publish(req, res, next) {
@@ -38,13 +38,13 @@ class Expert {
     }
 
     /**
-     * @apiGroup Expert
+     * @apiGroup Collaborate
      * @getList 获取列表
-     * @api {get} /expert/getList 获取列表
+     * @api {get} /collaborate/getList 获取列表
      * @apiParam {string} limit  本页多少条
      * @apiParam {string} page  第几页    （现成框架字段忍受一下）
      * @apiParam {string} keyWords  关键字
-     * @apiSampleRequest  /expert/getList
+     * @apiSampleRequest  /collaborate/getList
      */
     async getList(req, res, next) {
         var keyWords = req.query.keyWords || ''
@@ -53,6 +53,7 @@ class Expert {
 
         try {
             let model = await Model.paginate({name: {$regex: keyWords, $options: 'i'}}, {limit: limit, page: page,sort:{stick:-1,releaseTime:-1}})
+           console.log( model)
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
         }
         catch (err) {
@@ -61,11 +62,11 @@ class Expert {
     }
 
     /**
-     * @apiGroup Expert
+     * @apiGroup Collaborate
      * @getList 获取详情
-     * @api {get} /expert/getDetails 获取详情
+     * @api {get} /collaborate/getDetails 获取详情
      * @apiParam {string} id  id
-     * @apiSampleRequest  /expert/getDetails
+     * @apiSampleRequest  /collaborate/getDetails
      */
     async getDetails(req, res, next) {
         try {
@@ -78,10 +79,10 @@ class Expert {
     }
 
     /**
-     * @apiGroup Expert
+     * @apiGroup Collaborate
      * @delById 删除
-     * @api {post} /expert/delById 删除
-     * @apiSampleRequest  /expert/delById
+     * @api {post} /collaborate/delById 删除
+     * @apiSampleRequest  /collaborate/delById
      */
     async delById(req, res, next) {
         try {
@@ -94,17 +95,18 @@ class Expert {
     }
 
     /**
-     * @apiGroup Expert
+     * @apiGroup Collaborate
      * @updateById 更新某条
      * @apiParam {string} id  id
-     * @api {post} /expert/updateById 更新某条
-     * @apiParam {string} name  姓名
-     * @apiParam {string} sex  性别
-     * @apiParam {string} current  现状
-     * @apiParam {string} experience  经历
-     * @apiParam {string} achievement  科研成果
-     * @apiParam {string} photos  头像
-     * @apiSampleRequest  /expert/updateById
+     * @apiParam {string} name  项目名称
+     * @apiParam {string} content  内容
+     * @apiParam {string} company  公司
+     * @apiParam {string} accessory  附件  这里存一个字符串 文件服务正在建
+     * @apiParam {string} Tcompany  推广公司
+     * @apiParam {string} Tcontact  推广联系方式
+     * @apiParam {string} Tphotos  推广二维码
+     * @api {post} /collaborate/updateById 更新某条
+     * @apiSampleRequest  /collaborate/updateById
      */
     async updateById(req, res, next) {
 
@@ -119,13 +121,13 @@ class Expert {
     }
 
     /**
-     * @apiGroup Expert
+     * @apiGroup Collaborate
      * @updateStatusById 更新某条的状态（审核）
      * @apiParam {string} id  id
-     * @api {post} /expert/updateStatusById 更新某条的状态（审核）
+     * @api {post} /collaborate/updateStatusById 更新某条的状态（审核）
      * @apiParam {string} message 拒绝信息
      * @apiParam {string} status  状态  （0未审核   1通过  2未通过 ）
-     * @apiSampleRequest  /expert/updateStatusById
+     * @apiSampleRequest  /collaborate/updateStatusById
      */
     async updateStatusById(req, res, next) {
         try {
@@ -147,12 +149,12 @@ class Expert {
         }
     }
     /**
-     * @apiGroup Expert
+     * @apiGroup Collaborate
      * @updateStatusById 置顶
      * @apiParam {string} id  id
-     * @api {post} /expert/stickById 置顶
+     * @api {post} /collaborate/stickById 置顶
      * @apiParam {string} stick   0未置顶  1置顶
-     * @apiSampleRequest  /expert/stickById
+     * @apiSampleRequest  /collaborate/stickById
      */
     async stickById(req, res, next) {
         try {
@@ -167,4 +169,4 @@ class Expert {
 
 }
 
-module.exports = new Expert();
+module.exports = new Collaborate();

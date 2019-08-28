@@ -24,14 +24,13 @@ db.on('error', function (error) {
 db.on('close', function () {
     console.log('数据库断开，重新连接数据库');
 });
-
 exports.Content = require('./Centent');
 exports.User = require('./User');
 exports.News = require('./News');
 exports.Expert = require('./Expert');
 exports.Organization = require('./Organization');
-
-
+exports.Collaborate = require('./Collaborate');
+exports.Statute = require('./Statute');
 
 
 
