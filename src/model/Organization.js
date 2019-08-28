@@ -12,7 +12,7 @@ var OrganizationSchema = new Schema({
     name: String,
     province:String,
     city:String,
-    adress:String,
+    address:String,
     district:String,
     website:String,
     speciality:String,

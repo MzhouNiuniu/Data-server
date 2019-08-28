@@ -1139,6 +1139,13 @@ define({ "api": [
             "group": "Parameter",
             "type": "string",
             "optional": false,
+            "field": "address",
+            "description": "<p>详细地址</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
             "field": "district",
             "description": "<p>区</p>"
           },
@@ -1227,6 +1234,603 @@ define({ "api": [
     "filename": "src/controller/organizetion.js",
     "groupTitle": "Organization",
     "name": "PostOrganizationUpdatestatusbyid"
+  },
+  {
+    "group": "ResearchReport",
+    "type": "get",
+    "url": "/researchReport/getDetails",
+    "title": "获取详情",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/researchReport/getDetails"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/ResearchReport.js",
+    "groupTitle": "ResearchReport",
+    "name": "GetResearchreportGetdetails"
+  },
+  {
+    "group": "ResearchReport",
+    "type": "get",
+    "url": "/researchReport/getList",
+    "title": "获取列表",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>本页多少条</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "page",
+            "description": "<p>第几页    （现成框架字段忍受一下）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "keyWords",
+            "description": "<p>关键字</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "type",
+            "description": "<p>//0 专题报告  1定期报告</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/researchReport/getList"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/ResearchReport.js",
+    "groupTitle": "ResearchReport",
+    "name": "GetResearchreportGetlist"
+  },
+  {
+    "group": "ResearchReport",
+    "type": "post",
+    "url": "/researchReport/delById",
+    "title": "删除",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/researchReport/delById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/ResearchReport.js",
+    "groupTitle": "ResearchReport",
+    "name": "PostResearchreportDelbyid"
+  },
+  {
+    "group": "ResearchReport",
+    "type": "post",
+    "url": "/researchReport/publish",
+    "title": "发布",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "name",
+            "description": "<p>文字名字</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "content",
+            "description": "<p>内容</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "human",
+            "description": "<p>研究人</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "organization",
+            "description": "<p>机构</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "accessory",
+            "description": "<p>附件</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "cover",
+            "description": "<p>文号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "reference",
+            "description": "<p>封面</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "type",
+            "description": "<p>//0 专题报告  1定期报告</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "brief",
+            "description": "<p>简介</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/researchReport/publish"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/ResearchReport.js",
+    "groupTitle": "ResearchReport",
+    "name": "PostResearchreportPublish"
+  },
+  {
+    "group": "ResearchReport",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "stick",
+            "description": "<p>0未置顶  1置顶</p>"
+          }
+        ]
+      }
+    },
+    "type": "post",
+    "url": "/researchReport/stickById",
+    "title": "置顶",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/researchReport/stickById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/ResearchReport.js",
+    "groupTitle": "ResearchReport",
+    "name": "PostResearchreportStickbyid"
+  },
+  {
+    "group": "ResearchReport",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "name",
+            "description": "<p>文字名字</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "content",
+            "description": "<p>内容</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "human",
+            "description": "<p>研究人</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "organization",
+            "description": "<p>机构</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "accessory",
+            "description": "<p>附件</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "cover",
+            "description": "<p>文号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "reference",
+            "description": "<p>封面</p>"
+          }
+        ]
+      }
+    },
+    "type": "post",
+    "url": "/researchReport/updateById",
+    "title": "更新某条",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/researchReport/updateById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/ResearchReport.js",
+    "groupTitle": "ResearchReport",
+    "name": "PostResearchreportUpdatebyid"
+  },
+  {
+    "group": "ResearchReport",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>拒绝信息</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "status",
+            "description": "<p>状态  （0未审核   1通过  2未通过 ）</p>"
+          }
+        ]
+      }
+    },
+    "type": "post",
+    "url": "/researchReport/updateStatusById",
+    "title": "更新某条的状态（审核）",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/researchReport/updateStatusById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/ResearchReport.js",
+    "groupTitle": "ResearchReport",
+    "name": "PostResearchreportUpdatestatusbyid"
+  },
+  {
+    "group": "ResearchScriptures",
+    "type": "get",
+    "url": "/researchScriptures/getDetails",
+    "title": "获取详情",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/researchScriptures/getDetails"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/ResearchScriptures.js",
+    "groupTitle": "ResearchScriptures",
+    "name": "GetResearchscripturesGetdetails"
+  },
+  {
+    "group": "ResearchScriptures",
+    "type": "get",
+    "url": "/researchScriptures/getList",
+    "title": "获取列表",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>本页多少条</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "page",
+            "description": "<p>第几页    （现成框架字段忍受一下）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "keyWords",
+            "description": "<p>关键字</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/researchScriptures/getList"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/ResearchScriptures.js",
+    "groupTitle": "ResearchScriptures",
+    "name": "GetResearchscripturesGetlist"
+  },
+  {
+    "group": "ResearchScriptures",
+    "type": "post",
+    "url": "/researchScriptures/delById",
+    "title": "删除",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/researchScriptures/delById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/ResearchScriptures.js",
+    "groupTitle": "ResearchScriptures",
+    "name": "PostResearchscripturesDelbyid"
+  },
+  {
+    "group": "ResearchScriptures",
+    "type": "post",
+    "url": "/researchScriptures/publish",
+    "title": "发布",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "name",
+            "description": "<p>文字名字</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "content",
+            "description": "<p>内容</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "brief",
+            "description": "<p>简介</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "cover",
+            "description": "<p>封面</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/researchScriptures/publish"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/ResearchScriptures.js",
+    "groupTitle": "ResearchScriptures",
+    "name": "PostResearchscripturesPublish"
+  },
+  {
+    "group": "ResearchScriptures",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "stick",
+            "description": "<p>0未置顶  1置顶</p>"
+          }
+        ]
+      }
+    },
+    "type": "post",
+    "url": "/researchScriptures/stickById",
+    "title": "置顶",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/researchScriptures/stickById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/ResearchScriptures.js",
+    "groupTitle": "ResearchScriptures",
+    "name": "PostResearchscripturesStickbyid"
+  },
+  {
+    "group": "ResearchScriptures",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "name",
+            "description": "<p>文字名字</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "content",
+            "description": "<p>内容</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "brief",
+            "description": "<p>简介</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "cover",
+            "description": "<p>封面</p>"
+          }
+        ]
+      }
+    },
+    "type": "post",
+    "url": "/researchScriptures/updateById",
+    "title": "更新某条",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/researchScriptures/updateById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/ResearchScriptures.js",
+    "groupTitle": "ResearchScriptures",
+    "name": "PostResearchscripturesUpdatebyid"
+  },
+  {
+    "group": "ResearchScriptures",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>拒绝信息</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "status",
+            "description": "<p>状态  （0未审核   1通过  2未通过 ）</p>"
+          }
+        ]
+      }
+    },
+    "type": "post",
+    "url": "/researchScriptures/updateStatusById",
+    "title": "更新某条的状态（审核）",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/researchScriptures/updateStatusById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/ResearchScriptures.js",
+    "groupTitle": "ResearchScriptures",
+    "name": "PostResearchscripturesUpdatestatusbyid"
   },
   {
     "group": "Statute",

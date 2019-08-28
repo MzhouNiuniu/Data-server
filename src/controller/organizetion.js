@@ -102,6 +102,7 @@ class Organization {
      * @apiParam {string} name  姓名
      * @apiParam {string} province  省
      * @apiParam {string} city  市
+     * @apiParam {string} address  详细地址
      * @apiParam {string} district  区
      * @apiParam {string} website  机构网站
      * @apiParam {string} service  服务内容

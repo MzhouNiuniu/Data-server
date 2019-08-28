@@ -6,21 +6,26 @@ var node_xlsx = require('node-xlsx');
 const _ = require('lodash')
 import config from '../../config/settings'
 
-class Statute {
+class ResearchReport {
     constructor() {
         // super()
     }
 
     /**
      *
-     * @apiGroup Statute
+     * @apiGroup ResearchReport
      * @publish 发布
-     * @api {post} /statute/publish 发布
+     * @api {post} /researchReport/publish 发布
      * @apiParam {string} name  文字名字
      * @apiParam {string} content  内容
-     * @apiParam {string} reference  文号
-     * @apiParam {string} type  0  政策法规  1 指南标准  2 国家性规范文件 3 地方规范文件 4 部门规范文件
-     * @apiSampleRequest  /statute/publish
+     * @apiParam {string} human  研究人
+     * @apiParam {string} organization  机构
+     * @apiParam {string} accessory  附件
+     * @apiParam {string} cover  文号
+     * @apiParam {string} reference  封面
+     * @apiParam {string} type  //0 专题报告  1定期报告
+     * @apiParam {string} brief    简介
+     * @apiSampleRequest  /researchReport/publish
      *
      */
     async publish(req, res, next) {
@@ -36,14 +41,14 @@ class Statute {
     }
 
     /**
-     * @apiGroup Statute
+     * @apiGroup ResearchReport
      * @getList 获取列表
-     * @api {get} /statute/getList 获取列表
+     * @api {get} /researchReport/getList 获取列表
      * @apiParam {string} limit  本页多少条
      * @apiParam {string} page  第几页    （现成框架字段忍受一下）
      * @apiParam {string} keyWords  关键字
-     * @apiParam {string} type  0  政策法规  1 指南标准  2 国家性规范文件 3 地方规范文件 4 部门规范文件
-     * @apiSampleRequest  /statute/getList
+     * @apiParam {string} type  //0 专题报告  1定期报告
+     * @apiSampleRequest  /researchReport/getList
      */
     async getList(req, res, next) {
         var keyWords = req.query.keyWords || ''
@@ -60,11 +65,11 @@ class Statute {
     }
 
     /**
-     * @apiGroup Statute
+     * @apiGroup ResearchReport
      * @getList 获取详情
-     * @api {get} /statute/getDetails 获取详情
+     * @api {get} /researchReport/getDetails 获取详情
      * @apiParam {string} id  id
-     * @apiSampleRequest  /statute/getDetails
+     * @apiSampleRequest  /researchReport/getDetails
      */
     async getDetails(req, res, next) {
         try {
@@ -77,10 +82,10 @@ class Statute {
     }
 
     /**
-     * @apiGroup Statute
+     * @apiGroup ResearchReport
      * @delById 删除
-     * @api {post} /statute/delById 删除
-     * @apiSampleRequest  /statute/delById
+     * @api {post} /researchReport/delById 删除
+     * @apiSampleRequest  /researchReport/delById
      */
     async delById(req, res, next) {
         try {
@@ -93,18 +98,18 @@ class Statute {
     }
 
     /**
-     * @apiGroup Statute
+     * @apiGroup ResearchReport
      * @updateById 更新某条
      * @apiParam {string} id  id
-     * @apiParam {string} name  项目名称
+     * @apiParam {string} name  文字名字
      * @apiParam {string} content  内容
-     * @apiParam {string} company  公司
-     * @apiParam {string} accessory  附件  这里存一个字符串 文件服务正在建
-     * @apiParam {string} Tcompany  推广公司
-     * @apiParam {string} Tcontact  推广联系方式
-     * @apiParam {string} Tphotos  推广二维码
-     * @api {post} /statute/updateById 更新某条
-     * @apiSampleRequest  /statute/updateById
+     * @apiParam {string} human  研究人
+     * @apiParam {string} organization  机构
+     * @apiParam {string} accessory  附件
+     * @apiParam {string} cover  文号
+     * @apiParam {string} reference  封面
+     * @api {post} /researchReport/updateById 更新某条
+     * @apiSampleRequest  /researchReport/updateById
      */
     async updateById(req, res, next) {
 
@@ -119,13 +124,13 @@ class Statute {
     }
 
     /**
-     * @apiGroup Statute
+     * @apiGroup ResearchReport
      * @updateStatusById 更新某条的状态（审核）
      * @apiParam {string} id  id
-     * @api {post} /statute/updateStatusById 更新某条的状态（审核）
+     * @api {post} /researchReport/updateStatusById 更新某条的状态（审核）
      * @apiParam {string} message 拒绝信息
      * @apiParam {string} status  状态  （0未审核   1通过  2未通过 ）
-     * @apiSampleRequest  /statute/updateStatusById
+     * @apiSampleRequest  /researchReport/updateStatusById
      */
     async updateStatusById(req, res, next) {
         try {
@@ -147,12 +152,12 @@ class Statute {
         }
     }
     /**
-     * @apiGroup Statute
+     * @apiGroup ResearchReport
      * @updateStatusById 置顶
      * @apiParam {string} id  id
-     * @api {post} /statute/stickById 置顶
+     * @api {post} /researchReport/stickById 置顶
      * @apiParam {string} stick   0未置顶  1置顶
-     * @apiSampleRequest  /statute/stickById
+     * @apiSampleRequest  /researchReport/stickById
      */
     async stickById(req, res, next) {
         try {
@@ -167,4 +172,4 @@ class Statute {
 
 }
 
-module.exports = new Statute();
+module.exports = new ResearchReport();
