@@ -34,3 +34,4 @@ exports.Collaborate = require('./Collaborate');
 exports.ResearchReport = require('./ResearchReport');
 exports.ResearchScriptures = require('./ResearchScriptures');
 exports.Magazine = require('./Magazine');
+exports.About = require('./About');

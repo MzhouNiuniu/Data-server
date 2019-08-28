@@ -1,5 +1,55 @@
 define({ "api": [
   {
+    "group": "About",
+    "type": "get",
+    "url": "/about/getDetails",
+    "title": "获取详情",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/about/getDetails"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/about.js",
+    "groupTitle": "About",
+    "name": "GetAboutGetdetails"
+  },
+  {
+    "group": "About",
+    "type": "post",
+    "url": "/about/publish",
+    "title": "发布  修改同个接口",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Array",
+            "optional": false,
+            "field": "info",
+            "description": "<p>平台介绍  [{company:公司名,content：详细信息}] 可以多条按照这个格式来提交</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Array",
+            "optional": false,
+            "field": "aptitude",
+            "description": "<p>资质文件  [图片1，图片2]</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/about/publish"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/about.js",
+    "groupTitle": "About",
+    "name": "PostAboutPublish"
+  },
+  {
     "group": "Collaborate",
     "type": "get",
     "url": "/collaborate/getDetails",

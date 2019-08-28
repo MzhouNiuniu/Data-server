@@ -7,3 +7,4 @@ exports.Statute = require('./statute');
 exports.ResearchReport = require('./researchReport');
 exports.ResearchScriptures = require('./researchScriptures');
 exports.Magazine = require('./magazine');
+exports.About = require('./about');
