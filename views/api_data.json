@@ -661,6 +661,49 @@
     "name": "PostExpertUpdatestatusbyid"
   },
   {
+    "group": "IndexConfig",
+    "type": "get",
+    "url": "/indexConfig/getDetails",
+    "title": "获取详情",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/indexConfig/getDetails"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/indexConfig.js",
+    "groupTitle": "IndexConfig",
+    "name": "GetIndexconfigGetdetails"
+  },
+  {
+    "group": "IndexConfig",
+    "type": "post",
+    "url": "/indexConfig/publish",
+    "title": "发布  修改同个接口",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Array",
+            "optional": false,
+            "field": "banner",
+            "description": "<p>平台介绍  [{url:xxxx,photos：xxx}] 可以多条按照这个格式来提交</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/indexConfig/publish"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/indexConfig.js",
+    "groupTitle": "IndexConfig",
+    "name": "PostIndexconfigPublish"
+  },
+  {
     "group": "Magazine",
     "type": "get",
     "url": "/magazine/getDetails",

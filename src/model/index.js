@@ -35,3 +35,5 @@ exports.ResearchReport = require('./ResearchReport');
 exports.ResearchScriptures = require('./ResearchScriptures');
 exports.Magazine = require('./Magazine');
 exports.About = require('./About');
+exports.IndexConfig = require('./IndexConfig');
+
