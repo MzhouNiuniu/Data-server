@@ -5,7 +5,7 @@ var moment = require('moment')
 var node_xlsx = require('node-xlsx');
 const _ = require('lodash')
 import config from '../../config/settings'
-
+//法律
 class Statute {
     constructor() {
         // super()
@@ -51,7 +51,7 @@ class Statute {
         var page = Number(req.query.page || 1)
         var type = Number(req.query.type)
         try {
-            let model = await Model.paginate({name: {$regex: keyWords, $options: 'i',$regex:type}}, {limit: limit, page: page,sort:{stick:-1,releaseTime:-1}})
+            let model = await Model.paginate({name: {$regex: keyWords, $options: 'i'},type:type}, {limit: limit, page: page,sort:{stick:-1,releaseTime:-1}})
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
         }
         catch (err) {

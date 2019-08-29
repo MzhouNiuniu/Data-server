@@ -5,7 +5,7 @@ var moment = require('moment')
 var node_xlsx = require('node-xlsx');
 const _ = require('lodash')
 import config from '../../config/settings'
-
+//项目合作
 class Collaborate {
     constructor() {
         // super()
@@ -53,7 +53,6 @@ class Collaborate {
 
         try {
             let model = await Model.paginate({name: {$regex: keyWords, $options: 'i'}}, {limit: limit, page: page,sort:{stick:-1,releaseTime:-1}})
-           console.log( model)
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
         }
         catch (err) {

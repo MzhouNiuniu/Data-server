@@ -49,7 +49,7 @@ class News {
         var page = Number(req.query.page || 1)
         var type = Number(req.query.type)
         try {
-            let news = await NewModel.paginate({title: {$regex: keyWords, $options: 'i',$regex:type}}, {limit: limit, page: page,sort:{stick:-1,releaseTime:-1}})
+            let news = await NewModel.paginate({title: {$regex: keyWords, $options: 'i'},type:type}, {limit: limit, page: page,sort:{stick:-1,releaseTime:-1}})
             res.send(siteFunc.renderApiData(req, 200, 'ok', news))
         }
         catch (err) {

@@ -1,11 +1,11 @@
-const Model = require("../model").About;
+const Model = require("../model").IndexConfig;
 const formidable = require('formidable');
 const {server, siteFunc} = require('../../utils');
 var moment = require('moment')
 var node_xlsx = require('node-xlsx');
 const _ = require('lodash')
 import config from '../../config/settings'
-//考虑到资质文件图片很多 单独用一个表存放 提高读写效率
+//单独用一个表存放 提高读写效率
 class IndexConfig {
     constructor() {
         // super()

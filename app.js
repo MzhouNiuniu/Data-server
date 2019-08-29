@@ -19,6 +19,7 @@ import researchScripturesRouter from './routes/researchScriptures'
 import magazineRouter from './routes/magazine'
 import aboutRouter from './routes/about'
 import indexConfigRouter from './routes/indexConfig'
+import companyDataRouter from './routes/companyData'
 var app = express();
 var bodyParser = require('body-parser')
 import config from './config/settings'
@@ -77,6 +78,7 @@ app.use('/researchScriptures', researchScripturesRouter)//经典案例
 app.use('/magazine', magazineRouter)//杂志
 app.use('/about', aboutRouter)//关于我们
 app.use('/indexConfig', indexConfigRouter)//首页配置
+app.use('/companyData', companyDataRouter)//首页配置
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));

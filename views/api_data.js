@@ -359,6 +359,176 @@ define({ "api": [
     "name": "PostCollaborateUpdatestatusbyid"
   },
   {
+    "group": "CompanyData",
+    "type": "get",
+    "url": "/companyData/getDetails",
+    "title": "获取详情",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/companyData/getDetails"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/companyData.js",
+    "groupTitle": "CompanyData",
+    "name": "GetCompanydataGetdetails"
+  },
+  {
+    "group": "CompanyData",
+    "type": "get",
+    "url": "/companyData/getList",
+    "title": "获取列表",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>本页多少条</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "page",
+            "description": "<p>第几页    （现成框架字段忍受一下）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "keyWords",
+            "description": "<p>关键字</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/companyData/getList"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/companyData.js",
+    "groupTitle": "CompanyData",
+    "name": "GetCompanydataGetlist"
+  },
+  {
+    "group": "CompanyData",
+    "type": "post",
+    "url": "/companyData/delById",
+    "title": "删除",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/companyData/delById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/companyData.js",
+    "groupTitle": "CompanyData",
+    "name": "PostCompanydataDelbyid"
+  },
+  {
+    "group": "CompanyData",
+    "type": "post",
+    "url": "/companyData/publish",
+    "title": "发布",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/companyData/publish"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/companyData.js",
+    "groupTitle": "CompanyData",
+    "name": "PostCompanydataPublish"
+  },
+  {
+    "group": "CompanyData",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          }
+        ]
+      }
+    },
+    "type": "post",
+    "url": "/companyData/updateById",
+    "title": "更新某条",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/companyData/updateById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/companyData.js",
+    "groupTitle": "CompanyData",
+    "name": "PostCompanydataUpdatebyid"
+  },
+  {
+    "group": "CompanyData",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>拒绝信息</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "status",
+            "description": "<p>状态  （0未审核   1通过  2未通过 ）</p>"
+          }
+        ]
+      }
+    },
+    "type": "post",
+    "url": "/companyData/updateStatusById",
+    "title": "更新某条的状态（审核）",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/companyData/updateStatusById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/companyData.js",
+    "groupTitle": "CompanyData",
+    "name": "PostCompanydataUpdatestatusbyid"
+  },
+  {
     "group": "Expert",
     "type": "get",
     "url": "/expert/getDetails",

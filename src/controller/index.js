@@ -9,3 +9,4 @@ exports.ResearchScriptures = require('./researchScriptures');
 exports.Magazine = require('./magazine');
 exports.About = require('./about');
 exports.IndexConfig = require('./indexConfig');
+exports.companyData = require('./companyData');

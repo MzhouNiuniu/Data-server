@@ -1,24 +1,21 @@
-const Model = require("../model").Magazine;
+const Model = require("../model").CompanyData;
 const formidable = require('formidable');
 const {server, siteFunc} = require('../../utils');
 var moment = require('moment')
 var node_xlsx = require('node-xlsx');
 const _ = require('lodash')
 import config from '../../config/settings'
-//杂志
-class Magazine {
+//专家
+class CompanyData {
     constructor() {
         // super()
     }
 
     /**
-     * @apiGroup Magazine
+     * @apiGroup CompanyData
      * @publish 发布
-     * @api {post} /magazine/publish 发布
-     * @apiParam {string} name  姓名
-     * @apiParam {string} url  链接
-     * @apiParam {string} photos  头像
-     * @apiSampleRequest  /magazine/publish
+     * @api {post} /companyData/publish 发布
+     * @apiSampleRequest  /companyData/publish
      *
      */
     async publish(req, res, next) {
@@ -33,13 +30,13 @@ class Magazine {
     }
 
     /**
-     * @apiGroup Magazine
+     * @apiGroup CompanyData
      * @getList 获取列表
-     * @api {get} /magazine/getList 获取列表
+     * @api {get} /companyData/getList 获取列表
      * @apiParam {string} limit  本页多少条
      * @apiParam {string} page  第几页    （现成框架字段忍受一下）
      * @apiParam {string} keyWords  关键字
-     * @apiSampleRequest  /magazine/getList
+     * @apiSampleRequest  /companyData/getList
      */
     async getList(req, res, next) {
         var keyWords = req.query.keyWords || ''
@@ -47,7 +44,7 @@ class Magazine {
         var page = Number(req.query.page || 1)
 
         try {
-            let model = await Model.paginate({name: {$regex: keyWords, $options: 'i'}}, {limit: limit, page: page,sort:{stick:-1,releaseTime:-1}})
+            let model = await Model.paginate({name: {$regex: keyWords, $options: 'i'}}, {limit: limit, page: page,sort:{stick:-1}})
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
         }
         catch (err) {
@@ -56,11 +53,11 @@ class Magazine {
     }
 
     /**
-     * @apiGroup Magazine
+     * @apiGroup CompanyData
      * @getList 获取详情
-     * @api {get} /magazine/getDetails 获取详情
+     * @api {get} /companyData/getDetails 获取详情
      * @apiParam {string} id  id
-     * @apiSampleRequest  /magazine/getDetails
+     * @apiSampleRequest  /companyData/getDetails
      */
     async getDetails(req, res, next) {
         try {
@@ -73,10 +70,10 @@ class Magazine {
     }
 
     /**
-     * @apiGroup Magazine
+     * @apiGroup CompanyData
      * @delById 删除
-     * @api {post} /magazine/delById 删除
-     * @apiSampleRequest  /magazine/delById
+     * @api {post} /companyData/delById 删除
+     * @apiSampleRequest  /companyData/delById
      */
     async delById(req, res, next) {
         try {
@@ -89,14 +86,12 @@ class Magazine {
     }
 
     /**
-     * @apiGroup Magazine
+     * @apiGroup CompanyData
      * @updateById 更新某条
      * @apiParam {string} id  id
-     * @api {post} /magazine/updateById 更新某条
-     * @apiParam {string} name  姓名
-     * @apiParam {string} url  链接
-     * @apiParam {string} photos  头像
-     * @apiSampleRequest  /magazine/updateById
+     * @api {post} /companyData/updateById 更新某条
+
+     * @apiSampleRequest  /companyData/updateById
      */
     async updateById(req, res, next) {
 
@@ -111,16 +106,27 @@ class Magazine {
     }
 
     /**
-     * @apiGroup Magazine
-     * @updateStatusById 置顶
+     * @apiGroup CompanyData
+     * @updateStatusById 更新某条的状态（审核）
      * @apiParam {string} id  id
-     * @api {post} /magazine/stickById 置顶
-     * @apiParam {string} stick   0未置顶  1置顶
-     * @apiSampleRequest  /magazine/stickById
+     * @api {post} /companyData/updateStatusById 更新某条的状态（审核）
+     * @apiParam {string} message 拒绝信息
+     * @apiParam {string} status  状态  （0未审核   1通过  2未通过 ）
+     * @apiSampleRequest  /companyData/updateStatusById
      */
-    async stickById(req, res, next) {
+    async updateStatusById(req, res, next) {
         try {
-            let model = await Model.findByIdAndUpdate(req.body.id, {'stick': req.body.stick})
+
+            if(req.body.status==2){
+                let model = await Model.findById(req.body.id)
+                model.status=req.body.status
+                model.auditList.push({author:req.session.adminUserInfo,message:req.body.message,releaseTime:moment(new Date()).format('YYYY-MM-DD HH:mm:ss')})
+                let models = await Model.findByIdAndUpdate(req.body.id, model)
+            }
+            else{
+                let model = await Model.findByIdAndUpdate(req.body.id, {'status': req.body.status})
+            }
+
             res.send(siteFunc.renderApiData(req, 200, 'ok'))
         }
         catch (err) {
@@ -128,7 +134,6 @@ class Magazine {
         }
     }
 
-
 }
 
-module.exports = new Magazine();
+module.exports = new CompanyData();
