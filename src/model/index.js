@@ -3,8 +3,7 @@ import config from "../../config/settings";
 const mongoose = require('mongoose');
 const isProd = process.env.NODE_ENV === 'production'
 // const settings = require('../../../configs/settings');
-var fs = require('fs');
-var Grid = require('gridfs-stream');
+
 if (!isProd) {
     mongoose.connect(`mongodb://${config.HOST}:${config.PORT}/${config.DB}`, { useNewUrlParser: true });
 } else {
@@ -12,7 +11,7 @@ if (!isProd) {
 }
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
-Grid.mongo = mongoose.mongo;
+
 db.once('open', () => {
     console.log('connect mongodb success')
 })
@@ -40,3 +39,8 @@ exports.About = require('./About');
 exports.IndexConfig = require('./IndexConfig');
 exports.CompanyData = require('./CompanyData');
 exports.BasicData = require('./BasicData');
+
+exports.Oss = require('./Oss')
+exports.FileChunk = require('./fs.chunks')
+exports.FileFiles = require('./fs.files')
+exports.db = db

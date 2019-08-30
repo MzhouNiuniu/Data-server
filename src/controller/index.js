@@ -10,3 +10,4 @@ exports.Magazine = require('./magazine');
 exports.About = require('./about');
 exports.IndexConfig = require('./indexConfig');
 exports.companyData = require('./companyData');
+exports.Oss = require('./oss');
