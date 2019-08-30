@@ -24,7 +24,11 @@ var OrganizationSchema = new Schema({
         default:0
         //0不置顶  1置顶
     },
-    auditList:Array, //审核记录
+    auditList:[{
+        name:String,//名称
+        type:String,//类型
+        companyName:String,//合作机构名字
+    }], //审核记录
     intro:String,
     status:{
         type:Number,

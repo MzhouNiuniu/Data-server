@@ -50,6 +50,210 @@
     "name": "PostAboutPublish"
   },
   {
+    "group": "BasicData",
+    "type": "get",
+    "url": "/basicData/getDetails",
+    "title": "获取详情",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/basicData/getDetails"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/basicData.js",
+    "groupTitle": "BasicData",
+    "name": "GetBasicdataGetdetails"
+  },
+  {
+    "group": "BasicData",
+    "type": "get",
+    "url": "/basicData/getList",
+    "title": "获取列表",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>本页多少条</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "page",
+            "description": "<p>第几页    （现成框架字段忍受一下）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "keyWords",
+            "description": "<p>关键字</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/basicData/getList"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/basicData.js",
+    "groupTitle": "BasicData",
+    "name": "GetBasicdataGetlist"
+  },
+  {
+    "group": "BasicData",
+    "type": "post",
+    "url": "/basicData/delById",
+    "title": "删除",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/basicData/delById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/basicData.js",
+    "groupTitle": "BasicData",
+    "name": "PostBasicdataDelbyid"
+  },
+  {
+    "group": "BasicData",
+    "type": "post",
+    "url": "/basicData/publish",
+    "title": "发布",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "province",
+            "description": "<p>省</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "city",
+            "description": "<p>市</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "district",
+            "description": "<p>区</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "year",
+            "description": "<p>年</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "experience",
+            "description": "<p>辖区名称</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "GDP",
+            "description": "<p>GDP</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "addFDP",
+            "description": "<p>GDP增速</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "income",
+            "description": "<p>收入</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "addIncome",
+            "description": "<p>增长收入</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "balance",
+            "description": "<p>存续债卷余额</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/basicData/publish"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/basicData.js",
+    "groupTitle": "BasicData",
+    "name": "PostBasicdataPublish"
+  },
+  {
+    "group": "BasicData",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          }
+        ]
+      }
+    },
+    "type": "post",
+    "url": "/basicData/updateById",
+    "title": "更新某条",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/basicData/updateById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/basicData.js",
+    "groupTitle": "BasicData",
+    "name": "PostBasicdataUpdatebyid"
+  },
+  {
     "group": "Collaborate",
     "type": "get",
     "url": "/collaborate/getDetails",

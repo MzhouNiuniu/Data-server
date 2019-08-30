@@ -48,7 +48,7 @@ var CompanyDataSchema = new Schema({
     province:String,//省
     city:String,//市
     district:String,//区
-    mainType:{//评级
+    mainType:{
         enum : ['城投','新区城投','交投','水投','文旅投','工投','农投','地铁','其他'],
         type:String
     },//主体类型
