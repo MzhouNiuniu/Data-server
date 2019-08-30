@@ -12,6 +12,7 @@ import userRouter from './routes/user'
 import newRouter from './routes/news'
 import expertRouter from './routes/expert'
 import organizationRouter from './routes/organization'
+import oss from './routes/oss'
 import collaborateRouter from './routes/collaborate'
 import statuteRouter from './routes/statute'
 import researchReportRouter from './routes/researchReport'
@@ -70,6 +71,7 @@ app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/news', newRouter)
 app.use('/expert', expertRouter)
+app.use('/oss', oss)
 app.use('/organization', organizationRouter)//机构
 app.use('/collaborate', collaborateRouter)//项目合作
 app.use('/statute', statuteRouter)//法律法规

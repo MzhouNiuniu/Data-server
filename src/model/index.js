@@ -37,3 +37,8 @@ exports.Magazine = require('./Magazine');
 exports.About = require('./About');
 exports.IndexConfig = require('./IndexConfig');
 exports.CompanyData = require('./CompanyData');
+
+exports.Oss = require('./Oss')
+exports.FileChunk = require('./fs.chunks')
+exports.FileFiles = require('./fs.files')
+exports.db = db
