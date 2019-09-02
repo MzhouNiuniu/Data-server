@@ -2,7 +2,7 @@ import config from "../../config/settings";
 const {server, siteFunc} = require('../../utils');
 const fs = require('fs');
 // const { createModel } = require('mongoose-gridfs');
-const OssModel = require("../model").FileChunk;
+const OssModel = require("../model").Oss;
 const db = require("../model").db;
 var shortid = require('shortid');
 var mongoose = require('mongoose');
@@ -21,8 +21,9 @@ class Oss {
      */
     async upload(req, res, next) {
         try {
-            // let file = fs.createReadStream(`uploads/${req.files[0].filename}`,{encoding: 'utf-8'})
-            // let fileData = ''
+            let _id = shortid.generate()
+            let file = fs.createReadStream(`uploads/${req.files[0].filename}`,{encoding: 'utf-8'})
+            let fileData = ''
             // const Attachment = createModel();
             // const readStream = createReadStream(`uploads/${req.files[0].filename}`);
             // const options = ({ filename: 'sample.txt', contentType: 'text/plain' });
@@ -34,16 +35,16 @@ class Oss {
             //     console.log(file)
             //     res.send(file)
             // });
-            //
-                var gfs = Grid(db.db);
-                var writestream = gfs.createWriteStream({
-                    filename:req.files[0].originalname,
-                });
-                fs.createReadStream(`uploads/${req.files[0].filename}`).pipe(writestream);
-                writestream.on('close', function (file) {
-                    console.log(file)
-                    res.send(siteFunc.renderApiData(res, 200, '插入成功',{_id:file._id}))
-                });
+
+            //     var gfs = Grid(db.db);
+            //     var writestream = gfs.createWriteStream({
+            //         filename:req.files[0].originalname,
+            //     });
+            //     fs.createReadStream(`uploads/${req.files[0].filename}`).pipe(writestream);
+            //     writestream.on('close', function (file) {
+            //         console.log(file)
+            //         res.send(siteFunc.renderApiData(res, 200, '插入成功',{_id:file._id}))
+            //     });
 
 
 
@@ -58,14 +59,19 @@ class Oss {
                 // all set!
 
 
-            // file.on('data', (data) =>{
-            //     fileData+=data
-            // })
-            // file.on('end', () =>{
-            //     let model = new OssModel({_id, data:fileData, name:req.files[0].originalname, pathName:req.files[0].filename})
-            //     model.save()
-            //     res.send(siteFunc.renderApiData(res, 200, '插入成功',{_id}))
-            // })
+            file.on('data', (data) =>{
+                fileData+=data
+            })
+            file.on('end', () =>{
+                let params = {
+                    _id,
+                    name:req.files[0].originalname,
+                    path:config.baseUrl+req.files[0].filename
+                }
+                let model = new OssModel(params)
+                model.save()
+                res.send(siteFunc.renderApiData(res, 200, '插入成功',params))
+            })
         }
         catch (err) {
             res.send(siteFunc.renderApiErr(req, res, 500, err))
