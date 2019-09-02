@@ -131,6 +131,7 @@ class News {
             else{
                 let model = await NewModel.findByIdAndUpdate(req.body.id, {'status': req.body.status})
             }
+            res.send(siteFunc.renderApiData(req, 200, 'ok'))
 
         }
         catch (err) {

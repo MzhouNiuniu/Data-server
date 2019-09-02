@@ -20,6 +20,8 @@ class Organization {
      * @apiParam {string} city  市
      * @apiParam {string} district  区
      * @apiParam {string} website  机构网站
+     * @apiParam {string} scope  经营范围
+     * @apiParam {string} speciality  专业领域
      * @apiParam {string} service  服务内容
      * @apiParam {string} experience  经验
      * @apiParam {string} intro  简介
@@ -141,6 +143,7 @@ class Organization {
             else{
                 let model = await Model.findByIdAndUpdate(req.body.id, {'status': req.body.status})
             }
+            res.send(siteFunc.renderApiData(req, 200, '操作成功'))
         }
         catch (err) {
             res.send(siteFunc.renderApiErr(req, res, 500, err))

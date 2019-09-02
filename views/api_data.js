@@ -1715,6 +1715,20 @@ define({ "api": [
             "group": "Parameter",
             "type": "string",
             "optional": false,
+            "field": "scope",
+            "description": "<p>经营范围</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "speciality",
+            "description": "<p>专业领域</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
             "field": "service",
             "description": "<p>服务内容</p>"
           },
@@ -1912,6 +1926,49 @@ define({ "api": [
     "filename": "src/controller/organizetion.js",
     "groupTitle": "Organization",
     "name": "PostOrganizationUpdatestatusbyid"
+  },
+  {
+    "group": "Oss",
+    "type": "get",
+    "url": "/Oss/download",
+    "title": "下载文件",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>文件id</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/Oss/download"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/oss.js",
+    "groupTitle": "Oss",
+    "name": "GetOssDownload"
+  },
+  {
+    "group": "Oss",
+    "type": "post",
+    "url": "/Oss/upload",
+    "title": "上传文件",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/Oss/upload"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/oss.js",
+    "groupTitle": "Oss",
+    "name": "PostOssUpload"
   },
   {
     "group": "ResearchReport",
@@ -2808,8 +2865,50 @@ define({ "api": [
   {
     "group": "User",
     "type": "post",
+    "url": "/user/getList",
+    "title": "获取用户列表",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>本页多少条</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "page",
+            "description": "<p>第几页    （现成框架字段忍受一下）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "keyWords",
+            "description": "<p>关键字</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/user/getList"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/user.js",
+    "groupTitle": "User",
+    "name": "PostUserGetlist"
+  },
+  {
+    "group": "User",
+    "type": "post",
     "url": "/user/updateUser",
-    "title": "新增用户",
+    "title": "修改密码",
     "parameter": {
       "fields": {
         "Parameter": [

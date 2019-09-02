@@ -134,7 +134,7 @@ class ResearchReport {
      */
     async updateStatusById(req, res, next) {
         try {
-
+            console.log(req.body.status)
             if(req.body.status==2){
                 let model = await Model.findById(req.body.id)
                 model.status=req.body.status

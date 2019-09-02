@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "cloud-server项目API文档",
   "title": "cloud-server API",
-  "url": "http://192.168.9.163:3000",
+  "url": "http://192.168.9.105:3000",
   "forceLanguage": "zh-cn",
-  "sampleUrl": "http://192.168.9.163:3000"
+  "sampleUrl": "http://192.168.9.105:3000"
 }

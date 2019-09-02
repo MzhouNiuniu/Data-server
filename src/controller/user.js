@@ -2,84 +2,13 @@ const UserModel = require("../model").User;
 const db = require("../model").db;
 const formidable = require('formidable');
 const {server,siteFunc } = require('../../utils');
-const re=require('./index.js');
 const _ = require('lodash')
-var fs = require('fs');
-var Grid = require('gridfs-stream');
 import  config from '../../config/settings'
 class User {
     constructor() {
         // super()
     }
-    async up(req,res){
-        var form = new formidable.IncomingForm();
-        form.encoding = 'utf-8';
-        // form.uploadDir = path.join(__dirname, '../../public/upload/stuUpload/');
-        form.keepExtensions = true;//保留后缀
-        form.maxFieldsSize = 2 * 1024 * 1024;  //大小限制
-        form.parse(req, function (err, fields, files) {
-            // console.log(fields)
-            // console.log(files.flie)
-            // db.once('open', () => {
-                var gfs = Grid(db.db);
-            //     var writestream = gfs.createWriteStream({
-            //         filename: 'mongo_file1.txt'
-            //     });
-            // fs.createReadStream(files.flie.path).pipe(writestream);
-            // writestream.on('close', function (file) {
-            //     console.log(file.filename + ' Written To DB');
-            // });
-            //     console.log(files.flie.size)
-            // // })
-            //
-            // gfs.files.find({ filename: 'mongo_file1.txt' }).toArray(function (err, filess) {
-            //     if (err) {
-            //         throw (err);
-            //     }
-                // console.log(files);
-                var readstream = gfs.createReadStream({
-                    filename: 'mongo_file.txt'
-                });
-                    readstream.pipe((val)=>{
-                        console.log(val)
-                    });
-                // var readstream =gfs.createReadStream(options)
-                // console.log()
-                // // var fs_write_stream = fs.createWriteStream(filess);
-                // fs.createReadStream().pipe(readstream);
-                // .on('close', function () {
-                //     console.log('file has been written fully!');
-                // });
-            // });
 
-            // fs_write_stream.on('close', function () {
-            //     console.log('file has been written fully!');
-            // });
-            // console.log(writestream)
-            // var readstream = gfs.createReadStream({
-            //     filename: 'mongo_file.txt'
-            // });
-            // var fs_write_stream = fs.createWriteStream(files.flie.path);
-            // console.log(fs_write_stream)
-            // gfs.findOne({filename: 'mongo_file.txt'}, function (err, file) {
-            //     console.log(file);
-            // });
-            // gfs.findOne({ _id:'54da7b013706c1e7ab25f9fa'}, function (err, file) {
-            //     console.log(file);
-            // });
-            // gfs.files.find({ filename:'123.txt' }).toArray(function (err, files) {
-            //   console.log(files);
-            //   // res.send()
-            // })
-          // res.send( readstream.pipe(fs_write_stream));
-            // fs_write_stream.on('close', function () {
-            //     console.log('file has been written fully!');
-            // });
-
-
-        })
-
-    }
     /**
      * @apiGroup User
      * @apiName 登陆
@@ -144,7 +73,7 @@ class User {
     /**
      * @apiGroup User
      * @updateUser 修改密码
-     * @api {post} /user/updateUser 新增用户
+     * @api {post} /user/updateUser 修改密码
      * @apiParam {string} password  密码
      * @apiSampleRequest /user/updateUser
      */
@@ -158,6 +87,28 @@ class User {
             res.send(siteFunc.renderApiData(res, 200,'ok',user ))
 
         }
+        catch (err) {
+            res.send(siteFunc.renderApiErr(req, res, 500, err))
+        }
+    }
+    /**
+     * @apiGroup User
+     * @updateUser 获取用户列表
+     * @api {post} /user/getList 获取用户列表
+     * @apiParam {string} limit  本页多少条
+     * @apiParam {string} page  第几页    （现成框架字段忍受一下）
+     * @apiParam {string} keyWords  关键字
+     * @apiSampleRequest /user/getList
+     */
+    async getList(req, res, next) {
+        var keyWords = req.query.keyWords || ''
+        var limit = Number(req.query.limit || 10)
+        var page = Number(req.query.page || 1)
+        try {
+            let model = await UserModel.paginate({userName: {$regex: keyWords, $options: 'i'}}, {limit: limit, page: page})
+            res.send(siteFunc.renderApiData(req, 200, 'ok', model))
+        }
+
         catch (err) {
             res.send(siteFunc.renderApiErr(req, res, 500, err))
         }

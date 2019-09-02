@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var shortid = require('shortid');
 var moment = require('moment')
+var mongoosePaginate = require('mongoose-paginate');
 //用户
 var UserSchema = new Schema({
     _id: {
@@ -18,8 +19,7 @@ var UserSchema = new Schema({
     logo: { type: String, default: "/upload/images/defaultlogo.png" },
 });
 
-
+UserSchema.plugin(mongoosePaginate);
 var User = mongoose.model("User", UserSchema);
-
 
 module.exports = User;

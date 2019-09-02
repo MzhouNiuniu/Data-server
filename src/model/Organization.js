@@ -16,21 +16,24 @@ var OrganizationSchema = new Schema({
     address:String,
     district:String,
     website:String,
-    speciality:String,
-    service:String,
-    experience:Array,
+    scope:String,//经营范围
+    speciality:String,//专业领域
+    service:String,//服务
+    experience:Array,//经验
+    intro:String,
     stick:{
         type:Number,
         enum : [0,1],//枚举
         default:0
         //0不置顶  1置顶
     },
-    auditList:[{
-        name:String,//名称
-        type:String,//类型
-        companyName:String,//合作机构名字
-    }], //审核记录
-    intro:String,
+    auditList:Array,
+    // auditList:[{
+    //     name:String,//名称
+    //     type:String,//类型
+    //     companyName:String,//合作机构名字
+    // }],
+
     status:{
         type:Number,
         default:0
