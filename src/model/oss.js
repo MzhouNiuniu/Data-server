@@ -7,7 +7,7 @@ var OssSchema = new Schema({
     _id: String,
     data: Buffer,
     name:String,
-    pathName:String
+    path:String
 });
 
 OssSchema.plugin(mongoosePaginate);

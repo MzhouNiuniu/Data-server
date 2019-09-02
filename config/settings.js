@@ -19,7 +19,8 @@ module.exports = {
     USERNAME: 'doramart',
     PASSWORD: 'doramart',
 
-
+    //文件系统配置
+    baseUrl:'http://192.168.9.105:3000/uploads/',
 };
 
 
