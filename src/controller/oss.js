@@ -104,8 +104,8 @@ class Oss {
             //     "xOO6w7ChDQrE47rDsKENCsTjusOwoQ0KxOO6w7ChDQrE47rDsKE=")
 
 
-            let file = await OssModel.find({'files_id': '5d67a41679b23f39841e485c'})
-            res.send(siteFunc.renderApiData(res, 200, '成功',file.data))
+            let data = await OssModel.find({'_id': req.query.id})
+            res.send(siteFunc.renderApiData(res, 200, '成功',data))
 
 
             // var pathname = file[0].pathName;
