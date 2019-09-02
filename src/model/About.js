@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 var shortid = require('shortid');
 var moment = require('moment')
 var mongoosePaginate = require('mongoose-paginate');
+//关于我们
 var AboutSchema = new Schema({
     _id: {
         type: String,

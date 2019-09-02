@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 var shortid = require('shortid');
 var mongoosePaginate = require('mongoose-paginate');
 import config from '../../config/settings'
+
 var OssSchema = new Schema({
     _id: String,
     data: Buffer,

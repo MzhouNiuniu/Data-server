@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 var shortid = require('shortid');
 var moment = require('moment')
 var mongoosePaginate = require('mongoose-paginate');
+//法律
 var StatuteSchema = new Schema({
     _id: {
         type: String,

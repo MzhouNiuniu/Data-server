@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 var shortid = require('shortid');
 var moment = require('moment')
 var mongoosePaginate = require('mongoose-paginate');
+//研究经典案例
 var ResearchScripturesSchema = new Schema({
     _id: {
         type: String,

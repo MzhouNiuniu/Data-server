@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var shortid = require('shortid');
 var moment = require('moment')
-
+//用户
 var UserSchema = new Schema({
     _id: {
         type: String,

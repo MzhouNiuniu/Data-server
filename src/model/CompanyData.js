@@ -39,6 +39,7 @@ let bond={
     specification:String,//募集说明书.
     report:String,//评级报告.
 }
+//城投数据
 var CompanyDataSchema = new Schema({
     _id: {
         type: String,

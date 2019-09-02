@@ -5,6 +5,7 @@ var shortid = require('shortid');
 var moment = require('moment')
 var mongoosePaginate = require('mongoose-paginate');
 import User from './User'
+//新闻
 var NewsSchema = new Schema({
     _id: {
         type: String,
