@@ -1,13 +1,10 @@
 import config from "../../config/settings";
 const {server, siteFunc} = require('../../utils');
+const formidable = require('formidable');
+var path = require('path');
 const fs = require('fs');
-// const { createModel } = require('mongoose-gridfs');
 const OssModel = require("../model").Oss;
-const db = require("../model").db;
 var shortid = require('shortid');
-var mongoose = require('mongoose');
-var Grid = require('gridfs-stream');
-Grid.mongo = mongoose.mongo;
 class Oss {
     constructor() {
         // super()
@@ -20,58 +17,44 @@ class Oss {
      * @apiSampleRequest  /Oss/upload
      */
     async upload(req, res, next) {
-        try {
-            let _id = shortid.generate()
-            let file = fs.createReadStream(`uploads/${req.files[0].filename}`,{encoding: 'utf-8'})
-            let fileData = ''
-            // const Attachment = createModel();
-            // const readStream = createReadStream(`uploads/${req.files[0].filename}`);
-            // const options = ({ filename: 'sample.txt', contentType: 'text/plain' });
 
-            // const readStreams = Attachment.read({_id:'5d6658aa5a7a980b649e22dd'});
-            // console.log(readStreams)
-            // Attachment.write(options, readStream, (error, file) => {
-            //     //=> {_id: ..., filename: ..., ...}
-            //     console.log(file)
-            //     res.send(file)
-            // });
-
-            //     var gfs = Grid(db.db);
-            //     var writestream = gfs.createWriteStream({
-            //         filename:req.files[0].originalname,
-            //     });
-            //     fs.createReadStream(`uploads/${req.files[0].filename}`).pipe(writestream);
-            //     writestream.on('close', function (file) {
-            //         console.log(file)
-            //         res.send(siteFunc.renderApiData(res, 200, '插入成功',{_id:file._id}))
-            //     });
+            try {
+                var form = new formidable.IncomingForm();
+                form.encoding = 'utf-8';
+                form.uploadDir = path.join(__dirname, '../../public/upload/');
+                form.maxFieldsSize = 2 * 1024 * 1024;  //大小限制
+                form.parse(req, function (err, fields, files) {
+                    if (err) {
+                        res.send(siteFunc.renderApiErr(req, res, 500, err))
+                        return;
+                    }
+                    let _id = shortid.generate()
+                    console.log(files.File)
+                    console.log(files.File.path)
+                    // if(!files.){
+                    //
+                    // }
 
 
-
-                // gfs.files.find({ filename:'mongo_file.txt' }).toArray(function (err, files) {
-                //     console.log(files);
-                // })
-
-                // var fs_write_stream = fs.createWriteStream(`uploads/${req.files[0].filename}`);
-                // console.log(fs_write_stream)
-
-                // fs.createReadStream(`uploads/${req.files[0].filename}`).pipe(writestream);
-                // all set!
-
-
-            file.on('data', (data) =>{
-                fileData+=data
             })
-            file.on('end', () =>{
-                let params = {
-                    _id,
-                    name:req.files[0].originalname,
-                    path:config.baseUrl+req.files[0].filename
-                }
-                let model = new OssModel(params)
-                model.save()
-                res.send(siteFunc.renderApiData(res, 200, '插入成功',params))
-            })
+
+
+        //     let _id = shortid.generate()
+        //     let file = fs.createReadStream(`uploads/${req.files[0].filename}`,{encoding: 'utf-8'})
+        //     let fileData = ''
+        //     file.on('data', (data) =>{
+        //         fileData+=data
+        //     })
+        //     file.on('end', () =>{
+        //         let params = {
+        //             _id,
+        //             name:req.files[0].originalname,
+        //             path:config.baseUrl+req.files[0].filename
+        //         }
+        //         let model = new OssModel(params)
+        //         model.save()
+        //         res.send(siteFunc.renderApiData(res, 200, '插入成功',params))
+        //     })
         }
         catch (err) {
             res.send(siteFunc.renderApiErr(req, res, 500, err))

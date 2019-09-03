@@ -19,9 +19,9 @@ class User {
      */
 
     async login(req, res, next) {
-        const  newPsd= server.encrypt(req.query.password, config.encrypt_key);
-        req.query.password=newPsd
-        let user = await UserModel.findOne(req.query);
+        const  newPsd= server.encrypt(req.body.password, config.encrypt_key);
+        req.body.password=newPsd
+        let user = await UserModel.findOne(req.body);
         if (!_.isEmpty(user)) {
             let auth_token = user._id
             req.session.adminlogined = true;

@@ -33,6 +33,7 @@ class BasicData {
             req.body.author = req.session.adminUserInfo
             let model = new Model(req.body)
             model.save()
+            console.log(model)
             res.send(siteFunc.renderApiData(res, 200, '插入成功'))
         }
         catch (err) {
@@ -55,7 +56,7 @@ class BasicData {
         var page = Number(req.query.page || 1)
 
         try {
-            let model = await Model.paginate({name: {$regex: keyWords, $options: 'i'}}, {limit: limit, page: page,sort:{stick:-1,releaseTime:-1}})
+            let model = await Model.paginate({year: {$regex: keyWords, $options: 'i'}}, {limit: limit, page: page})
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
         }
         catch (err) {
@@ -105,7 +106,6 @@ class BasicData {
      * @apiSampleRequest  /basicData/updateById
      */
     async updateById(req, res, next) {
-
         try {
             req.body.releaseTime=moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
             let model = await Model.findByIdAndUpdate(req.body.id, req.body)

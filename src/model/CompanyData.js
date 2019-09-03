@@ -46,6 +46,12 @@ var CompanyDataSchema = new Schema({
         type: String,
         'default': shortid.generate
     },
+    auditList:Array, //审核记录
+    status:{
+        type:Number,
+        default:0
+        //0待审核  1审核通过  2审核未通过
+    },
     name:String,//公司名称
     province:String,//省
     city:String,//市

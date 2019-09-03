@@ -10,11 +10,11 @@ class Collaborate {
     constructor() {
         // super()
     }
-
     /**
      * @apiGroup Collaborate
      * @publish 发布
      * @api {post} /collaborate/publish 发布
+     * @apiParam {string} type  项目类型
      * @apiParam {string} name  项目名称
      * @apiParam {string} content  内容
      * @apiParam {string} company  公司

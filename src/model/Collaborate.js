@@ -17,6 +17,7 @@ var CollaborateSchema = new Schema({
     Tcompany:String,
     Tcontact:String,
     Tphotos:String,
+    type:String,//项目类型
     stick:{
         type:Number,
         enum : [0,1],//枚举

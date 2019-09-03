@@ -16,8 +16,10 @@ var UserSchema = new Schema({
     name: String,
     userName: { type: String, required: [true, '必填']} ,
     password: { type: String, required: [true, '必填']},
+    role: { type: String,  default: 'user'},
     logo: { type: String, default: "/upload/images/defaultlogo.png" },
 });
+
 
 UserSchema.plugin(mongoosePaginate);
 var User = mongoose.model("User", UserSchema);

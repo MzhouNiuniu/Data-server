@@ -13,6 +13,12 @@ var MagazineSchema = new Schema({
     name:String,//杂志名字
     url:String,//链接
     photos:String,//头像
+    stick:{
+        type:Number,
+        enum : [0,1],//枚举
+        default:0
+        //0不置顶  1置顶
+    },
     releaseTime:{
         type:String,
         default:moment(new Date()).format('YYYY-MM-DD HH:mm:ss')

@@ -26,7 +26,7 @@ var BasicDataSchema = new Schema({
     },
 });
 BasicDataSchema.plugin(mongoosePaginate);
-var BasicData = mongoose.model("BasicData", BasicDataSchema);
+var BasicData = mongoose.model("basicData", BasicDataSchema);
 
 
 module.exports = BasicData;
