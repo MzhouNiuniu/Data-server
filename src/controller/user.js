@@ -17,8 +17,12 @@ class User {
      * @apiParam {string} password  密码
      * @apiSampleRequest  /user/login
      */
-
+    async test(req,res){
+        req.session.adminlogined = true;
+        req.session.adminUserInfo = 'user';
+    }
     async login(req, res, next) {
+        console.log('321')
         const  newPsd= server.encrypt(req.body.password, config.encrypt_key);
         req.body.password=newPsd
         let user = await UserModel.findOne(req.body);
@@ -26,8 +30,10 @@ class User {
             let auth_token = user._id
             req.session.adminlogined = true;
             req.session.adminUserInfo = user;
-            res.cookie(config.auth_cookie_name, auth_token, { path: '/', maxAge: 1000 * 60 * 60 * 24 * 30,sign:true,  httpOnly: true }); //cookie 有效期30天
+            console.log( req.session)
+            // res.cookie(config.auth_cookie_name, auth_token, { path: '/', maxAge: 1000 * 60 * 60 * 24 * 30,sign:true,  httpOnly: true }); //cookie 有效期30天
             res.send(siteFunc.renderApiData(res, 200,'ok',user ))
+
         }
         else{
             res.send(siteFunc.renderApiData(res, 500, '用户名或密码错误'))
