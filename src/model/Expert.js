@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var shortid = require('shortid');
 var moment = require('moment')
-var mongoosePaginate = require('mongoose-paginate');
+var mongoosePaginate = require('../../utils/mongoose-paginate');
 //专家
 var ExpertSchema = new Schema({
     _id: {

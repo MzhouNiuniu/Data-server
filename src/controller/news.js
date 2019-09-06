@@ -57,6 +57,7 @@ class News {
         }
     }
 
+
     /**
      * @apiGroup News
      * @getList 获取新闻详情
@@ -190,12 +191,37 @@ class News {
                     }
                 })
                 res.send(siteFunc.renderApiData(req, 200, 'ok'))
-            })
+        })
         }
         catch (err) {
             res.send(siteFunc.renderApiErr(req, res, 500, err))
         }
     }
+    /**
+     * @apiGroup News
+     * @importExcel 获取新闻首页信息（审核）
+     * @api {get} /news/getIndex 获取新闻首页信息
+     */
+    async getIndex(req, res, next) {
+        try {
+            let industryDynamic = await NewModel.find({type: 0}).sort({stick: -1, releaseTime: -1}).limit(5)
+            let ideaNew = await NewModel.find({type: 1}).sort({stick: -1, releaseTime: -1}).limit(5)
+            let ideaDynamic = await NewModel.find({type: 2}).sort({stick: -1, releaseTime: -1}).limit(5)
+            let projectDynamic = await NewModel.find({type: 3}).sort({stick: -1, releaseTime: -1}).limit(5)
+            let params={
+                industryDynamic,
+                ideaNew,
+                ideaDynamic,
+                projectDynamic
+            }
+            res.send(siteFunc.renderApiData(req, 200, 'ok',params))
+        }
+        catch (err) {
+            res.send(siteFunc.renderApiErr(req, res, 500, err))
+        }
+
+    }
+
 
 
 }
