@@ -16,7 +16,9 @@ let sessionConfig = {
     cookie: {
         maxAge: 1000 * 60 * 60,
         secure: false,
-        httpOnly:false
+        httpOnly:false,
+        // domain: 'localhost', path: '/'
+
     },
     store: new MongoStore({
         url: `mongodb://${config.HOST}:${config.PORT}/${config.DB}`,

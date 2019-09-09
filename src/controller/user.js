@@ -97,6 +97,28 @@ class User {
             res.send(siteFunc.renderApiErr(req, res, 500, err))
         }
     }
+    async updateById(req, res, next){
+        try {
+            // req.body.releaseTime=moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+            console.log(req.body.id)
+            let model = await UserModel.findByIdAndUpdate(req.body.id, req.body)
+            console.log(req.body)
+            res.send(siteFunc.renderApiData(req, 200, 'ok'))
+        }
+        catch (err) {
+            res.send(siteFunc.renderApiErr(req, res, 500, err))
+        }
+    }
+    async getDetails(req, res, next) {
+        try {
+
+            let news = await UserModel.findById(req.query.id)
+            res.send(siteFunc.renderApiData(req, 200, 'ok', news))
+        }
+        catch (err) {
+            res.send(siteFunc.renderApiErr(req, res, 500, err))
+        }
+    }
     /**
      * @apiGroup User
      * @updateUser 获取用户列表

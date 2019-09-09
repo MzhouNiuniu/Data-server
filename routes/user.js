@@ -5,7 +5,9 @@ import authToken from '../utils/authToken'
 router.post('/reg',User.reg)
 router.post('/login',User.login)
 router.post('/updateUser',authToken,User.updateUser)
+router.post('/updateById',User.updateById)
 router.post('/getList',User.getList)
+router.get('/getDetails',User.getDetails)
 router.get('/test',User.test)
 
 
