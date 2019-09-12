@@ -30,7 +30,7 @@ class User {
             let auth_token = user._id
             req.session.adminlogined = true;
             req.session.adminUserInfo = user;
-            console.log( req.session)
+
             // res.cookie(config.auth_cookie_name, auth_token, { path: '/', maxAge: 1000 * 60 * 60 * 24 * 30,sign:true,  httpOnly: true }); //cookie 有效期30天
             res.send(siteFunc.renderApiData(res, 200,'ok',user ))
 
@@ -100,9 +100,7 @@ class User {
     async updateById(req, res, next){
         try {
             // req.body.releaseTime=moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
-            console.log(req.body.id)
             let model = await UserModel.findByIdAndUpdate(req.body.id, req.body)
-            console.log(req.body)
             res.send(siteFunc.renderApiData(req, 200, 'ok'))
         }
         catch (err) {

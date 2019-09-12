@@ -8,6 +8,9 @@ router.get('/getList',authToken,model.getList)
 router.post('/delById',authToken,model.delById)
 router.post('/updateById',authToken,model.updateById)
 router.get('/getDetails',authToken,model.getDetails)
+router.get('/getBaseListByCity',model.getBaseListByCity)
+
+
 // router.post('/importExcel',model.importExcel)
 
 module.exports = router;

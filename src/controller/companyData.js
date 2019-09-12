@@ -5,6 +5,7 @@ var moment = require('moment')
 var node_xlsx = require('node-xlsx');
 const _ = require('lodash')
 import config from '../../config/settings'
+
 //专家
 class CompanyData {
     constructor() {
@@ -22,6 +23,7 @@ class CompanyData {
         try {
             let model = new Model(req.body)
             model.save()
+            console.log(model)
             res.send(siteFunc.renderApiData(res, 200, '插入成功'))
         }
         catch (err) {
@@ -44,7 +46,11 @@ class CompanyData {
         var page = Number(req.query.page || 1)
 
         try {
-            let model = await Model.paginate({name: {$regex: keyWords, $options: 'i'}}, {limit: limit, page: page,sort:{stick:-1}})
+            let model = await Model.paginate({name: {$regex: keyWords, $options: 'i'}}, {
+                limit: limit,
+                page: page,
+                sort: {stick: -1}
+            })
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
         }
         catch (err) {
@@ -96,7 +102,7 @@ class CompanyData {
     async updateById(req, res, next) {
 
         try {
-            req.body.releaseTime=moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+            req.body.releaseTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
             let model = await Model.findByIdAndUpdate(req.body.id, req.body)
             res.send(siteFunc.renderApiData(req, 200, 'ok'))
         }
@@ -117,17 +123,39 @@ class CompanyData {
     async updateStatusById(req, res, next) {
         try {
 
-            if(req.body.status==2){
+            if (req.body.status == 2) {
                 let model = await Model.findById(req.body.id)
-                model.status=req.body.status
-                model.auditList.push({author:req.session.adminUserInfo,message:req.body.message,releaseTime:moment(new Date()).format('YYYY-MM-DD HH:mm:ss')})
+                model.status = req.body.status
+                model.auditList.push({
+                    author: req.session.adminUserInfo,
+                    message: req.body.message,
+                    releaseTime: moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+                })
                 let models = await Model.findByIdAndUpdate(req.body.id, model)
             }
-            else{
+            else {
                 let model = await Model.findByIdAndUpdate(req.body.id, {'status': req.body.status})
             }
 
             res.send(siteFunc.renderApiData(req, 200, 'ok'))
+        }
+        catch (err) {
+            res.send(siteFunc.renderApiErr(req, res, 500, err))
+        }
+    }
+
+    async getListBySearch(req, res, next) {
+        var keyWords = req.query.keyWords || ''
+        var limit = Number(req.query.limit || 10)
+        var page = Number(req.query.page || 1)
+        var province = req.query.province || ''
+        try {
+            let model = await Model.paginate({name: {$regex: keyWords, $options: 'i'},}, {
+                limit: limit,
+                page: page,
+                sort: {stick: -1}
+            })
+            res.send(siteFunc.renderApiData(req, 200, 'ok', model))
         }
         catch (err) {
             res.send(siteFunc.renderApiErr(req, res, 500, err))

@@ -4,7 +4,9 @@ var Schema = mongoose.Schema;
 var shortid = require('shortid');
 var moment = require('moment')
 var mongoosePaginate = require('mongoose-paginate');
+import FinancialData from './FinancialData'
 //由于报错 暂时不限制死
+// FinancialDataSchema
 let bond={
     record:[
         {
@@ -42,7 +44,7 @@ let bond={
 }
 //城投数据
 var CompanyDataSchema = new Schema({
-    _id: {
+    id: {
         type: String,
         'default': shortid.generate
     },
@@ -66,16 +68,7 @@ var CompanyDataSchema = new Schema({
     info:String,//企业概况
     registerCapital:String,//注册资本
     photos:String,//企业图片
-    financial:[{ //财务
-        year:String,//年限
-        totalAsset:String,//总资产
-        netAsset:String,//净资产
-        liabilities:String,//负债率
-        mainBusiness:String,//主营业务
-        business:String,//营业务
-        netProfit:String,//净利润
-        totalProfit:String,//利润总额
-    }],
+    financial:[{type: String, ref: 'FinancialData'}],
     rate:[{
         year:String,//年份
         main:{//评级

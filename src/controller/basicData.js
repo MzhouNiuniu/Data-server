@@ -115,6 +115,14 @@ class BasicData {
             res.send(siteFunc.renderApiErr(req, res, 500, err))
         }
     }
+    async getBaseListByCity(req,res,next) {
+        try {
+            let model = await Model.find(req.query)
+            res.send(siteFunc.renderApiData(req, 200, 'ok',model))
+        }
+        catch (err) {
+        }
+    }
 
 
 
