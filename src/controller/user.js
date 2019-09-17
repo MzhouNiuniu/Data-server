@@ -22,11 +22,11 @@ class User {
         req.session.adminUserInfo = 'user';
     }
     async login(req, res, next) {
-        console.log('321')
         const  newPsd= server.encrypt(req.body.password, config.encrypt_key);
         req.body.password=newPsd
-        let user = await UserModel.findOne(req.body);
-        if (!_.isEmpty(user)) {
+        let user = await UserModel.findOne({userName:req.body.userName});
+        if (!_.isEmpty(user)&&user.password==req.body.password) {
+
             let auth_token = user._id
             req.session.adminlogined = true;
             req.session.adminUserInfo = user;
@@ -85,7 +85,7 @@ class User {
      */
     async updateUser(req, res, next) {
         try {
-            const  newPsd= server.encrypt(req.body.password,  config.encrypt_key);
+            const  newPsd= server.encrypt(req.body.password,config.encrypt_key);
             req.body.password=newPsd
             UserModel.updateOne({'password': req.session.adminUserInfo.password},{'password':req.body.password})
             let  user = await UserModel.find({'password':req.body.password})
@@ -99,6 +99,8 @@ class User {
     }
     async updateById(req, res, next){
         try {
+            const  newPsd= server.encrypt(req.body.password,config.encrypt_key);
+            req.body.password=newPsd
             // req.body.releaseTime=moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
             let model = await UserModel.findByIdAndUpdate(req.body.id, req.body)
             res.send(siteFunc.renderApiData(req, 200, 'ok'))

@@ -641,6 +641,83 @@ define({ "api": [
   },
   {
     "group": "CompanyData",
+    "type": "get",
+    "url": "/companyData/getListBySearch",
+    "title": "条件查询",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>本页多少条</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "page",
+            "description": "<p>第几页    （现成框架字段忍受一下）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "keyWords",
+            "description": "<p>关键字</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "province",
+            "description": "<p>省</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "mainType",
+            "description": "<p>主体类型</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "rateMain",
+            "description": "<p>评级</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "totalAsset",
+            "description": "<p>总资产  实例    如果  0-100 那么传参   0,100</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "business",
+            "description": "<p>营业收入  实例    如果  0-100 那么传参   0,100</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/companyData/getListBySearch"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "src/controller/companyData.js",
+    "groupTitle": "CompanyData",
+    "name": "GetCompanydataGetlistbysearch"
+  },
+  {
+    "group": "CompanyData",
     "type": "post",
     "url": "/companyData/delById",
     "title": "删除",

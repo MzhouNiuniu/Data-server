@@ -5,8 +5,13 @@ var moment = require('moment')
 var mongoosePaginate = require('mongoose-paginate');
 //基础数据
 var FinancialDataSchema = new Schema({
+    _id: {
+        type: String,
+        'default': shortid.generate
+    },
+    DataId:String,
     year: String,//年限
-    totalAsset: String,//总资产
+    totalAsset: Number,//总资产
     netAsset: String,//净资产
     liabilities: String,//负债率
     mainBusiness: String,//主营业务

@@ -38,6 +38,7 @@ exports.Magazine = require('./Magazine');
 exports.About = require('./About');
 exports.IndexConfig = require('./IndexConfig');
 exports.CompanyData = require('./CompanyData');
+exports.FinancialData = require('./FinancialData');
 exports.BasicData = require('./BasicData');
 
 exports.Oss = require('./Oss')

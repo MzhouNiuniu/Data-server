@@ -9,6 +9,7 @@ router.post('/delById',authToken,model.delById)
 router.post('/updateById',authToken,model.updateById)
 router.get('/getDetails',authToken,model.getDetails)
 router.post('/updateStatusById',authToken,model.updateStatusById)
+router.get('/getListBySearch',model.getListBySearch)
 // router.post('/importExcel',model.importExcel)
 
 

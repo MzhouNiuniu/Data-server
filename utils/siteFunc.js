@@ -7,7 +7,6 @@ const logUtil = require('./middleware/logUtil')
 var siteFunc = {
     // 封装api返回的数据
     renderApiData(res, responseCode, responseMessage, data = {}, type ) {
-
         if (type == 'getlist') {
             responseMessage = res.__("validate_error_getSuccess", { success: responseMessage })
         }

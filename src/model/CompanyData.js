@@ -44,7 +44,7 @@ let bond={
 }
 //城投数据
 var CompanyDataSchema = new Schema({
-    id: {
+    _id: {
         type: String,
         'default': shortid.generate
     },
@@ -68,7 +68,13 @@ var CompanyDataSchema = new Schema({
     info:String,//企业概况
     registerCapital:String,//注册资本
     photos:String,//企业图片
-    financial:[{type: String, ref: 'FinancialData'}],
+    financial:[],//
+    totalAsset:Number,
+    businessCount:Number,
+    rateMain:{//评级
+        enum : ['AAA','AA+','AA','其他'],
+        type:String
+    },
     rate:[{
         year:String,//年份
         main:{//评级
