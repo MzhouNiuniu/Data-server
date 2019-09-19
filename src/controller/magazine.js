@@ -54,6 +54,15 @@ class Magazine {
             res.send(siteFunc.renderApiErr(req, res, 500, err))
         }
     }
+    async getIndex(req, res, next) {
+        try {
+            let model = await Model.find({}).sort({stick:-1,releaseTime:-1})
+            res.send(siteFunc.renderApiData(req, 200, 'ok', model))
+        }
+        catch (err) {
+            res.send(siteFunc.renderApiErr(req, res, 500, err))
+        }
+    }
 
     /**
      * @apiGroup Magazine

@@ -58,6 +58,40 @@ class Statute {
             res.send(siteFunc.renderApiErr(req, res, 500, err))
         }
     }
+    async getListByWeb(req, res, next) {
+        var keyWords = req.query.keyWords || ''
+        var limit = Number(req.query.limit || 10)
+        var page = Number(req.query.page || 1)
+        var type = Number(req.query.type)
+        try {
+            let model = await Model.paginate({name: {$regex: keyWords, $options: 'i'},type:type,status:1}, {limit: limit, page: page,sort:{stick:-1,releaseTime:-1}})
+            res.send(siteFunc.renderApiData(req, 200, 'ok', model))
+        }
+        catch (err) {
+            res.send(siteFunc.renderApiErr(req, res, 500, err))
+        }
+    }
+    async getIndex(req, res, next) {
+        try {
+            let policies = await Model.find({type: 0,status:1}).sort({stick: -1, releaseTime: -1}).limit(4)
+            let guide = await Model.find({type: 1,status:1}).sort({stick: -1, releaseTime: -1}).limit(4)
+            let council = await Model.find({type: 2,status:1}).sort({stick: -1, releaseTime: -1}).limit(5)
+            let endemicity = await Model.find({type: 3,status:1}).sort({stick: -1, releaseTime: -1}).limit(5)
+            let department = await Model.find({type: 4,status:1}).sort({stick: -1, releaseTime: -1}).limit(5)
+            let params={
+                policies,
+                guide,
+                council,
+                endemicity,
+                department
+            }
+            res.send(siteFunc.renderApiData(req, 200, 'ok',params))
+        }
+        catch (err) {
+            res.send(siteFunc.renderApiErr(req, res, 500, err))
+        }
+
+    }
 
     /**
      * @apiGroup Statute

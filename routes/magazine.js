@@ -3,6 +3,7 @@ var router = express.Router();
 import controller from '../src/controller'
 const model=controller.Magazine
 router.post('/publish',model.publish)
+router.get('/getIndex',model.getIndex)
 router.get('/getList',model.getList)
 router.post('/delById',model.delById)
 router.post('/updateById',model.updateById)
