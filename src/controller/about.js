@@ -55,6 +55,15 @@ class About {
             res.send(siteFunc.renderApiErr(req, res, 500, err))
         }
     }
+    async getIndex(req, res, next) {
+        try {
+            let model = await Model.findOne()
+            res.send(siteFunc.renderApiData(req, 200, 'ok', model))
+        }
+        catch (err) {
+            res.send(siteFunc.renderApiErr(req, res, 500, err))
+        }
+    }
 
 
 

@@ -35,11 +35,11 @@ class CompanyData {
                         model.totalAsset=item.totalAsset
                         model.business=item.business
                     }
-                    // let fModel = new FModel(item)
-                    // fModel.DataId=id
-                    // fModel.save()
+                    let fModel = new FModel(item)
+                    fModel.DataId=id
+                    fModel.save()
                 })
-                // model.financial=[]
+                model.financial=[]
             }
             //取最大年份的评级数据
             let years=0
@@ -96,9 +96,9 @@ class CompanyData {
      */
     async getDetails(req, res, next) {
         try {
-            // let fModel = await FModel.find({'DataId': req.query.id})
+            let fModel = await FModel.find({'DataId': req.query.id})
             let model = await Model.find({'_id': req.query.id})
-             // model[0].financial=fModel
+             model[0].financial=fModel
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
         }
         catch (err) {
@@ -133,7 +133,7 @@ class CompanyData {
     async updateById(req, res, next) {
         try {
             req.body.releaseTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
-            // await FModel.remove({'DataId': req.body.id})
+            await FModel.remove({'DataId': req.body.id})
             let year=0
             if(req.body.financial){
                 req.body.financial.map((item)=>{
@@ -142,11 +142,10 @@ class CompanyData {
                         req.body.totalAsset=item.totalAsset
                         req.body.business=item.business
                     }
-                    // let fModel = new FModel(item)
-                    // fModel.DataId=id
-                    // fModel.save()
+                    let fModel = new FModel(item)
+                    fModel.DataId=req.body.id
+                    fModel.save()
                 })
-                // model.financial=[]
             }
             //取最大年份的评级数据
             let years=0
@@ -158,7 +157,7 @@ class CompanyData {
                     }
                 })
             }
-            // req.body.financial=[]
+            req.body.financial=[]
 
             let model = await Model.findByIdAndUpdate(req.body.id, req.body)
             res.send(siteFunc.renderApiData(req, 200, 'ok'))

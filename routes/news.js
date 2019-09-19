@@ -5,7 +5,8 @@ import authToken from '../utils/authToken'
 
 const model=controller.News
 router.post('/publish',authToken,model.publish)
-router.get('/getList',model.getList)
+router.get('/getList',authToken,model.getList)
+router.get('/getListByWeb',model.getListByWeb)
 router.post('/delById',authToken,model.delById)
 router.post('/updateById',authToken,model.updateById)
 router.get('/getDetails',model.getDetails)

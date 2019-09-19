@@ -57,6 +57,20 @@ class News {
         }
     }
 
+    async getListByWeb(req, res, next) {
+        var keyWords = req.query.keyWords || ''
+        var limit = Number(req.query.limit || 10)
+        var page = Number(req.query.page || 1)
+        var type = Number(req.query.type)
+        try {
+            let news = await NewModel.paginate({title: {$regex: keyWords, $options: 'i'},type:type,status:1}, {limit: limit, page: page,sort:{stick:-1,releaseTime:-1}})
+            res.send(siteFunc.renderApiData(req, 200, 'ok', news))
+        }
+        catch (err) {
+            res.send(siteFunc.renderApiErr(req, res, 500, err))
+        }
+    }
+
 
     /**
      * @apiGroup News
@@ -199,15 +213,15 @@ class News {
     }
     /**
      * @apiGroup News
-     * @importExcel 获取新闻首页信息（审核）
+     * @importExcel 获取新闻首页信息
      * @api {get} /news/getIndex 获取新闻首页信息
      */
     async getIndex(req, res, next) {
         try {
-            let industryDynamic = await NewModel.find({type: 0}).sort({stick: -1, releaseTime: -1}).limit(5)
-            let ideaNew = await NewModel.find({type: 1}).sort({stick: -1, releaseTime: -1}).limit(5)
-            let ideaDynamic = await NewModel.find({type: 2}).sort({stick: -1, releaseTime: -1}).limit(5)
-            let projectDynamic = await NewModel.find({type: 3}).sort({stick: -1, releaseTime: -1}).limit(5)
+            let industryDynamic = await NewModel.find({type: 0,status:1}).sort({stick: -1, releaseTime: -1}).limit(3)
+            let ideaNew = await NewModel.find({type: 1,status:1}).sort({stick: -1, releaseTime: -1}).limit(5)
+            let ideaDynamic = await NewModel.find({type: 2,status:1}).sort({stick: -1, releaseTime: -1}).limit(5)
+            let projectDynamic = await NewModel.find({type: 3,status:1}).sort({stick: -1, releaseTime: -1}).limit(5)
             let params={
                 industryDynamic,
                 ideaNew,

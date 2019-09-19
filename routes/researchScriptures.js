@@ -6,9 +6,10 @@ import controller from '../src/controller'
 const model=controller.ResearchScriptures
 router.post('/publish',authToken,model.publish)
 router.get('/getList',authToken,model.getList)
+router.get('/getListByWeb',model.getListByWeb)
 router.post('/delById',authToken,model.delById)
 router.post('/updateById',authToken,model.updateById)
-router.get('/getDetails',authToken,model.getDetails)
+router.get('/getDetails',model.getDetails)
 router.post('/updateStatusById',authToken,model.updateStatusById)
 router.post('/stickById',authToken,model.stickById)
 

@@ -163,6 +163,7 @@ class Expert {
             res.send(siteFunc.renderApiErr(req, res, 500, err))
         }
     }
+    //按照中文排序
     async getListByName(req, res, next) {
         var keyWords = req.query.keyWords || ''
         var limit = Number(req.query.limit || 10)
@@ -170,7 +171,7 @@ class Expert {
             // ,collation:{ locale: 'zh' }
 
         try {
-            let model = await Model.paginate({name: {$regex: keyWords, $options: 'i'}}, { collation: { locale: 'en' },limit: limit, page: page,sort:{stick:-1,name:1}})
+            let model = await Model.paginate({name: {$regex: keyWords, $options: 'i'},status:1}, { collation: { locale: 'en' },limit: limit, page: page,sort:{stick:-1,name:1}})
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
 
         }

@@ -1,10 +1,12 @@
 const Model = require("../model").ResearchReport;
+const sModel = require("../model").ResearchScriptures;
 const formidable = require('formidable');
 const {server, siteFunc} = require('../../utils');
 var moment = require('moment')
 var node_xlsx = require('node-xlsx');
 const _ = require('lodash')
 import config from '../../config/settings'
+
 //研究报告
 class ResearchReport {
     constructor() {
@@ -56,7 +58,28 @@ class ResearchReport {
         var page = Number(req.query.page || 1)
         var type = Number(req.query.type)
         try {
-            let model = await Model.paginate({name: {$regex: keyWords, $options: 'i'},type:type}, {limit: limit, page: page,sort:{stick:-1,releaseTime:-1}})
+            let model = await Model.paginate({name: {$regex: keyWords, $options: 'i'}, type: type}, {
+                limit: limit,
+                page: page,
+                sort: {stick: -1, releaseTime: -1}
+            })
+            res.send(siteFunc.renderApiData(req, 200, 'ok', model))
+        }
+        catch (err) {
+            res.send(siteFunc.renderApiErr(req, res, 500, err))
+        }
+    }
+    async getListByWeb(req, res, next) {
+        var keyWords = req.query.keyWords || ''
+        var limit = Number(req.query.limit || 10)
+        var page = Number(req.query.page || 1)
+        var type = Number(req.query.type)
+        try {
+            let model = await Model.paginate({name: {$regex: keyWords, $options: 'i'}, type: type,status:1}, {
+                limit: limit,
+                page: page,
+                sort: {stick: -1, releaseTime: -1}
+            })
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
         }
         catch (err) {
@@ -114,7 +137,7 @@ class ResearchReport {
     async updateById(req, res, next) {
 
         try {
-            req.body.releaseTime=moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+            req.body.releaseTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
             let model = await Model.findByIdAndUpdate(req.body.id, req.body)
             res.send(siteFunc.renderApiData(req, 200, 'ok'))
         }
@@ -135,13 +158,17 @@ class ResearchReport {
     async updateStatusById(req, res, next) {
         try {
             console.log(req.body.status)
-            if(req.body.status==2){
+            if (req.body.status == 2) {
                 let model = await Model.findById(req.body.id)
-                model.status=req.body.status
-                model.auditList.push({author:req.session.adminUserInfo,message:req.body.message,releaseTime:moment(new Date()).format('YYYY-MM-DD HH:mm:ss')})
+                model.status = req.body.status
+                model.auditList.push({
+                    author: req.session.adminUserInfo,
+                    message: req.body.message,
+                    releaseTime: moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+                })
                 let models = await Model.findByIdAndUpdate(req.body.id, model)
             }
-            else{
+            else {
                 let model = await Model.findByIdAndUpdate(req.body.id, {'status': req.body.status})
             }
 
@@ -151,6 +178,7 @@ class ResearchReport {
             res.send(siteFunc.renderApiErr(req, res, 500, err))
         }
     }
+
     /**
      * @apiGroup ResearchReport
      * @updateStatusById 置顶
@@ -167,6 +195,24 @@ class ResearchReport {
         catch (err) {
             res.send(siteFunc.renderApiErr(req, res, 500, err))
         }
+    }
+
+    async getIndex(req, res, next) {
+        try {
+            let special = await Model.find({type: 0, status: 1}).sort({stick: -1, releaseTime: -1}).limit(6)
+            let regular = await Model.find({type: 1, status: 1}).sort({stick: -1, releaseTime: -1}).limit(6)
+            let scriptures = await sModel.find({status: 1}).sort({stick: -1, releaseTime: -1}).limit(6)
+            let params = {
+                special,
+                regular,
+                scriptures,
+            }
+            res.send(siteFunc.renderApiData(req, 200, 'ok', params))
+        }
+        catch (err) {
+            res.send(siteFunc.renderApiErr(req, res, 500, err))
+        }
+
     }
 
 

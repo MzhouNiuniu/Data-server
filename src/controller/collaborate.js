@@ -59,6 +59,19 @@ class Collaborate {
             res.send(siteFunc.renderApiErr(req, res, 500, err))
         }
     }
+    async getListByWeb(req, res, next) {
+        var keyWords = req.query.keyWords || ''
+        var limit = Number(req.query.limit || 10)
+        var page = Number(req.query.page || 1)
+
+        try {
+            let model = await Model.paginate({name: {$regex: keyWords, $options: 'i'},status:1}, {limit: limit, page: page,sort:{stick:-1,releaseTime:-1}})
+            res.send(siteFunc.renderApiData(req, 200, 'ok', model))
+        }
+        catch (err) {
+            res.send(siteFunc.renderApiErr(req, res, 500, err))
+        }
+    }
 
     /**
      * @apiGroup Collaborate
