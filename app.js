@@ -59,7 +59,7 @@ app.use(function (req, res, next) {
 //res.header('Access-Control-Allow-Origin', 'http://www.baidu.com'); //这样写，只有www.baidu.com 可以访问。
     res.header('Access-Control-Allow-Headers','Content-Type, Content-Length, Authorization,token');
     res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');//设置方法
-    res.header('Content-Type', 'application/json;charset=utf-8');
+    // res.header('Content-Type', 'application/json;charset=utf-8');
     if (req.method == 'OPTIONS') {
         res.send(200); // 意思是，在正常的请求之前，会发送一个验证，是否可以请求。
     }
@@ -70,13 +70,15 @@ app.use(function (req, res, next) {
 
 
 // view engine setup
-app.set('views', path.join(__dirname, '/views'));// 设置静态文件目录
-app.engine('.html', require('ejs').__express); //设置ejs渲染html
+// app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');//设置html为模板引擎 注意这里是html
+
+app.use(express.static(path.join(__dirname, 'public/dist')))
+app.engine('.html', require('ejs').__express); //设置ejs渲染html
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
-app.use(express.static(path.join(__dirname, 'views')));
+// app.use(express.static(path.join(__dirname, 'views')));
 
 app.use('/', indexRouter);
 app.use('/user', userRouter);

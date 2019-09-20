@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./src/views/News/img/news-bg.png"],"names":["module","exports"],"mappings":"mGAAAA,EAAOC,QAAU,IAA0B","file":"js/chunk-2d2102d8.0bc1263b.js","sourcesContent":["module.exports = __webpack_public_path__ + \"img/news-bg.d7d53270.png\";"],"sourceRoot":""}

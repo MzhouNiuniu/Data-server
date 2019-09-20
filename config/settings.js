@@ -14,7 +14,7 @@ module.exports = {
 
     //    数据库配置
     DB: 'test',
-    HOST: '192.168.9.105',
+    HOST: 'localhost',
     PORT: 27017,
     USERNAME: 'doramart',
     PASSWORD: 'doramart',

@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./src/views/Policy/img/bgs.png"],"names":["module","exports"],"mappings":"mGAAAA,EAAOC,QAAU,IAA0B","file":"js/chunk-2d225b2f.3238826c.js","sourcesContent":["module.exports = __webpack_public_path__ + \"img/bgs.31296324.png\";"],"sourceRoot":""}
