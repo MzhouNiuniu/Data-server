@@ -43,6 +43,7 @@ class CompanyData {
             }
             //取最大年份的评级数据
             let years=0
+
             if(req.body.rate){
                 req.body.rate.map((item)=>{
                     if(years<item.year){
@@ -131,6 +132,7 @@ class CompanyData {
      * @apiSampleRequest  /companyData/updateById
      */
     async updateById(req, res, next) {
+
         try {
             req.body.releaseTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
             await FModel.remove({'DataId': req.body.id})

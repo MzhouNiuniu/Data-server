@@ -41,7 +41,7 @@ import magazineRouter from './routes/magazine'
 import aboutRouter from './routes/about'
 import indexConfigRouter from './routes/indexConfig'
 import companyDataRouter from './routes/companyData'
-import basicDataRouter from './routes/basicData'
+import basicDataRouter from './routes/BasicData'
 var app = express();
 var bodyParser = require('body-parser')
 import config from './config/settings'

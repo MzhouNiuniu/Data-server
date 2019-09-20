@@ -41,7 +41,7 @@ exports.CompanyData = require('./CompanyData');
 exports.FinancialData = require('./FinancialData');
 exports.BasicData = require('./BasicData');
 
-exports.Oss = require('./Oss')
+exports.Oss = require('./oss')
 exports.FileChunk = require('./fs.chunks')
 exports.FileFiles = require('./fs.files')
 exports.db = db
