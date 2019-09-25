@@ -16,7 +16,7 @@ var ExpertSchema = new Schema({
     photos:String,//头像
     experience:String,//经历
     direction:String,//研究方向
-    achievement:Array,//科研成果
+    achievement:String,//科研成果
     stick:{
         type:Number,
         enum : [0,1],//枚举

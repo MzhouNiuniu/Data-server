@@ -9,6 +9,8 @@ router.post('/delById',authToken,model.delById)
 router.post('/updateById',authToken,model.updateById)
 router.get('/getDetails',authToken,model.getDetails)
 router.get('/getBaseListByCity',model.getBaseListByCity)
+router.get('/getListByWeb',model.getListByWeb)
+
 
 
 // router.post('/importExcel',model.importExcel)

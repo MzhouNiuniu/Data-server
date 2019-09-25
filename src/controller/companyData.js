@@ -1,5 +1,6 @@
 const Model = require("../model").CompanyData;
 const FModel = require("../model").FinancialData;
+const RModel = require("../model").Rate;
 const formidable = require('formidable');
 const {server, siteFunc} = require('../../utils');
 var moment = require('moment')
@@ -23,34 +24,40 @@ class CompanyData {
      */
     async publish(req, res, next) {
         try {
-            const id=shortid.generate()
-            req.body._id=id
+            const id = shortid.generate()
+            req.body._id = id
             let model = new Model(req.body)
             //取最大年份的总资产数据
-            let year=0
-            if(req.body.financial){
-                req.body.financial.map((item)=>{
-                    if(year<item.year){
-                        year=item.year
-                        model.totalAsset=item.totalAsset
-                        model.business=item.business
+            let year = 0
+            if (req.body.financial) {
+                req.body.financial.map((item) => {
+                    if (year < item.year) {
+                        year = item.year
+                        model.totalAsset = item.totalAsset
+                        model.business = item.business
                     }
                     let fModel = new FModel(item)
-                    fModel.DataId=id
+                    fModel.DataId = id
                     fModel.save()
                 })
-                model.financial=[]
+                model.financial = []
             }
-            //取最大年份的评级数据
-            let years=0
 
-            if(req.body.rate){
-                req.body.rate.map((item)=>{
-                    if(years<item.year){
-                        years=item.year
-                        model.rateMain=item.main
+            //取最大年份的评级数据
+            let years = 0
+
+            if (req.body.rate) {
+                req.body.rate.map((item) => {
+                    if (years < item.year) {
+                        years = item.year
+                        model.rateMain = item.main
                     }
+                    let rModel = new RModel(item)
+                    rModel.DataId = id
+                    rModel.save()
                 })
+                model.rate = []
+
             }
 
             model.save()
@@ -98,8 +105,10 @@ class CompanyData {
     async getDetails(req, res, next) {
         try {
             let fModel = await FModel.find({'DataId': req.query.id})
+            let rModel = await RModel.find({'DataId': req.query.id})
             let model = await Model.find({'_id': req.query.id})
-             model[0].financial=fModel
+            model[0].financial = fModel
+            model[0].rate = rModel
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
         }
         catch (err) {
@@ -136,31 +145,35 @@ class CompanyData {
         try {
             req.body.releaseTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
             await FModel.remove({'DataId': req.body.id})
-            let year=0
-            if(req.body.financial){
-                req.body.financial.map((item)=>{
-                    if(year<item.year){
-                        year=item.year
-                        req.body.totalAsset=item.totalAsset
-                        req.body.business=item.business
+            await RModel.remove({'DataId': req.body.id})
+            let year = 0
+            if (req.body.financial) {
+                req.body.financial.map((item) => {
+                    if (year < item.year) {
+                        year = item.year
+                        req.body.totalAsset = item.totalAsset
+                        req.body.business = item.business
                     }
                     let fModel = new FModel(item)
-                    fModel.DataId=req.body.id
+                    fModel.DataId = req.body.id
                     fModel.save()
                 })
             }
             //取最大年份的评级数据
-            let years=0
-            if(req.body.rate){
-                req.body.rate.map((item)=>{
-                    if(years<item.year){
-                        years=item.year
-                        req.body.rateMain=item.main
+            let years = 0
+            if (req.body.rate) {
+                req.body.rate.map((item) => {
+                    if (years < item.year) {
+                        years = item.year
+                        req.body.rateMain = item.main
                     }
+                    let rModel = new RModel(item)
+                    rModel.DataId = req.body.id
+                    rModel.save()
                 })
             }
-            req.body.financial=[]
-
+            req.body.financial = []
+            req.body.rate = []
             let model = await Model.findByIdAndUpdate(req.body.id, req.body)
             res.send(siteFunc.renderApiData(req, 200, 'ok'))
         }
@@ -201,6 +214,10 @@ class CompanyData {
             res.send(siteFunc.renderApiErr(req, res, 500, err))
         }
     }
+    getListByYear(){
+
+    }
+
     /**
      * @apiGroup CompanyData
      * @getListBySearch 条件查询
@@ -216,23 +233,100 @@ class CompanyData {
      * @apiSampleRequest  /companyData/getListBySearch
      */
     async getListBySearch(req, res, next) {
-        var keyWords = req.query.keyWords||''
+
+        var keyWords = req.query.keyWords || ''
         var limit = Number(req.query.limit || 10)
         var page = Number(req.query.page || 1)
-        var province = req.query.province||''
-        var mainType= req.query.mainType||''
-        var totalAsset= req.query.totalAsset?req.query.totalAsset.split(","):[0,99999999999999999999999]
-        var business = req.query.business?req.query.business.split(","):[0,99999999999999999999999]
-        var rateMain = req.query.rateMain?req.query.rateMain:null
+        var province = req.query.province || ''
+        var mainType = req.query.mainType || ''
+        var totalAsset = req.query.totalAsset ? req.query.totalAsset.split(",") : [0, 99999999999999999999999]
+        var business = req.query.business ? req.query.business.split(",") : [0, 99999999999999999999999]
+        var rateMain = req.query.rateMain ? req.query.rateMain : null
+        let params = {
+            name: {$regex: keyWords, $options: 'i'},
+            province: {$regex: province},
+            mainType: {$regex: mainType},
+        }
+        // totalAsset: {$lte: totalAsset[1], $gte: totalAsset[0]},
+        // business: {$lte: business[1], $gte: business[0]},            rateMain
+        switch (req.query.income) {
+            case '1':
+                business = [0, 10]
+                break;
+            case '2':
+                business = [10, 50]
+                break;
+            case '3':
+                business = [50, 100]
+                break;
+            case '4':
+                business = [100, 200]
+                break;
+            case '5':
+                business = [200, 99999999999999999999999]
+                break;
+            default:
+                business = [0, 99999999999999999999999]
+
+        }
+        switch (req.query.scale) {
+            case '1':
+                totalAsset = [0, 100]
+                break;
+            case '2':
+                totalAsset = [100, 500]
+                break;
+            case '3':
+                totalAsset = [500, 1000]
+                break;
+            case '4':
+                totalAsset = [1000, 2000]
+                break;
+            case '5':
+                totalAsset = [2000, 99999999999999999999999]
+                break;
+            default:
+                totalAsset = [0, 99999999999999999999999]
+
+        }
+        if(req.query.income){
+            params.business={$lte: business[1], $gte: business[0]}
+        }
+        if(req.query.province){
+            params.province=req.query.province
+        }
+        if(req.query.mainType){
+            params.mainType=req.query.mainType
+        }
+        if(req.query.totalAsset){
+            params.totalAsset=req.query.totalAsset
+        }
+        if(req.query.rateMain){
+            params.rateMain=req.query.rateMain
+        }
+        if(req.query.scale){
+            params.totalAsset={$lte: totalAsset[1], $gte: totalAsset[0]}
+        }
+        if(req.query.startCreateTime && req.query.endCreateTime){
+            params.createTime=  {$lte:  new Date(req.query.startCreateTime), $gte: new Date(req.query.endCreateTime)}
+        }
+        if(req.query.min && req.query.max){
+            params.totalAsset= {$lte: req.query.max, $gte: req.query.min}
+        }
+
+
         try {
-            let model = await Model.paginate({totalAsset:{$lte:totalAsset[1],$gte:totalAsset[0]},business:{$lte:business[1],$gte:business[0]},name: {$regex: keyWords, $options: 'i'},province:{$regex: province},mainType:{$regex: mainType},rateMain}, {
+            console.log(params)
+            let model = await Model.paginate(params,{
                 limit: limit,
                 page: page,
                 sort: {stick: -1}
             })
+            // console.log(model)
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
         }
-        catch (err) {
+        catch
+            (err) {
             res.send(siteFunc.renderApiErr(req, res, 500, err))
         }
     }

@@ -6,7 +6,7 @@ import controller from '../src/controller'
 const model=controller.Statute
 router.post('/publish',authToken,model.publish)
 router.get('/getList',authToken,model.getList)
-router.get('/getListByWeb',authToken,model.getListByWeb)
+router.get('/getListByWeb',model.getListByWeb)
 router.get('/getIndex',authToken,model.getIndex)
 router.post('/delById',authToken,model.delById)
 router.post('/updateById',authToken,model.updateById)

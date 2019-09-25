@@ -63,6 +63,36 @@ class BasicData {
             res.send(siteFunc.renderApiErr(req, res, 500, err))
         }
     }
+    /**
+     * @apiGroup BasicData
+     * @getList 获取列表
+     * @api {get} /basicData/getListByWeb 获取列表
+     * @apiParam {string} directly   不传默认省级  枚举 只能是 省级 市级 区级三种
+     * @apiParam {string} province   如果你选到省级一下了 比如江苏省  这个字段你就传江苏省
+     * @apiParam {string} city   如果你选到省级一下了 比如江苏省 南京市  这个字段你就传南京市  其实江苏省也可以不传传最好 保证唯一性
+     */
+    async getListByWeb(req, res, next) {
+        let params={
+            directly:'省级'
+        }
+        if(req.query.directly){
+            params.directly=req.query.directly
+        }
+        if(req.query.province){
+            params.province={$regex: req.query.province, $options: 'i'}
+        }
+        if(req.query.city){
+            params.city={$regex: req.query.city, $options: 'i'}
+        }
+        console.log(params)
+        try {
+            let model = await Model.find(params)
+            res.send(siteFunc.renderApiData(req, 200, 'ok', model))
+        }
+        catch (err) {
+            res.send(siteFunc.renderApiErr(req, res, 500, err))
+        }
+    }
 
     /**
      * @apiGroup BasicData

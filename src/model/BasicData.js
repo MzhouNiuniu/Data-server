@@ -14,7 +14,7 @@ var BasicDataSchema = new Schema({
     city:String,
     district:String,
     year:String,
-    directly:String,//辖区名称
+    directly:String,//行政级别
     GDP:String,//GDP
     addFDP:String,//GDP增速
     income:String,//收入

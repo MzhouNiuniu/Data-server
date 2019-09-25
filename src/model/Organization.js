@@ -20,7 +20,12 @@ var OrganizationSchema = new Schema({
     speciality:String,//专业领域
     service:String,//服务
     experience:Array,//经验
-    intro:String,
+    // experience:[{
+    //     name:String,//名称
+    //     type:String,//类型
+    //     companyName:String,//合作机构名字
+    // }],
+intro:String,
     stick:{
         type:Number,
         enum : [0,1],//枚举
@@ -29,12 +34,12 @@ var OrganizationSchema = new Schema({
     },
     auditList:Array,
     // auditList:[{
-    //     name:String,//名称
-    //     type:String,//类型
-    //     companyName:String,//合作机构名字
-    // }],
+//     "message" : "1111",//拒绝信息
+//     "releaseTime" : "2019-08-28 09:48:09"//拒绝时间
+// },
 
-    status:{
+
+status:{
         type:Number,
         default:0
         //0待审核  1审核通过  2审核未通过

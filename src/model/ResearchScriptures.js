@@ -31,7 +31,7 @@ var ResearchScripturesSchema = new Schema({
     },
     author: {
         type: Object
-    }
+    }//这里是用户对象
 
 });
 ResearchScripturesSchema.plugin(mongoosePaginate);
