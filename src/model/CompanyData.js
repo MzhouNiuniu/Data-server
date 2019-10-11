@@ -70,6 +70,7 @@ var CompanyDataSchema = new Schema({
     photos:String,//企业图片
     financial:[],//
     totalAsset:Number,
+    news:Array,
     businessCount:Number,
     rateMain:{//评级
         enum : ['AAA','AA+','AA','其他'],

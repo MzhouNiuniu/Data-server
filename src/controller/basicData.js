@@ -72,22 +72,35 @@ class BasicData {
      * @apiParam {string} city   如果你选到省级一下了 比如江苏省 南京市  这个字段你就传南京市  其实江苏省也可以不传传最好 保证唯一性
      */
     async getListByWeb(req, res, next) {
-        let params={
-            directly:'省级'
-        }
-        if(req.query.directly){
-            params.directly=req.query.directly
-        }
-        if(req.query.province){
-            params.province={$regex: req.query.province, $options: 'i'}
-        }
-        if(req.query.city){
-            params.city={$regex: req.query.city, $options: 'i'}
-        }
-        console.log(params)
+
         try {
-            let model = await Model.find(params)
-            res.send(siteFunc.renderApiData(req, 200, 'ok', model))
+            let model
+            let models=[]
+
+            //判断默认首页查出北京返回
+           if(!req.query.directly){
+                let pam
+                if(req.query.year){
+                    pam={'province':'北京市','directly':'省级',year:req.query.year}
+                }
+               console.log('321')
+               console.log(req.query.directly)
+                models = await Model.find(pam)
+                model=  await Model.find({year:req.query.year,'directly':'省级'})
+           }
+            else if(req.query.directly=='省级'){
+                models = await Model.find({directly:'省级',year:req.query.year,province:req.query.province})
+                model=  await Model.find({year:req.query.year,'directly':'市级',province:req.query.province})
+            }
+           else if(req.query.directly=='市级'){
+                models = await Model.find({directly:'市级',year:req.query.year,city:req.query.city})
+                model=  await Model.find({year:req.query.year,'directly':'区级',city:req.query.city})
+            }
+            let data={
+                list:model,
+                base:models[0]
+            }
+            res.send(siteFunc.renderApiData(req, 200, 'ok', data))
         }
         catch (err) {
             res.send(siteFunc.renderApiErr(req, res, 500, err))

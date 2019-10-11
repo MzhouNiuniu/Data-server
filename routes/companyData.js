@@ -13,6 +13,7 @@ router.get('/getDetails',model.getDetails)
 router.post('/updateStatusById',authToken,model.updateStatusById)
 router.get('/getListBySearch',model.getListBySearch)
 router.get('/getListByYear',model.getListByYear)
+
 // router.post('/importExcel',model.importExcel)
 
 

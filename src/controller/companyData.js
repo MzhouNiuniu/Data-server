@@ -1,6 +1,7 @@
 const Model = require("../model").CompanyData;
 const FModel = require("../model").FinancialData;
 const RModel = require("../model").Rate;
+const NModel = require("../model").News;
 const formidable = require('formidable');
 const {server, siteFunc} = require('../../utils');
 var moment = require('moment')
@@ -107,8 +108,11 @@ class CompanyData {
             let fModel = await FModel.find({'DataId': req.query.id})
             let rModel = await RModel.find({'DataId': req.query.id})
             let model = await Model.find({'_id': req.query.id})
+            let nmodel = await NModel.find({'source': model[0].name})
+            // source
             model[0].financial = fModel
             model[0].rate = rModel
+            model[0].news=nmodel
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
         }
         catch (err) {
@@ -214,9 +218,6 @@ class CompanyData {
             res.send(siteFunc.renderApiErr(req, res, 500, err))
         }
     }
-    getListByYear(){
-
-    }
 
     /**
      * @apiGroup CompanyData
@@ -289,40 +290,43 @@ class CompanyData {
                 totalAsset = [0, 99999999999999999999999]
 
         }
-        if(req.query.income){
-            params.business={$lte: business[1], $gte: business[0]}
+        if (req.query.income) {
+            params.business = {$lte: business[1], $gte: business[0]}
         }
-        if(req.query.province){
-            params.province=req.query.province
+        if (req.query.province) {
+            params.province = req.query.province
         }
-        if(req.query.mainType){
-            params.mainType=req.query.mainType
+        if (req.query.mainType) {
+            params.mainType = req.query.mainType
         }
-        if(req.query.totalAsset){
-            params.totalAsset=req.query.totalAsset
+        if (req.query.totalAsset) {
+            params.totalAsset = req.query.totalAsset
         }
-        if(req.query.rateMain){
-            params.rateMain=req.query.rateMain
+        if (req.query.rateMain) {
+            params.rateMain = req.query.rateMain
         }
-        if(req.query.scale){
-            params.totalAsset={$lte: totalAsset[1], $gte: totalAsset[0]}
+        if (req.query.scale) {
+            params.totalAsset = {$lte: totalAsset[1], $gte: totalAsset[0]}
         }
-        if(req.query.startCreateTime && req.query.endCreateTime){
-            params.createTime=  {$lte:  new Date(req.query.startCreateTime), $gte: new Date(req.query.endCreateTime)}
+
+        if (req.query.startCreateTime && req.query.endCreateTime) {
+            console.log(new Date(req.query.startCreateTime))
+            params.creationTime = {$lte: req.query.endCreateTime, $gte:req.query.startCreateTime}
         }
-        if(req.query.min && req.query.max){
-            params.totalAsset= {$lte: req.query.max, $gte: req.query.min}
+        if (req.query.min && req.query.max) {
+            params.totalAsset = {$lte: req.query.max, $gte: req.query.min}
         }
 
 
         try {
             console.log(params)
-            let model = await Model.paginate(params,{
+
+            let model = await Model.paginate(params, {
                 limit: limit,
                 page: page,
                 sort: {stick: -1}
             })
-            // console.log(model)
+            console.log(model)
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
         }
         catch
@@ -331,6 +335,66 @@ class CompanyData {
         }
     }
 
+    async getListByYear(req, res, next) {
+        var limit = Number(req.query.limit || 10)
+        var page = Number(req.query.page || 1)
+        var keyWords=req.query.keyWords || ""
+        let model
+        if (!req.query.directly) {
+            model = await Model.paginate({
+                name: {$regex:keyWords, $options: 'i'},
+            }, {
+                limit: limit,
+                page: page,
+                sort: {stick: -1}
+            })
+            console.log('start')
+
+
+        }
+
+        else if (req.query.directly == '省级') {
+            model = await Model.find({
+                name: {$regex: keyWords, $options: 'i'},
+                province: {$regex: req.query.province}
+            }, {
+                limit: limit,
+                page: page,
+                sort: {stick: -1}
+            })
+        }
+        else if (req.query.directly == '市级') {
+            model = await Model.find({
+                name: {$regex: keyWords, $options: 'i'},
+                city: {$regex: req.query.city}
+            }, {
+                limit: limit,
+                page: page,
+                sort: {stick: -1}
+            })
+        }
+        // let model = await Model.paginate(params, {
+        //     limit: limit,
+        //     page: page,
+        //     sort: {stick: -1}
+        // })
+        console.log('end')
+        for(let index = 0; index < model.docs.length; index ++){
+            let fModel=await FModel.find({
+                year:req.query.year,
+                DataId:model.docs[index]._id
+            })
+            let rModel=await RModel.find({
+                year:req.query.year,
+                DataId:model.docs[index]._id
+            })
+            model.docs[index].financial=fModel
+            model.docs[index].rate=rModel
+        }
+
+        res.send(siteFunc.renderApiData(req, 200, 'ok', model))
+
+    }
 }
 
 module.exports = new CompanyData();

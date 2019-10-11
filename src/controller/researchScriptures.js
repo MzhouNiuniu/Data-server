@@ -83,6 +83,7 @@ class ResearchScriptures {
      */
     async getDetails(req, res, next) {
         try {
+            console.log( req.query.id)
             let model = await Model.find({'_id': req.query.id})
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
         }

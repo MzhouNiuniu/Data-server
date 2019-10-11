@@ -1,4 +1,6 @@
 const Model = require("../model").IndexConfig;
+const AModel= require("../model").About;
+const NewModel=require("../model").News;
 const formidable = require('formidable');
 const {server, siteFunc} = require('../../utils');
 var moment = require('moment')
@@ -52,6 +54,33 @@ class IndexConfig {
             res.send(siteFunc.renderApiErr(req, res, 500, err))
         }
     }
+    async getIndex(req, res, next) {
+        try {
+            let model = await Model.findOne()
+            let amodel = await AModel.find({})
+            console.log(model)
+            let industryDynamic = await NewModel.find({type: 0,status:1}).sort({stick: -1, releaseTime: -1}).limit(3)
+            let ideaNew = await NewModel.find({type: 1,status:1}).sort({stick: -1, releaseTime: -1}).limit(5)
+            let ideaDynamic = await NewModel.find({type: 2,status:1}).sort({stick: -1, releaseTime: -1}).limit(5)
+            let projectDynamic = await NewModel.find({type: 3,status:1}).sort({stick: -1, releaseTime: -1}).limit(5)
+            let params={
+                industryDynamic,
+                ideaNew,
+                ideaDynamic,
+                projectDynamic
+            }
+            let re={
+               about:amodel,
+               banner:model.banner,
+                news:params
+            }
+            res.send(siteFunc.renderApiData(req, 200, 'ok', re))
+        }
+        catch (err) {
+            res.send(siteFunc.renderApiErr(req, res, 500, err))
+        }
+    }
+
 }
 
 module.exports = new IndexConfig();

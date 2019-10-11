@@ -154,9 +154,12 @@ class Organization {
                 let models = await Model.findByIdAndUpdate(req.body.id, model)
             }
             else{
+                console.log(req.body.status)
                 let model = await Model.findByIdAndUpdate(req.body.id, {'status': req.body.status})
+                res.send(siteFunc.renderApiData(req, 200, '操作成功'))
+
+                console.log(model)
             }
-            res.send(siteFunc.renderApiData(req, 200, '操作成功'))
         }
         catch (err) {
             res.send(siteFunc.renderApiErr(req, res, 500, err))

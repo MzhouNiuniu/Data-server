@@ -121,6 +121,48 @@
   },
   {
     "group": "BasicData",
+    "type": "get",
+    "url": "/basicData/getListByWeb",
+    "title": "获取列表",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "directly",
+            "description": "<p>不传默认省级  枚举 只能是 省级 市级 区级三种</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "province",
+            "description": "<p>如果你选到省级一下了 比如江苏省  这个字段你就传江苏省</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "city",
+            "description": "<p>如果你选到省级一下了 比如江苏省 南京市  这个字段你就传南京市  其实江苏省也可以不传传最好 保证唯一性</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "src/controller/basicData.js",
+    "groupTitle": "BasicData",
+    "name": "GetBasicdataGetlistbyweb",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.9.105:3000/basicData/getListByWeb"
+      }
+    ]
+  },
+  {
+    "group": "BasicData",
     "type": "post",
     "url": "/basicData/delById",
     "title": "删除",

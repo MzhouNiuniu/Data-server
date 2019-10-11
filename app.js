@@ -7,6 +7,8 @@ var MongoStore = require('connect-mongo')(session)
 // var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var ejs = require('ejs');
+
+
 let sessionConfig = {
     secret: config.session_secret,
     name:'session',

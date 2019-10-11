@@ -13,6 +13,7 @@ var BasicDataSchema = new Schema({
     province:String,
     city:String,
     district:String,
+
     year:String,
     directly:String,//行政级别
     GDP:String,//GDP
@@ -20,6 +21,8 @@ var BasicDataSchema = new Schema({
     income:String,//收入
     addIncome:String,//增长收入
     balance:String,//存续债卷余额
+    budget:String,//预算
+    man:String,//人口
     releaseTime:{
         type:String,
         default:moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
