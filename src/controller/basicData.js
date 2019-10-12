@@ -1,10 +1,12 @@
 const Model = require("../model").BasicData;
+const cModel = require("../model").CompanyData;
 const formidable = require('formidable');
 const {server, siteFunc} = require('../../utils');
 var moment = require('moment')
 var node_xlsx = require('node-xlsx');
 const _ = require('lodash')
 import config from '../../config/settings'
+
 //考虑到资质文件图片很多 单独用一个表存放 提高读写效率
 class BasicData {
     constructor() {
@@ -63,6 +65,7 @@ class BasicData {
             res.send(siteFunc.renderApiErr(req, res, 500, err))
         }
     }
+
     /**
      * @apiGroup BasicData
      * @getList 获取列表
@@ -75,30 +78,150 @@ class BasicData {
 
         try {
             let model
-            let models=[]
+            let models = []
 
             //判断默认首页查出北京返回
-           if(!req.query.directly){
+            if (!req.query.directly) {
                 let pam
-                if(req.query.year){
-                    pam={'province':'北京市','directly':'省级',year:req.query.year}
+                if (req.query.year) {
+                    pam = {'province': '北京市', 'directly': '省级', year: req.query.year}
                 }
-               console.log('321')
-               console.log(req.query.directly)
+                console.log('321')
+                console.log(req.query.directly)
+                let count = await cModel.aggregate([{
+                        $match: {
+                            province: '北京市', //匹配number>=100的记录m
+                        }
+                    }, {
+                        $group: {
+                            _id: 'id',
+                            count: {$sum: 1},
+                        }
+                    }]
+                )
                 models = await Model.find(pam)
-                model=  await Model.find({year:req.query.year,'directly':'省级'})
-           }
-            else if(req.query.directly=='省级'){
-                models = await Model.find({directly:'省级',year:req.query.year,province:req.query.province})
-                model=  await Model.find({year:req.query.year,'directly':'市级',province:req.query.province})
+                console.log(count)
+                if (count.length > 0) {
+                    models[0].count = count[0].count
+
+                }
+                else {
+                    models[0].count = 0
+                }
+                model = await Model.find({year: req.query.year, 'directly': '省级'})
+                for (let index = 0; index < model.length; index++) {
+                    let count = await cModel.aggregate([{
+                            $match: {
+                                province: model[index].province, //匹配number>=100的记录
+                            }
+                        }, {
+                            $group: {
+                                _id: 'id',
+                                count: {$sum: 1},
+                            }
+                        }]
+                    )
+                    if (count.length > 0) {
+                        model[index].count = count[0].count
+                    }
+                    else {
+                        model[index].count = 0
+                    }
+
+
+                }
+
+
             }
-           else if(req.query.directly=='市级'){
-                models = await Model.find({directly:'市级',year:req.query.year,city:req.query.city})
-                model=  await Model.find({year:req.query.year,'directly':'区级',city:req.query.city})
+            else if (req.query.directly == '省级') {
+                let count = await cModel.aggregate([{
+                        $match: {
+                            province: req.query.province, //匹配number>=100的记录m
+                        }
+                    }, {
+                        $group: {
+                            _id: 'id',
+                            count: {$sum: 1},
+                        }
+                    }]
+                )
+                models = await Model.find({directly: '省级', year: req.query.year, province: req.query.province})
+                if (count.length > 0) {
+                    models[0].count = count[0].count
+
+                }
+                else {
+                    models[0].count = 0
+                }
+                model = await Model.find({year: req.query.year, 'directly': '市级', province: req.query.province})
+                for (let index = 0; index < model.length; index++) {
+                    let count = await cModel.aggregate([{
+                            $match: {
+                                city: model[index].city, //匹配number>=100的记录
+                            }
+                        }, {
+                            $group: {
+                                _id: 'id',
+                                count: {$sum: 1},
+                            }
+                        }]
+                    )
+                    if (count.length > 0) {
+                        model[index].count = count[0].count
+                    }
+                    else {
+                        model[index].count = 0
+                    }
+
+
+                }
             }
-            let data={
-                list:model,
-                base:models[0]
+            else if (req.query.directly == '市级') {
+                let count = await cModel.aggregate([{
+                        $match: {
+                            city: req.query.city, //匹配number>=100的记录m
+                        }
+                    }, {
+                        $group: {
+                            _id: 'id',
+                            count: {$sum: 1},
+                        }
+                    }]
+                )
+                models = await Model.find({directly: '市级', year: req.query.year, city: req.query.city})
+                if (count.length > 0) {
+                    models[0].count = count[0].count
+
+                }
+                else {
+                    models[0].count = 0
+                }
+                model = await Model.find({year: req.query.year, 'directly': '区级', city: req.query.city})
+                for (let index = 0; index < model.length; index++) {
+                    let count = await cModel.aggregate([{
+                            $match: {
+                                district: model[index].district, //匹配number>=100的记录
+                            }
+                        }, {
+                            $group: {
+                                _id: 'id',
+                                count: {$sum: 1},
+                            }
+                        }]
+                    )
+                    if (count.length > 0) {
+                        model[index].count = count[0].count
+                    }
+                    else {
+                        model[index].count = 0
+                    }
+
+
+                }
+            }
+            let data = {
+                list: model,
+                base: models[0]
             }
             res.send(siteFunc.renderApiData(req, 200, 'ok', data))
         }
@@ -150,7 +273,7 @@ class BasicData {
      */
     async updateById(req, res, next) {
         try {
-            req.body.releaseTime=moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+            req.body.releaseTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
             let model = await Model.findByIdAndUpdate(req.body.id, req.body)
             res.send(siteFunc.renderApiData(req, 200, 'ok'))
         }
@@ -158,16 +281,15 @@ class BasicData {
             res.send(siteFunc.renderApiErr(req, res, 500, err))
         }
     }
-    async getBaseListByCity(req,res,next) {
+
+    async getBaseListByCity(req, res, next) {
         try {
             let model = await Model.find(req.query)
-            res.send(siteFunc.renderApiData(req, 200, 'ok',model))
+            res.send(siteFunc.renderApiData(req, 200, 'ok', model))
         }
         catch (err) {
         }
     }
-
-
 
 
 }

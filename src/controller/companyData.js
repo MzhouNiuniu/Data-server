@@ -2,6 +2,7 @@ const Model = require("../model").CompanyData;
 const FModel = require("../model").FinancialData;
 const RModel = require("../model").Rate;
 const NModel = require("../model").News;
+const FiModel=require("../model").Financialing
 const formidable = require('formidable');
 const {server, siteFunc} = require('../../utils');
 var moment = require('moment')
@@ -10,7 +11,7 @@ const _ = require('lodash')
 var shortid = require('shortid');
 import config from '../../config/settings'
 
-//专家
+//城投公司
 class CompanyData {
     constructor() {
         // super()
@@ -35,7 +36,7 @@ class CompanyData {
                     if (year < item.year) {
                         year = item.year
                         model.totalAsset = item.totalAsset
-                        model.business = item.business
+                        model.businessCount = item.business
                     }
                     let fModel = new FModel(item)
                     fModel.DataId = id
@@ -43,7 +44,84 @@ class CompanyData {
                 })
                 model.financial = []
             }
+            if (req.body.financing) {
+                req.body.financing.map((item) => {
+                    if(item.enterpriseBond){
+                        let fiModel = new FiModel(item.enterpriseBond)
+                        fiModel.DataId = id
+                        fiModel.save()
+                    }
+                    if(item.companyBond){
+                        let fiModel = new FiModel(item.companyBond)
+                        fiModel.DataId = id
+                        fiModel.save()
+                    }
+                    if(item.middleBond){
+                        let fiModel = new FiModel(item.middleBond)
+                        fiModel.DataId = id
+                        fiModel.save()
+                    }
+                    if(item.unpublicBond){
+                        let fiModel = new FiModel(item.unpublicBond)
+                        fiModel.DataId = id
+                        fiModel.save()
+                    }
+                    if(item.enterpriseAssetBond){
+                        let fiModel = new FiModel(item.enterpriseAssetBond)
+                        fiModel.DataId = id
+                        fiModel.save()
+                    }
+                    if(item.credit){
+                        let fiModel = new FiModel(item.credit)
+                        fiModel.DataId = id
+                        fiModel.save()
+                    }
 
+                    if(item.SCP){
+                        let fiModel = new FiModel(item.SCP)
+                        fiModel.DataId = id
+                        fiModel.save()
+                    }
+                    if(item.CP){
+                        let fiModel = new FiModel(item.CP)
+                        fiModel.DataId = id
+                        fiModel.save()
+                    }
+                    if(item.MTN){
+                        let fiModel = new FiModel(item.MTN)
+                        fiModel.DataId = id
+                        fiModel.save()
+                    }
+                    if(item.PPN){
+                        let fiModel = new FiModel(item.PPN)
+                        fiModel.DataId = id
+                        fiModel.save()
+                    }
+                    if(item.ABN){
+                        let fiModel = new FiModel(item.ABN)
+                        fiModel.DataId = id
+                        fiModel.save()
+                    }
+                    if(item.PRN){
+                        let fiModel = new FiModel(item.PRN)
+                        fiModel.DataId = id
+                        fiModel.save()
+                    }
+                    if(item.DFI){
+                        let fiModel = new FiModel(item.DFI)
+                        fiModel.DataId = id
+                        fiModel.save()
+                    }
+                    if(item.GN){
+                        let fiModel = new FiModel(item.GN)
+                        fiModel.DataId = id
+                        fiModel.save()
+                    }
+                    console.log(item)
+
+                })
+
+            }
             //取最大年份的评级数据
             let years = 0
 
@@ -129,6 +207,7 @@ class CompanyData {
     async delById(req, res, next) {
         try {
             let model = await Model.remove({'_id': req.body.id})
+            let models = await FiModel.remove({'DataId': req.body.id})
             res.send(siteFunc.renderApiData(req, 200, 'ok'))
         }
         catch (err) {
@@ -145,10 +224,10 @@ class CompanyData {
      * @apiSampleRequest  /companyData/updateById
      */
     async updateById(req, res, next) {
-
         try {
             req.body.releaseTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
             await FModel.remove({'DataId': req.body.id})
+            await FiModel.remove({'DataId': req.body.id})
             await RModel.remove({'DataId': req.body.id})
             let year = 0
             if (req.body.financial) {
@@ -156,12 +235,89 @@ class CompanyData {
                     if (year < item.year) {
                         year = item.year
                         req.body.totalAsset = item.totalAsset
-                        req.body.business = item.business
+                        req.body.businessCount = item.business
                     }
                     let fModel = new FModel(item)
                     fModel.DataId = req.body.id
                     fModel.save()
                 })
+            }
+            if (req.body.financing) {
+                req.body.financing.map((item) => {
+
+                    if(item.enterpriseBond){
+                        let fiModel = new FiModel(item.enterpriseBond)
+                        fiModel.DataId = req.body.id
+                        fiModel.save()
+                    }
+                    if(item.companyBond){
+                        let fiModel = new FiModel(item.companyBond)
+                        fiModel.DataId = req.body.id
+                        fiModel.save()
+                    }
+                    if(item.middleBond){
+                        let fiModel = new FiModel(item.middleBond)
+                        fiModel.DataId = req.body.id
+                        fiModel.save()
+                    }
+                    if(item.unpublicBond){
+                        let fiModel = new FiModel(item.unpublicBond)
+                        fiModel.DataId = req.body.id
+                        fiModel.save()
+                    }
+                    if(item.enterpriseAssetBond){
+                        let fiModel = new FiModel(item.enterpriseAssetBond)
+                        fiModel.DataId = req.body.id
+                        fiModel.save()
+                    }
+                    if(item.credit){
+                        let fiModel = new FiModel(item.credit)
+                        fiModel.DataId = req.body.id
+                        fiModel.save()
+                    }
+
+                    if(item.SCP){
+                        let fiModel = new FiModel(item.SCP)
+                        fiModel.DataId = req.body.id
+                        fiModel.save()
+                    }
+                    if(item.CP){
+                        let fiModel = new FiModel(item.CP)
+                        fiModel.DataId = req.body.id
+                        fiModel.save()
+                    }
+                    if(item.MTN){
+                        let fiModel = new FiModel(item.MTN)
+                        fiModel.DataId = req.body.id
+                        fiModel.save()
+                    }
+                    if(item.PPN){
+                        let fiModel = new FiModel(item.PPN)
+                        fiModel.DataId = req.body.id
+                        fiModel.save()
+                    }
+                    if(item.ABN){
+                        let fiModel = new FiModel(item.ABN)
+                        fiModel.DataId = req.body.id
+                        fiModel.save()
+                    }
+                    if(item.PRN){
+                        let fiModel = new FiModel(item.PRN)
+                        fiModel.DataId = req.body.id
+                        fiModel.save()
+                    }
+                    if(item.DFI){
+                        let fiModel = new FiModel(item.DFI)
+                        fiModel.DataId = req.body.id
+                        fiModel.save()
+                    }
+                    if(item.GN){
+                        let fiModel = new FiModel(item.GN)
+                        fiModel.DataId = req.body.id
+                        fiModel.save()
+                    }
+                })
+
             }
             //取最大年份的评级数据
             let years = 0
@@ -343,18 +499,18 @@ class CompanyData {
         if (!req.query.directly) {
             model = await Model.paginate({
                 name: {$regex:keyWords, $options: 'i'},
+                province: {$regex: '北京市'},
             }, {
                 limit: limit,
                 page: page,
                 sort: {stick: -1}
             })
-            console.log('start')
 
 
         }
 
         else if (req.query.directly == '省级') {
-            model = await Model.find({
+            model = await Model.paginate({
                 name: {$regex: keyWords, $options: 'i'},
                 province: {$regex: req.query.province}
             }, {
@@ -364,7 +520,7 @@ class CompanyData {
             })
         }
         else if (req.query.directly == '市级') {
-            model = await Model.find({
+            model = await Model.paginate({
                 name: {$regex: keyWords, $options: 'i'},
                 city: {$regex: req.query.city}
             }, {

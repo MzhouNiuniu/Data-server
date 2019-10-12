@@ -13,7 +13,7 @@ var BasicDataSchema = new Schema({
     province:String,
     city:String,
     district:String,
-
+    count:String,//用于数据转化
     year:String,
     directly:String,//行政级别
     GDP:String,//GDP

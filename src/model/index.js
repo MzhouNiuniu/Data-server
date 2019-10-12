@@ -39,6 +39,7 @@ exports.About = require('./About');
 exports.IndexConfig = require('./IndexConfig');
 exports.CompanyData = require('./CompanyData');
 exports.FinancialData = require('./FinancialData');
+exports.Financialing = require('./Financialing');
 exports.Rate = require('./Rate');
 exports.BasicData = require('./BasicData');
 

@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 var shortid = require('shortid');
 var moment = require('moment')
 var mongoosePaginate = require('mongoose-paginate');
-//基础数据
+//财务收入
 var FinancialDataSchema = new Schema({
     _id: {
         type: String,
