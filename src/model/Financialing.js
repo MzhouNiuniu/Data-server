@@ -22,6 +22,7 @@ var FinancialingSchema = new Schema({
         }
     ],
     DataId:String,
+    province:String,
     code:String,
     abbreviation:String,//简称
     issuer:String,//发行人

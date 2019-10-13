@@ -40,6 +40,7 @@ class CompanyData {
                     }
                     let fModel = new FModel(item)
                     fModel.DataId = id
+
                     fModel.save()
                 })
                 model.financial = []
@@ -49,75 +50,89 @@ class CompanyData {
                     if(item.enterpriseBond){
                         let fiModel = new FiModel(item.enterpriseBond)
                         fiModel.DataId = id
+                        fiModel.province = req.body.province
+                        console.log(fiModel)
                         fiModel.save()
                     }
                     if(item.companyBond){
                         let fiModel = new FiModel(item.companyBond)
                         fiModel.DataId = id
+                        fiModel.province = req.body.province
                         fiModel.save()
                     }
                     if(item.middleBond){
                         let fiModel = new FiModel(item.middleBond)
                         fiModel.DataId = id
+                        fiModel.province = req.body.province
                         fiModel.save()
                     }
                     if(item.unpublicBond){
                         let fiModel = new FiModel(item.unpublicBond)
                         fiModel.DataId = id
+                        fiModel.province = req.body.province
                         fiModel.save()
                     }
                     if(item.enterpriseAssetBond){
                         let fiModel = new FiModel(item.enterpriseAssetBond)
                         fiModel.DataId = id
+                        fiModel.province = req.body.province
                         fiModel.save()
                     }
                     if(item.credit){
                         let fiModel = new FiModel(item.credit)
                         fiModel.DataId = id
+                        fiModel.province = req.body.province
                         fiModel.save()
                     }
 
                     if(item.SCP){
                         let fiModel = new FiModel(item.SCP)
                         fiModel.DataId = id
+                        fiModel.province = req.body.province
                         fiModel.save()
                     }
                     if(item.CP){
                         let fiModel = new FiModel(item.CP)
                         fiModel.DataId = id
+                        fiModel.province = req.body.province
                         fiModel.save()
                     }
                     if(item.MTN){
                         let fiModel = new FiModel(item.MTN)
                         fiModel.DataId = id
+                        fiModel.province = req.body.province
                         fiModel.save()
                     }
                     if(item.PPN){
                         let fiModel = new FiModel(item.PPN)
                         fiModel.DataId = id
+                        fiModel.province = req.body.province
                         fiModel.save()
                     }
                     if(item.ABN){
                         let fiModel = new FiModel(item.ABN)
                         fiModel.DataId = id
+                        fiModel.province = req.body.province
                         fiModel.save()
                     }
                     if(item.PRN){
                         let fiModel = new FiModel(item.PRN)
                         fiModel.DataId = id
+                        fiModel.province = req.body.province
                         fiModel.save()
                     }
                     if(item.DFI){
                         let fiModel = new FiModel(item.DFI)
                         fiModel.DataId = id
+                        fiModel.province = req.body.province
                         fiModel.save()
                     }
                     if(item.GN){
                         let fiModel = new FiModel(item.GN)
                         fiModel.DataId = id
+                        fiModel.province = req.body.province
                         fiModel.save()
                     }
-                    console.log(item)
 
                 })
 
@@ -499,7 +514,7 @@ class CompanyData {
         if (!req.query.directly) {
             model = await Model.paginate({
                 name: {$regex:keyWords, $options: 'i'},
-                province: {$regex: '北京市'},
+
             }, {
                 limit: limit,
                 page: page,
@@ -549,6 +564,9 @@ class CompanyData {
         }
 
         res.send(siteFunc.renderApiData(req, 200, 'ok', model))
+
+    }
+    async getMapSearch(){
 
     }
 }

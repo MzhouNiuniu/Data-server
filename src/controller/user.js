@@ -30,8 +30,8 @@ class User {
             let auth_token = user._id
             req.session.adminlogined = true;
             req.session.adminUserInfo = user;
-
-            // res.cookie(config.auth_cookie_name, auth_token, { path: '/', maxAge: 1000 * 60 * 60 * 24 * 30,sign:true,  httpOnly: true }); //cookie 有效期30天
+            console.log(user)
+            res.cookie('role', user.role, { path: '/', maxAge: 1000 * 60 * 60 * 24 * 30,sign:true,  httpOnly: false }); //cookie 有效期30天
             res.send(siteFunc.renderApiData(res, 200,'ok',user ))
 
         }

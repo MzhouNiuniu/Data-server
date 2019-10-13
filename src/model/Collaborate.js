@@ -15,10 +15,7 @@ var CollaborateSchema = new Schema({
     accessory: Array,
     Tcompany: String,
     Tcontact: String,
-    Tphotos: {
-        type: String,
-        'default': '  https://cn.vuejs.org/images/logo.png'
-    },
+    Tphotos:String,
     type: String,//项目类型
     stick: {
         type: Number,

@@ -137,7 +137,38 @@ class IndexConfig {
                 }
             }]
         )
-        let pc = await CModel.find({level: '省', status: '1'})
+        let pc = await CModel.aggregate([{
+                $match: {
+                    status: 1 //匹配number>=100的记录
+                }
+            }, {
+                $group: {
+                    _id: '$province',
+                    mainType: {$push: '$mainType'}
+                }
+            }]
+        )
+
+        pc.map(item=>{
+            let ct=0
+            let xq=0
+            let qt=0
+            item.mainType.map(items=>{
+                if(items=='城投'){
+                    ct++
+                }
+                if(items=='新区城投'){
+                    xq++
+                }
+                if(items=='其他'){
+                    qt++
+                }
+
+            })
+            item.ct=ct
+            item.xq=xq
+            item.qt=qt
+        })
         let fi = await FiModel.find({})
         let params = {
             level: {
