@@ -157,6 +157,7 @@ class Expert {
     async stickById(req, res, next) {
         try {
             let model = await Model.findByIdAndUpdate(req.body.id, {'stick': req.body.stick})
+
             res.send(siteFunc.renderApiData(req, 200, 'ok'))
         }
         catch (err) {
@@ -171,7 +172,7 @@ class Expert {
             // ,collation:{ locale: 'zh' }
 
         try {
-            let model = await Model.paginate({name: {$regex: keyWords, $options: 'i'},status:1}, { collation: { locale: 'en' },limit: limit, page: page,sort:{stick:-1,name:1}})
+            let model = await Model.paginate({name: {$regex: keyWords, $options: 'i'},status:1}, { collation: { locale: 'zh' },limit: limit, page: page,sort:{stick:-1,name:1}})
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
 
         }

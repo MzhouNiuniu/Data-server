@@ -55,7 +55,7 @@ class Organization {
         var page = Number(req.query.page || 1)
 
         try {
-            let model = await Model.paginate({name: {$regex: keyWords, $options: 'i'}}, {limit: limit, page: page,sort:{stick:-1,releaseTime:-1}})
+            let model = await Model.paginate({name: {$regex: keyWords, $options: 'i'}},{limit: limit, page: page,sort:{stickTime:-1,releaseTime:-1}})
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
         }
         catch (err) {
@@ -68,10 +68,11 @@ class Organization {
         var page = Number(req.query.page || 1)
 
         try {
-            let model = await Model.paginate({name: {$regex: keyWords, $options: 'i'},status:1}, {limit: limit, page: page,sort:{stick:-1,releaseTime:-1}})
+            let model = await Model.paginate({name: {$regex: keyWords, $options: 'i'},status:1}, { collation: { locale: 'zh' },limit: limit, page: page,sort:{stickTime:-1,name:1}})
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
         }
         catch (err) {
+
             res.send(siteFunc.renderApiErr(req, res, 500, err))
         }
     }
@@ -154,7 +155,6 @@ class Organization {
                 let models = await Model.findByIdAndUpdate(req.body.id, model)
             }
             else{
-                console.log(req.body.status)
                 let model = await Model.findByIdAndUpdate(req.body.id, {'status': req.body.status})
                 res.send(siteFunc.renderApiData(req, 200, '操作成功'))
 
@@ -175,7 +175,15 @@ class Organization {
      */
     async stickById(req, res, next) {
         try {
-            let model = await Model.findByIdAndUpdate(req.body.id, {'stick': req.body.stick})
+
+            if(Number(req.body.stick)==0){
+                req.body.stickTime=''
+            }else{
+                req.body.stickTime=moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+            }
+            console.log(req.body)
+            let model = await Model.findByIdAndUpdate(req.body.id, {'stick': req.body.stick,'stickTime':req.body.stickTime})
+
             res.send(siteFunc.renderApiData(req, 200, 'ok'))
         }
         catch (err) {

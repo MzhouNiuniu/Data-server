@@ -28,6 +28,7 @@ class CompanyData {
         try {
             const id = shortid.generate()
             req.body._id = id
+            req.body.releaseTime=moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
             let model = new Model(req.body)
             //取最大年份的总资产数据
             let year = 0
@@ -47,11 +48,12 @@ class CompanyData {
             }
             if (req.body.financing) {
                 req.body.financing.map((item) => {
+
                     if(item.enterpriseBond){
                         let fiModel = new FiModel(item.enterpriseBond)
                         fiModel.DataId = id
                         fiModel.province = req.body.province
-                        console.log(fiModel)
+
                         fiModel.save()
                     }
                     if(item.companyBond){
@@ -405,9 +407,9 @@ class CompanyData {
      * @apiSampleRequest  /companyData/getListBySearch
      */
     async getListBySearch(req, res, next) {
-
+        var sorts=JSON.parse(req.query.sort)
         var keyWords = req.query.keyWords || ''
-        var limit = Number(req.query.limit || 10)
+        var limit = Number(req.query.limit || 9)
         var page = Number(req.query.page || 1)
         var province = req.query.province || ''
         var mainType = req.query.mainType || ''
@@ -425,6 +427,7 @@ class CompanyData {
             case '1':
                 business = [0, 10]
                 break;
+
             case '2':
                 business = [10, 50]
                 break;
@@ -481,7 +484,7 @@ class CompanyData {
         }
 
         if (req.query.startCreateTime && req.query.endCreateTime) {
-            console.log(new Date(req.query.startCreateTime))
+
             params.creationTime = {$lte: req.query.endCreateTime, $gte:req.query.startCreateTime}
         }
         if (req.query.min && req.query.max) {
@@ -490,14 +493,12 @@ class CompanyData {
 
 
         try {
-            console.log(params)
-
             let model = await Model.paginate(params, {
                 limit: limit,
                 page: page,
-                sort: {stick: -1}
+                sort:sorts
             })
-            console.log(model)
+
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
         }
         catch
@@ -549,7 +550,6 @@ class CompanyData {
         //     page: page,
         //     sort: {stick: -1}
         // })
-        console.log('end')
         for(let index = 0; index < model.docs.length; index ++){
             let fModel=await FModel.find({
                 year:req.query.year,
@@ -566,8 +566,14 @@ class CompanyData {
         res.send(siteFunc.renderApiData(req, 200, 'ok', model))
 
     }
-    async getMapSearch(){
-
+    async getMapSearch(req,res){
+        let model = await Model.paginate({
+            name:{$regex: req.query.keyWords, $options: 'i'}
+        },{
+            limit: 5,
+            page: 1,
+        })
+        res.send(siteFunc.renderApiData(req, 200, 'ok', model))
     }
 }
 

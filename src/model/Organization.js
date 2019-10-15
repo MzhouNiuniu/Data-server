@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var shortid = require('shortid');
 var moment = require('moment')
-var mongoosePaginate = require('mongoose-paginate');
+var mongoosePaginate = require('../../utils/mongoose-paginate');
 //机构
 var OrganizationSchema = new Schema({
     // _id: {
@@ -46,6 +46,10 @@ var OrganizationSchema = new Schema({
     releaseTime: {
         type: String,
         default: moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+    },
+    stickTime: {
+        type: String,
+        default:''
     },
     author: {
         type: Object,

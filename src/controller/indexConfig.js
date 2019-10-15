@@ -63,11 +63,10 @@ class IndexConfig {
         try {
             let model = await Model.findOne()
             let amodel = await AModel.find({})
-            console.log(model)
             let industryDynamic = await NewModel.find({type: 0, status: 1}).sort({stick: -1, releaseTime: -1}).limit(3)
-            let ideaNew = await NewModel.find({type: 1, status: 1}).sort({stick: -1, releaseTime: -1}).limit(5)
-            let ideaDynamic = await NewModel.find({type: 2, status: 1}).sort({stick: -1, releaseTime: -1}).limit(5)
-            let projectDynamic = await NewModel.find({type: 3, status: 1}).sort({stick: -1, releaseTime: -1}).limit(5)
+            let ideaNew = await NewModel.find({type: 1, status: 1}).sort({stick: -1, releaseTime: -1}).limit(3)
+            let ideaDynamic = await NewModel.find({type: 2, status: 1}).sort({stick: -1, releaseTime: -1}).limit(3)
+            let projectDynamic = await NewModel.find({type: 3, status: 1}).sort({stick: -1, releaseTime: -1}).limit(3)
             let params = {
                 industryDynamic,
                 ideaNew,
@@ -185,7 +184,6 @@ class IndexConfig {
             totalAssetS,
             pc,
             fi
-
         }
 
         res.send(siteFunc.renderApiData(req, 200, 'ok', params))

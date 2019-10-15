@@ -100,12 +100,16 @@ class BasicData {
                     }]
                 )
                 models = await Model.find(pam)
+                console.log('count')
                 console.log(count)
                 if (count.length > 0) {
+                    console.log(models)
                     models[0].count = count[0].count
 
+                    console.log(models[0].count)
                 }
                 else {
+                    console.log('coun11t')
                     models[0].count = 0
                 }
                 model = await Model.find({year: req.query.year, 'directly': '省级'})
