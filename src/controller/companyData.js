@@ -2,7 +2,7 @@ const Model = require("../model").CompanyData;
 const FModel = require("../model").FinancialData;
 const RModel = require("../model").Rate;
 const NModel = require("../model").News;
-const FiModel=require("../model").Financialing
+const FiModel = require("../model").Financialing
 const formidable = require('formidable');
 const {server, siteFunc} = require('../../utils');
 var moment = require('moment')
@@ -28,7 +28,7 @@ class CompanyData {
         try {
             const id = shortid.generate()
             req.body._id = id
-            req.body.releaseTime=moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+            req.body.releaseTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
             let model = new Model(req.body)
             //取最大年份的总资产数据
             let year = 0
@@ -49,87 +49,87 @@ class CompanyData {
             if (req.body.financing) {
                 req.body.financing.map((item) => {
 
-                    if(item.enterpriseBond){
+                    if (item.enterpriseBond) {
                         let fiModel = new FiModel(item.enterpriseBond)
                         fiModel.DataId = id
                         fiModel.province = req.body.province
 
                         fiModel.save()
                     }
-                    if(item.companyBond){
+                    if (item.companyBond) {
                         let fiModel = new FiModel(item.companyBond)
                         fiModel.DataId = id
                         fiModel.province = req.body.province
                         fiModel.save()
                     }
-                    if(item.middleBond){
+                    if (item.middleBond) {
                         let fiModel = new FiModel(item.middleBond)
                         fiModel.DataId = id
                         fiModel.province = req.body.province
                         fiModel.save()
                     }
-                    if(item.unpublicBond){
+                    if (item.unpublicBond) {
                         let fiModel = new FiModel(item.unpublicBond)
                         fiModel.DataId = id
                         fiModel.province = req.body.province
                         fiModel.save()
                     }
-                    if(item.enterpriseAssetBond){
+                    if (item.enterpriseAssetBond) {
                         let fiModel = new FiModel(item.enterpriseAssetBond)
                         fiModel.DataId = id
                         fiModel.province = req.body.province
                         fiModel.save()
                     }
-                    if(item.credit){
+                    if (item.credit) {
                         let fiModel = new FiModel(item.credit)
                         fiModel.DataId = id
                         fiModel.province = req.body.province
                         fiModel.save()
                     }
 
-                    if(item.SCP){
+                    if (item.SCP) {
                         let fiModel = new FiModel(item.SCP)
                         fiModel.DataId = id
                         fiModel.province = req.body.province
                         fiModel.save()
                     }
-                    if(item.CP){
+                    if (item.CP) {
                         let fiModel = new FiModel(item.CP)
                         fiModel.DataId = id
                         fiModel.province = req.body.province
                         fiModel.save()
                     }
-                    if(item.MTN){
+                    if (item.MTN) {
                         let fiModel = new FiModel(item.MTN)
                         fiModel.DataId = id
                         fiModel.province = req.body.province
                         fiModel.save()
                     }
-                    if(item.PPN){
+                    if (item.PPN) {
                         let fiModel = new FiModel(item.PPN)
                         fiModel.DataId = id
                         fiModel.province = req.body.province
                         fiModel.save()
                     }
-                    if(item.ABN){
+                    if (item.ABN) {
                         let fiModel = new FiModel(item.ABN)
                         fiModel.DataId = id
                         fiModel.province = req.body.province
                         fiModel.save()
                     }
-                    if(item.PRN){
+                    if (item.PRN) {
                         let fiModel = new FiModel(item.PRN)
                         fiModel.DataId = id
                         fiModel.province = req.body.province
                         fiModel.save()
                     }
-                    if(item.DFI){
+                    if (item.DFI) {
                         let fiModel = new FiModel(item.DFI)
                         fiModel.DataId = id
                         fiModel.province = req.body.province
                         fiModel.save()
                     }
-                    if(item.GN){
+                    if (item.GN) {
                         let fiModel = new FiModel(item.GN)
                         fiModel.DataId = id
                         fiModel.province = req.body.province
@@ -207,7 +207,7 @@ class CompanyData {
             // source
             model[0].financial = fModel
             model[0].rate = rModel
-            model[0].news=nmodel
+            model[0].news = nmodel
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
         }
         catch (err) {
@@ -262,73 +262,73 @@ class CompanyData {
             if (req.body.financing) {
                 req.body.financing.map((item) => {
 
-                    if(item.enterpriseBond){
+                    if (item.enterpriseBond) {
                         let fiModel = new FiModel(item.enterpriseBond)
                         fiModel.DataId = req.body.id
                         fiModel.save()
                     }
-                    if(item.companyBond){
+                    if (item.companyBond) {
                         let fiModel = new FiModel(item.companyBond)
                         fiModel.DataId = req.body.id
                         fiModel.save()
                     }
-                    if(item.middleBond){
+                    if (item.middleBond) {
                         let fiModel = new FiModel(item.middleBond)
                         fiModel.DataId = req.body.id
                         fiModel.save()
                     }
-                    if(item.unpublicBond){
+                    if (item.unpublicBond) {
                         let fiModel = new FiModel(item.unpublicBond)
                         fiModel.DataId = req.body.id
                         fiModel.save()
                     }
-                    if(item.enterpriseAssetBond){
+                    if (item.enterpriseAssetBond) {
                         let fiModel = new FiModel(item.enterpriseAssetBond)
                         fiModel.DataId = req.body.id
                         fiModel.save()
                     }
-                    if(item.credit){
+                    if (item.credit) {
                         let fiModel = new FiModel(item.credit)
                         fiModel.DataId = req.body.id
                         fiModel.save()
                     }
 
-                    if(item.SCP){
+                    if (item.SCP) {
                         let fiModel = new FiModel(item.SCP)
                         fiModel.DataId = req.body.id
                         fiModel.save()
                     }
-                    if(item.CP){
+                    if (item.CP) {
                         let fiModel = new FiModel(item.CP)
                         fiModel.DataId = req.body.id
                         fiModel.save()
                     }
-                    if(item.MTN){
+                    if (item.MTN) {
                         let fiModel = new FiModel(item.MTN)
                         fiModel.DataId = req.body.id
                         fiModel.save()
                     }
-                    if(item.PPN){
+                    if (item.PPN) {
                         let fiModel = new FiModel(item.PPN)
                         fiModel.DataId = req.body.id
                         fiModel.save()
                     }
-                    if(item.ABN){
+                    if (item.ABN) {
                         let fiModel = new FiModel(item.ABN)
                         fiModel.DataId = req.body.id
                         fiModel.save()
                     }
-                    if(item.PRN){
+                    if (item.PRN) {
                         let fiModel = new FiModel(item.PRN)
                         fiModel.DataId = req.body.id
                         fiModel.save()
                     }
-                    if(item.DFI){
+                    if (item.DFI) {
                         let fiModel = new FiModel(item.DFI)
                         fiModel.DataId = req.body.id
                         fiModel.save()
                     }
-                    if(item.GN){
+                    if (item.GN) {
                         let fiModel = new FiModel(item.GN)
                         fiModel.DataId = req.body.id
                         fiModel.save()
@@ -383,6 +383,7 @@ class CompanyData {
             }
             else {
                 let model = await Model.findByIdAndUpdate(req.body.id, {'status': req.body.status})
+                let fmodel = await FiModel.update({DataId:req.body.id},{'status': req.body.status})
             }
 
             res.send(siteFunc.renderApiData(req, 200, 'ok'))
@@ -407,7 +408,7 @@ class CompanyData {
      * @apiSampleRequest  /companyData/getListBySearch
      */
     async getListBySearch(req, res, next) {
-        var sorts=JSON.parse(req.query.sort)
+        var sorts = JSON.parse(req.query.sort)
         var keyWords = req.query.keyWords || ''
         var limit = Number(req.query.limit || 9)
         var page = Number(req.query.page || 1)
@@ -416,10 +417,19 @@ class CompanyData {
         var totalAsset = req.query.totalAsset ? req.query.totalAsset.split(",") : [0, 99999999999999999999999]
         var business = req.query.business ? req.query.business.split(",") : [0, 99999999999999999999999]
         var rateMain = req.query.rateMain ? req.query.rateMain : null
-        let params = {
-            name: {$regex: keyWords, $options: 'i'},
-            province: {$regex: province},
-            mainType: {$regex: mainType},
+        let params
+        if (keyWords == '') {
+            params = {
+                province: {$regex: province},
+                mainType: {$regex: mainType},
+            }
+        }
+        else{
+            params = {
+                name:{$regex: keyWords},
+                province: {$regex: province},
+                mainType: {$regex: mainType},
+            }
         }
         // totalAsset: {$lte: totalAsset[1], $gte: totalAsset[0]},
         // business: {$lte: business[1], $gte: business[0]},            rateMain
@@ -485,7 +495,7 @@ class CompanyData {
 
         if (req.query.startCreateTime && req.query.endCreateTime) {
 
-            params.creationTime = {$lte: req.query.endCreateTime, $gte:req.query.startCreateTime}
+            params.creationTime = {$lte: req.query.endCreateTime, $gte: req.query.startCreateTime}
         }
         if (req.query.min && req.query.max) {
             params.totalAsset = {$lte: req.query.max, $gte: req.query.min}
@@ -496,7 +506,7 @@ class CompanyData {
             let model = await Model.paginate(params, {
                 limit: limit,
                 page: page,
-                sort:sorts
+                sort: sorts
             })
 
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
@@ -510,11 +520,11 @@ class CompanyData {
     async getListByYear(req, res, next) {
         var limit = Number(req.query.limit || 10)
         var page = Number(req.query.page || 1)
-        var keyWords=req.query.keyWords || ""
+        var keyWords = req.query.keyWords || ""
         let model
         if (!req.query.directly) {
             model = await Model.paginate({
-                name: {$regex:keyWords, $options: 'i'},
+                name: {$regex: keyWords, $options: 'i'},
 
             }, {
                 limit: limit,
@@ -550,26 +560,27 @@ class CompanyData {
         //     page: page,
         //     sort: {stick: -1}
         // })
-        for(let index = 0; index < model.docs.length; index ++){
-            let fModel=await FModel.find({
-                year:req.query.year,
-                DataId:model.docs[index]._id
+        for (let index = 0; index < model.docs.length; index++) {
+            let fModel = await FModel.find({
+                year: req.query.year,
+                DataId: model.docs[index]._id
             })
-            let rModel=await RModel.find({
-                year:req.query.year,
-                DataId:model.docs[index]._id
+            let rModel = await RModel.find({
+                year: req.query.year,
+                DataId: model.docs[index]._id
             })
-            model.docs[index].financial=fModel
-            model.docs[index].rate=rModel
+            model.docs[index].financial = fModel
+            model.docs[index].rate = rModel
         }
 
         res.send(siteFunc.renderApiData(req, 200, 'ok', model))
 
     }
-    async getMapSearch(req,res){
+
+    async getMapSearch(req, res) {
         let model = await Model.paginate({
-            name:{$regex: req.query.keyWords, $options: 'i'}
-        },{
+            name: {$regex: req.query.keyWords, $options: 'i'}
+        }, {
             limit: 5,
             page: 1,
         })

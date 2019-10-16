@@ -45,8 +45,6 @@ class Oss {
             form.maxFieldsSize = 2 * 1024 * 1024;  //大小限制
             form.parse(req, function (err, fields, files) {
                 try{
-
-
                 if (err) {
                     res.send(siteFunc.renderApiErr(req, res, 500, err))
                     return;

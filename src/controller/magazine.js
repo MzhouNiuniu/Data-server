@@ -23,6 +23,7 @@ class Magazine {
      */
     async publish(req, res, next) {
         try {
+
             let model = new Model(req.body)
             model.save()
             res.send(siteFunc.renderApiData(res, 200, '插入成功'))

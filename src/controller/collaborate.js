@@ -27,6 +27,7 @@ class Collaborate {
      */
     async publish(req, res, next) {
         try {
+            req.body.releaseTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
             req.body.author = req.session.adminUserInfo
             let model = new Model(req.body)
             model.save()

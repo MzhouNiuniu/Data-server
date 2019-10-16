@@ -10,7 +10,6 @@ var moment = require('moment')
 var node_xlsx = require('node-xlsx');
 const _ = require('lodash')
 import config from '../../config/settings'
-
 //单独用一个表存放 提高读写效率
 class IndexConfig {
     constructor() {
@@ -168,7 +167,7 @@ class IndexConfig {
             item.xq=xq
             item.qt=qt
         })
-        let fi = await FiModel.find({})
+        let fi = await FiModel.find({status:1})
         let params = {
             level: {
                 province: p,

@@ -3,6 +3,8 @@ const db = require("../model").db;
 const formidable = require('formidable');
 const {server,siteFunc } = require('../../utils');
 const _ = require('lodash')
+var moment = require('moment')
+
 import  config from '../../config/settings'
 class User {
     constructor() {
@@ -51,6 +53,7 @@ class User {
      */
     async reg(req, res, next) {
             try {
+                req.body.releaseTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
                 const  newPsd= server.encrypt(req.body.password,  config.encrypt_key);
                 req.body.password=newPsd
                 const Vuser=new UserModel(req.body)

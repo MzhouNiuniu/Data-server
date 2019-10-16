@@ -23,6 +23,7 @@ class News {
      */
     async publish(req, res, next) {
         try {
+            req.body.releaseTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
             req.body.author = req.session.adminUserInfo
             let model = new NewModel(req.body)
             model.save()

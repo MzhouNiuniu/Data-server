@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 var shortid = require('shortid');
 var moment = require('moment')
 var mongoosePaginate = require('mongoose-paginate');
-//财务收入
+//债券发型信息
 var FinancialingSchema = new Schema({
     year:String,//年份
     //此处由于前端表单不好判断 为方便前端处理列多个字段管理
@@ -21,7 +21,12 @@ var FinancialingSchema = new Schema({
             other:String,//相关文件
         }
     ],
-    DataId:String,
+    status:{
+        type:Number,
+        default:0
+        //0待审核  1审核通过  2审核未通过
+    },
+    DataId:String,//企业id 关联企业
     province:String,
     code:String,
     abbreviation:String,//简称

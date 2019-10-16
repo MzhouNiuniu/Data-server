@@ -69,6 +69,7 @@ var CompanyDataSchema = new Schema({
     registerCapital:String,//注册资本
     photos:String,//企业图片
     financial:[],//
+    professionalWord:[],//新增业务数据
     totalAsset:Number,
     news:Array,
     businessCount:Number,
