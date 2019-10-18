@@ -3,11 +3,27 @@ import config from "../../config/settings";
 const {server, siteFunc} = require('../../utils');
 const formidable = require('formidable');
 var path = require('path');
+var fetch = require("node-fetch");
+
 const fs = require('fs');
 const OssModel = require("../model").Oss;
 var shortid = require('shortid');
 var FdfsClient = require('fastdfs-client');
 import  {baseUrl} from '../../config/settings'
+function download(u, p) {
+    return fetch(u, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/octet-stream' },
+    }).then(res => {
+        console.log(res)
+    console.log(res.buffer())
+
+    }).then(_ => {
+        fs.writeFile(p, _, "binary", function (err) {
+            console.log(err || p);
+        });
+    });
+}
 // var fdfs = new FdfsClient({
 //     // tracker servers
 //     trackers: [
@@ -29,7 +45,6 @@ class Oss {
     constructor() {
         // super()
     }
-
     /**
      * @apiGroup Oss
      * @upload 上传
@@ -154,61 +169,22 @@ class Oss {
      */
     async download(req, res, next) {
         try {
-            // let file = await OssModel.find({'filename':'mongo_file.txt'})
-            // console.log(file)
-            // res.send(file)
+            console.log(req.query.name)
 
+            var name =`${req.query.name}`;
+            name = encodeURI(name,"GBK")
+            name = name.toString('iso8859-1')
+            var path = `public/dist/upload/${req.query.url.split("/").reverse()[0]}`;
+            var size = fs.statSync(path).size;
+            var f = fs.createReadStream(path);
 
-            // var gfs = Grid(db.db);
-            // gfs.files.find({ filename:'mongo_file.txt' }).toArray(function (err, files) {
-            //     console.log(files);
-            // })
-            // OssModel.find({_id:ObjectId("5d6658479e5d4f0c28e6f482")}).then(function(contents){
-            //     console.log(contents)
-            // })
-            // res.send(file[0].data)
-            // res.send(
-            //     "xOO6w7ChDQrE47rDsKENCsTjusOwoQ0KxOO6w7ChDQrE47rDsKE=")
+            res.writeHead(200, {
+                'Content-Type': 'application/force-download',
+                'Content-Disposition': 'attachment; filename=' + name,
+                'Content-Length': size
+            });
+            f.pipe(res);
 
-
-            let data = await OssModel.find({'_id': req.query.id})
-            res.send(siteFunc.renderApiData(res, 200, '成功', data))
-
-
-            // var pathname = file[0].pathName;
-            // var realPath = `uploads/${pathname}`
-            // fs.exists(realPath, function (exists) {
-            //     if (!exists) {
-            //         console.log("文件不存在");
-            //         res.writeHead(404, {
-            //             'Content-Type': 'text/plain'
-            //         });
-            //
-            //         res.write("This request URL " + pathname + " was not found on this server.");
-            //         res.end();
-            //     } else {
-            //         console.log("文件存在");
-            //         fs.readFile(realPath, "base64", function (err, file) {
-            //             if (err) {
-            //                 res.writeHead(500, {
-            //                     'Content-Type': 'text/plain'
-            //                 });
-            //                 console.log("读取文件错误");
-            //                 res.end(err);
-            //             } else {
-            //                 res.writeHead(200, {
-            //                     'Content-Type': 'text/html'
-            //                 });
-            //                 console.log("读取文件完毕，正在发送......");
-            //
-            //                 res.write(file, "base64");
-            //
-            //                 res.end();
-            //                 console.log("文件发送完毕");
-            //             }
-            //         });
-            //     }
-            // });
         }
         catch (err) {
             res.send(siteFunc.renderApiErr(req, res, 500, err))

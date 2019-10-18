@@ -429,6 +429,7 @@ class CompanyData {
                 name:{$regex: keyWords},
                 province: {$regex: province},
                 mainType: {$regex: mainType},
+                status:1
             }
         }
         // totalAsset: {$lte: totalAsset[1], $gte: totalAsset[0]},

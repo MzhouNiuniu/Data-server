@@ -45,10 +45,10 @@ var FinancialingSchema = new Schema({
     mainType:String,//主体评级
     principalUnderwriter:String,//主承销商
     addEnhancementWay:String,//增信措施
-    aboutFile:String,//相关文件
-    specification:String,//相关文件
-    specification:String,//募集说明书.
-    report:String,//评级报告.
+    aboutFile:Array,//相关文件
+    specification:Array,//相关文件
+    specification:Array,//募集说明书.
+    report:Array,//评级报告.
 });
 FinancialingSchema.plugin(mongoosePaginate);
 var Financialing = mongoose.model("Financialing", FinancialingSchema);

@@ -69,7 +69,8 @@ var CompanyDataSchema = new Schema({
     registerCapital:String,//注册资本
     photos:String,//企业图片
     financial:[],//
-    professionalWord:[],//新增业务数据
+    businessScope:String,//企业经营范围
+    incomeInfo:[],//新增业务数据
     totalAsset:Number,
     news:Array,
     businessCount:Number,
@@ -100,10 +101,7 @@ var CompanyDataSchema = new Schema({
             GN:Object,//绿色债务融资工具（GN）
         }
     ],
-    other:[{
-        name:String,//名字
-        file:String//文件服务中关联的代号
-    }],
+    other:[],
     releaseTime:{
         type:String,
         default:moment(new Date()).format('YYYY-MM-DD HH:mm:ss')

@@ -20,22 +20,21 @@ class User {
      * @apiSampleRequest  /user/login
      */
     async test(req,res){
-        req.session.adminlogined = true;
-        req.session.adminUserInfo = 'user';
+        console.log(req.body)
+        // console.log(res)
+       res.send(req.body)
     }
     async login(req, res, next) {
         const  newPsd= server.encrypt(req.body.password, config.encrypt_key);
         req.body.password=newPsd
         let user = await UserModel.findOne({userName:req.body.userName});
         if (!_.isEmpty(user)&&user.password==req.body.password) {
-
             let auth_token = user._id
             req.session.adminlogined = true;
             req.session.adminUserInfo = user;
             console.log(user)
-            res.cookie('role', user.role, { path: '/', maxAge: 1000 * 60 * 60 * 24 * 30,sign:true,  httpOnly: false }); //cookie 有效期30天
+            res.cookie('role', user.role, { path: '/', maxAge: 1000 * 60 * 60 * 24 * 30, httpOnly: false }); //cookie 有效期30天
             res.send(siteFunc.renderApiData(res, 200,'ok',user ))
-
         }
         else{
             res.send(siteFunc.renderApiData(res, 500, '用户名或密码错误'))
@@ -114,7 +113,6 @@ class User {
     }
     async getDetails(req, res, next) {
         try {
-
             let news = await UserModel.findById(req.query.id)
             res.send(siteFunc.renderApiData(req, 200, 'ok', news))
         }

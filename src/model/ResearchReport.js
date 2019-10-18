@@ -16,7 +16,7 @@ var ResearchReportSchema = new Schema({
     brief:String,//简介
     human:String,//研究人
     organization:String,//机构
-    accessory:String,//附件
+    accessory:Array,//附件
     cover:String,//封面
     stick:{
         type:Number,
