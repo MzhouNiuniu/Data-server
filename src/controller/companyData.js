@@ -10,7 +10,8 @@ var node_xlsx = require('node-xlsx');
 const _ = require('lodash')
 var shortid = require('shortid');
 import config from '../../config/settings'
-
+var mongoose = require('mongoose');
+var ObId = mongoose.Types.ObjectId();
 //城投公司
 class CompanyData {
     constructor() {
@@ -26,7 +27,7 @@ class CompanyData {
      */
     async publish(req, res, next) {
         try {
-            const id = shortid.generate()
+            const id = ObId
             req.body._id = id
             req.body.releaseTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
             let model = new Model(req.body)
@@ -46,6 +47,7 @@ class CompanyData {
                 })
                 model.financial = []
             }
+            console.log( req.body.province)
             if (req.body.financing) {
                 req.body.financing.map((item) => {
 
@@ -200,7 +202,9 @@ class CompanyData {
      */
     async getDetails(req, res, next) {
         try {
+            console.log(req.query.id)
             let fModel = await FModel.find({'DataId': req.query.id})
+            console.log(fModel)
             let rModel = await RModel.find({'DataId': req.query.id})
             let model = await Model.find({'_id': req.query.id})
             let nmodel = await NModel.find({'source': model[0].name})
@@ -259,77 +263,92 @@ class CompanyData {
                     fModel.save()
                 })
             }
+            console.log( req.body.province)
             if (req.body.financing) {
                 req.body.financing.map((item) => {
 
                     if (item.enterpriseBond) {
                         let fiModel = new FiModel(item.enterpriseBond)
                         fiModel.DataId = req.body.id
+                        fiModel.province = req.body.province
                         fiModel.save()
                     }
                     if (item.companyBond) {
                         let fiModel = new FiModel(item.companyBond)
+                        fiModel.province = req.body.province
                         fiModel.DataId = req.body.id
                         fiModel.save()
                     }
                     if (item.middleBond) {
                         let fiModel = new FiModel(item.middleBond)
+                        fiModel.province = req.body.province
                         fiModel.DataId = req.body.id
                         fiModel.save()
                     }
                     if (item.unpublicBond) {
                         let fiModel = new FiModel(item.unpublicBond)
+                        fiModel.province = req.body.province
                         fiModel.DataId = req.body.id
                         fiModel.save()
                     }
                     if (item.enterpriseAssetBond) {
                         let fiModel = new FiModel(item.enterpriseAssetBond)
+                        fiModel.province = req.body.province
                         fiModel.DataId = req.body.id
                         fiModel.save()
                     }
                     if (item.credit) {
                         let fiModel = new FiModel(item.credit)
+                        fiModel.province = req.body.province
                         fiModel.DataId = req.body.id
                         fiModel.save()
                     }
 
                     if (item.SCP) {
                         let fiModel = new FiModel(item.SCP)
+                        fiModel.province = req.body.province
                         fiModel.DataId = req.body.id
                         fiModel.save()
                     }
                     if (item.CP) {
                         let fiModel = new FiModel(item.CP)
+                        fiModel.province = req.body.province
                         fiModel.DataId = req.body.id
                         fiModel.save()
                     }
                     if (item.MTN) {
                         let fiModel = new FiModel(item.MTN)
+                        fiModel.province = req.body.province
                         fiModel.DataId = req.body.id
                         fiModel.save()
                     }
                     if (item.PPN) {
                         let fiModel = new FiModel(item.PPN)
+                        fiModel.province = req.body.province
                         fiModel.DataId = req.body.id
                         fiModel.save()
                     }
                     if (item.ABN) {
                         let fiModel = new FiModel(item.ABN)
+                        fiModel.province = req.body.province
                         fiModel.DataId = req.body.id
                         fiModel.save()
                     }
                     if (item.PRN) {
                         let fiModel = new FiModel(item.PRN)
+                        fiModel.province = req.body.province
                         fiModel.DataId = req.body.id
                         fiModel.save()
                     }
                     if (item.DFI) {
                         let fiModel = new FiModel(item.DFI)
+                        fiModel.province = req.body.province
                         fiModel.DataId = req.body.id
                         fiModel.save()
                     }
                     if (item.GN) {
                         let fiModel = new FiModel(item.GN)
+                        fiModel.province = req.body.province
                         fiModel.DataId = req.body.id
                         fiModel.save()
                     }
@@ -384,6 +403,7 @@ class CompanyData {
             else {
                 let model = await Model.findByIdAndUpdate(req.body.id, {'status': req.body.status})
                 let fmodel = await FiModel.update({DataId:req.body.id},{'status': req.body.status})
+
             }
 
             res.send(siteFunc.renderApiData(req, 200, 'ok'))
@@ -495,8 +515,7 @@ class CompanyData {
         }
 
         if (req.query.startCreateTime && req.query.endCreateTime) {
-
-            params.creationTime = {$lte: req.query.endCreateTime, $gte: req.query.startCreateTime}
+            params.creationTime = {$lte: req.query.endCreateTime, $gte: new Date(req.query.startCreateTime)}
         }
         if (req.query.min && req.query.max) {
             params.totalAsset = {$lte: req.query.max, $gte: req.query.min}
@@ -504,6 +523,7 @@ class CompanyData {
 
 
         try {
+            console.log(params)
             let model = await Model.paginate(params, {
                 limit: limit,
                 page: page,

@@ -7,47 +7,13 @@ var mongoosePaginate = require('mongoose-paginate');
 import FinancialData from './FinancialData'
 //由于报错 暂时不限制死
 // FinancialDataSchema
-let bond={
-    record:[
-        {
-            abbreviation:String,//简称
-            makeTime:String,//成交时间
-            makeMoney:String,//成交金额
-            remainingTime:String,//剩余时间
-            makeRate:String,//成交利率
-            BP:String,//偏离
-            aboutFile:String,//相关文件
-            other:String,//相关文件
-        }
-    ],
-    code:String,
-    abbreviation:String,//简称
-    issuer:String,//发行人
-    fullName:String,//发行人
-    type:String,
-    scale:String,//发行规模
-    issueWay:String,//发行方式
-    startTime:String,//开始时间
-    endTime:String,//结束时间
-    repaymentWay:String,//还本方式
-    interestWay:String,//付息方式
-    deadlineBond:String,//债券期限
-    payValue:String,//票面利率
-    rateBond:String,//债券评级
-    mainType:String,//主体评级
-    principalUnderwriter:String,//主承销商
-    addEnhancementWay:String,//增信措施
-    aboutFile:String,//相关文件
-    specification:String,//相关文件
-    specification:String,//募集说明书.
-    report:String,//评级报告.
-}
+
 //城投数据
 var CompanyDataSchema = new Schema({
-    _id: {
-        type: String,
-        'default': shortid.generate
-    },
+    // _id: {
+    //     type: String,
+    //     'default': shortid.generate
+    // },
     auditList:Array, //审核记录
     status:{
         type:Number,
@@ -63,12 +29,15 @@ var CompanyDataSchema = new Schema({
         type:String
     },//主体类型
     controllerMan:String,//控制人
-    creationTime:String,//创建时间
+    creationTime:{
+        type: Date
+    },//创建时间
     level:String,//行政级别
     info:String,//企业概况
     registerCapital:String,//注册资本
     photos:String,//企业图片
     financial:[],//
+    belongGovernment:String,//所属政府
     businessScope:String,//企业经营范围
     incomeInfo:[],//新增业务数据
     totalAsset:Number,

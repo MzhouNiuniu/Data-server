@@ -54,12 +54,23 @@ class BasicData {
      * @apiSampleRequest  /basicData/getList
      */
     async getList(req, res, next) {
-        var keyWords = req.query.keyWords || ''
+        var keyWords = req.query.year || ''
         var limit = Number(req.query.limit || 10)
         var page = Number(req.query.page || 1)
-
+        let model=[]
         try {
-            let model = await Model.paginate({year: {$regex: keyWords, $options: 'i'}}, {limit: limit, page: page})
+            model = await Model.paginate({year: {$regex: keyWords, $options: 'i'}}, {limit: limit, page: page})
+            if(req.query.province){
+                model = await Model.paginate({year: {$regex: keyWords, $options: 'i'},province:req.query.province}, {limit: limit, page: page})
+            }
+            if(req.query.city){
+                model = await Model.paginate({year: {$regex: keyWords, $options: 'i'},province:req.query.province,city:req.query.city}, {limit: limit, page: page})
+
+            }
+            if(req.query.district){
+                model = await Model.paginate({year: {$regex: keyWords, $options: 'i'},province:req.query.province,city:req.query.city,district:req.query.district}, {limit: limit, page: page})
+
+            }
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
         }
         catch (err) {

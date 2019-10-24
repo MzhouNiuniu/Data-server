@@ -17,8 +17,8 @@ var FinancialingSchema = new Schema({
             remainingTime:String,//剩余时间
             makeRate:String,//成交利率
             BP:String,//偏离
-            aboutFile:String,//相关文件
-            other:String,//相关文件
+            aboutFile:Array,//相关文件
+            other:Array,//相关文件
         }
     ],
     status:{
@@ -26,7 +26,7 @@ var FinancialingSchema = new Schema({
         default:0
         //0待审核  1审核通过  2审核未通过
     },
-    DataId:String,//企业id 关联企业
+    DataId:Schema.Types.ObjectId,//企业id 关联企业
     province:String,
     code:String,
     abbreviation:String,//简称
@@ -46,7 +46,6 @@ var FinancialingSchema = new Schema({
     principalUnderwriter:String,//主承销商
     addEnhancementWay:String,//增信措施
     aboutFile:Array,//相关文件
-    specification:Array,//相关文件
     specification:Array,//募集说明书.
     report:Array,//评级报告.
 });

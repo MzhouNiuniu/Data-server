@@ -9,7 +9,7 @@ var FinancialDataSchema = new Schema({
         type: String,
         'default': shortid.generate
     },
-    DataId:String,
+    DataId:Schema.Types.ObjectId,
     year: String,//年限
     totalAsset: Number,//总资产
     netAsset: String,//净资产

@@ -85,9 +85,10 @@ class IndexConfig {
     }
 
     async getBigData(req, res) {
-        let p = await CModel.find({level: '省', status: '1'}).count()
-        let c = await CModel.find({level: '市', status: '1'}).count()
-        let d = await CModel.find({level: '区', status: '1'}).count()
+        let p = await CModel.find({level: '省', status: 1}).count()
+        let c = await CModel.find({level: '地市', status: 1}).count()
+        let d = await CModel.find({level: '区县', status: 1}).count()
+
         let mainType = await CModel.aggregate([{
                 $match: {
                     status: 1 //匹配number>=100的记录

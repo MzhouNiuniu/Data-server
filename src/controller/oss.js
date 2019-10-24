@@ -69,43 +69,46 @@ class Oss {
                 let _id = shortid.generate()
                 var newpath
                 let suffix
-                if(files.File.type=='image/png'){
-                    suffix=_id+'.png'
+                    console.log(files.File.name.split(".").reverse()[0])
+                    // ${detail.aboutFile.split("/").r
+                    // everse()[0].split(".").reverse()[0]}`
+                // if(files.File.type=='image/png'){
+                //     suffix=_id+'.png'
+                //     newpath = path.join(path.dirname(oldpath),suffix);
+                // }
+                // if(files.File.type=='image/jpeg'){
+                //     suffix=_id+'.jpg'
+                //     newpath = path.join(path.dirname(oldpath),suffix);
+                // }
+                // if(files.File.type=='application/x-rar-compressed'){
+                //     suffix=_id+'.rar'
+                //     newpath = path.join(path.dirname(oldpath),suffix);
+                // }
+                //     if(files.File.type=='application/octet-stream'){
+                //         suffix=_id+'.rar'
+                //         newpath = path.join(path.dirname(oldpath),suffix);
+                //     }
+                //     if(files.File.type=='application/x-zip-compressed'){
+                //         suffix=_id+'.rar'
+                //         newpath = path.join(path.dirname(oldpath),suffix);
+                //     }
+                //
+                // if(files.File.type=='application/zip'){
+                //     suffix=_id+'.zip'
+                //     newpath = path.join(path.dirname(oldpath),suffix);
+                // }
+                // if(files.File.type=='application/vnd.openxmlformats-officedocument.presentationml.presentation'){
+                    suffix=_id+`.${files.File.name.split(".").reverse()[0]}`
                     newpath = path.join(path.dirname(oldpath),suffix);
-                }
-                if(files.File.type=='image/jpeg'){
-                    suffix=_id+'.jpg'
-                    newpath = path.join(path.dirname(oldpath),suffix);
-                }
-                if(files.File.type=='application/x-rar-compressed'){
-                    suffix=_id+'.rar'
-                    newpath = path.join(path.dirname(oldpath),suffix);
-                }
-                    if(files.File.type=='application/octet-stream'){
-                        suffix=_id+'.rar'
-                        newpath = path.join(path.dirname(oldpath),suffix);
-                    }
-                    if(files.File.type=='application/x-zip-compressed'){
-                        suffix=_id+'.rar'
-                        newpath = path.join(path.dirname(oldpath),suffix);
-                    }
-
-                if(files.File.type=='application/zip'){
-                    suffix=_id+'.zip'
-                    newpath = path.join(path.dirname(oldpath),suffix);
-                }
-                if(files.File.type=='application/vnd.openxmlformats-officedocument.presentationml.presentation'){
-                    suffix=_id+'.ppt'
-                    newpath = path.join(path.dirname(oldpath),suffix);
-                }
-                if(files.File.type=='application/vnd.openxmlformats-officedocument.presentationml.presentation'){
-                    suffix=_id+'.ppt'
-                    newpath = path.join(path.dirname(oldpath),suffix);
-                }
-                if(files.File.type=='application/msword'){
-                    suffix=_id+'.doc'
-                    newpath = path.join(path.dirname(oldpath),suffix);
-                }
+                // }
+                // if(files.File.type=='application/vnd.openxmlformats-officedocument.presentationml.presentation'){
+                //     suffix=_id+'.ppt'
+                //     newpath = path.join(path.dirname(oldpath),suffix);
+                // }
+                // if(files.File.type=='application/msword'){
+                //     suffix=_id+'.doc'
+                //     newpath = path.join(path.dirname(oldpath),suffix);
+                // }
 
 
                 fs.rename(oldpath,newpath,(err)=>{
