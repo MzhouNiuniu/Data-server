@@ -6,23 +6,19 @@ var moment = require('moment')
 var mongoosePaginate = require('mongoose-paginate');
 //基础数据
 var BasicDataSchema = new Schema({
-    _id: {
-        type: String,
-        'default': shortid.generate
-    },
     province:String,
     city:String,
     district:String,
     count:String,//用于数据转化
     year:String,
     directly:String,//行政级别
-    GDP:String,//GDP
-    addFDP:String,//GDP增速
-    income:String,//收入
-    addIncome:String,//增长收入
-    balance:String,//存续债卷余额
-    budget:String,//预算
-    man:String,//人口
+    GDP:Number,//GDP
+    addFDP:Number,//GDP增速
+    income:Number,//收入
+    addIncome:Number,//增长收入
+    balance:Number,//存续债卷余额
+    budget:Number,//预算
+    man:Number,//人口
     releaseTime:{
         type:String,
         default:moment(new Date()).format('YYYY-MM-DD HH:mm:ss')

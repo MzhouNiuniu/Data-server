@@ -45,6 +45,9 @@ import aboutRouter from './routes/about'
 import indexConfigRouter from './routes/indexConfig'
 import companyDataRouter from './routes/companyData'
 import basicDataRouter from './routes/BasicData'
+import financialingRouter from './routes/financialing'
+
+
 var app = express();
 var bodyParser = require('body-parser')
 import config from './config/settings'
@@ -98,6 +101,8 @@ app.use('/about', aboutRouter)//关于我们
 app.use('/indexConfig', indexConfigRouter)//首页配置
 app.use('/companyData', companyDataRouter)//城投
 app.use('/basicData', basicDataRouter)
+app.use('/financialing', financialingRouter)
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));

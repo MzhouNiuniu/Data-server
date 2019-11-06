@@ -8,6 +8,13 @@ var mongoosePaginate = require('mongoose-paginate');
 //债券发型信息
 var FinancialingSchema = new Schema({
     year:String,//年份
+    financingType:{
+        type: String,
+    },//融资种类
+    DataName: {
+        type: String,
+        index: true
+    },//企业id 关联企业
     //此处由于前端表单不好判断 为方便前端处理列多个字段管理
     record:[
         {
@@ -17,26 +24,20 @@ var FinancialingSchema = new Schema({
             remainingTime:String,//剩余时间
             makeRate:String,//成交利率
             BP:String,//偏离
-            aboutFile:Array,//相关文件
-            other:Array,//相关文件
+            aboutFile:Object,//相关文件
+            other:Object,//相关文件
         }
     ],
-    status:{
-        type:Number,
-        default:0
-        //0待审核  1审核通过  2审核未通过
-    },
-    DataId:Schema.Types.ObjectId,//企业id 关联企业
-    province:String,
-    code:String,
+    province:String,//公司所在省份
+    code:String,//债券编码
     abbreviation:String,//简称
     issuer:String,//发行人
     fullName:String,//发行人
     type:String,
     scale:String,//发行规模
     issueWay:String,//发行方式
-    startTime:String,//开始时间
-    endTime:String,//结束时间
+    startTime:Date,//开始时间
+    endTime:Date,//结束时间
     repaymentWay:String,//还本方式
     interestWay:String,//付息方式
     deadlineBond:String,//债券期限

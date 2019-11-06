@@ -9,7 +9,10 @@ var RateSchema = new Schema({
         type: String,
         'default': shortid.generate
     },
-    DataId: Schema.Types.ObjectId,
+    DataId: {
+        type: Schema.Types.ObjectId,
+        index: true
+    },
     year: String,//年份
     main: {//评级
         enum: ['AAA', 'AA+', 'AA', '其他'],

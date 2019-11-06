@@ -19,6 +19,7 @@ class User {
      * @apiParam {string} password  密码
      * @apiSampleRequest  /user/login
      */
+
     async test(req,res){
         console.log(req.body)
         // console.log(res)
@@ -41,7 +42,21 @@ class User {
         }
 
     }
-
+    /**
+     * @apiGroup User
+     * @delById 删除
+     * @api {post} /uesr/delById 删除新闻
+     * @apiSampleRequest  /uesr/delById
+     */
+    async delById(req, res, next) {
+        try {
+            let news = await UserModel.remove({'_id': req.body.id})
+            res.send(siteFunc.renderApiData(req, 200, 'ok'))
+        }
+        catch (err) {
+            res.send(siteFunc.renderApiErr(req, res, 500, err))
+        }
+    }
     /**
      * @apiGroup User
      * @apiName 新增用户

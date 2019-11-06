@@ -42,7 +42,7 @@ exports.FinancialData = require('./FinancialData');
 exports.Financialing = require('./Financialing');
 exports.Rate = require('./Rate');
 exports.BasicData = require('./BasicData');
-
+exports.BrModel = require('./BondRecord');
 exports.Oss = require('./oss')
 exports.FileChunk = require('./fs.chunks')
 exports.FileFiles = require('./fs.files')

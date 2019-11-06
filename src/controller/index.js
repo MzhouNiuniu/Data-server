@@ -12,4 +12,6 @@ exports.IndexConfig = require('./indexConfig');
 exports.companyData = require('./companyData');
 exports.Oss = require('./oss');
 exports.BasicData = require('./basicData');
+exports.Financialing = require('./Financialing');
+
 

@@ -57,18 +57,30 @@ class BasicData {
         var keyWords = req.query.year || ''
         var limit = Number(req.query.limit || 10)
         var page = Number(req.query.page || 1)
-        let model=[]
+        let model = []
         try {
             model = await Model.paginate({year: {$regex: keyWords, $options: 'i'}}, {limit: limit, page: page})
-            if(req.query.province){
-                model = await Model.paginate({year: {$regex: keyWords, $options: 'i'},province:req.query.province}, {limit: limit, page: page})
+            if (req.query.province) {
+                model = await Model.paginate({
+                    year: {$regex: keyWords, $options: 'i'},
+                    province: req.query.province
+                }, {limit: limit, page: page})
             }
-            if(req.query.city){
-                model = await Model.paginate({year: {$regex: keyWords, $options: 'i'},province:req.query.province,city:req.query.city}, {limit: limit, page: page})
+            if (req.query.city) {
+                model = await Model.paginate({
+                    year: {$regex: keyWords, $options: 'i'},
+                    province: req.query.province,
+                    city: req.query.city
+                }, {limit: limit, page: page})
 
             }
-            if(req.query.district){
-                model = await Model.paginate({year: {$regex: keyWords, $options: 'i'},province:req.query.province,city:req.query.city,district:req.query.district}, {limit: limit, page: page})
+            if (req.query.district) {
+                model = await Model.paginate({
+                    year: {$regex: keyWords, $options: 'i'},
+                    province: req.query.province,
+                    city: req.query.city,
+                    district: req.query.district
+                }, {limit: limit, page: page})
 
             }
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
@@ -82,9 +94,9 @@ class BasicData {
      * @apiGroup BasicData
      * @getList 获取列表
      * @api {get} /basicData/getListByWeb 获取列表
-     * @apiParam {string} directly   不传默认省级  枚举 只能是 省级 市级 区级三种
-     * @apiParam {string} province   如果你选到省级一下了 比如江苏省  这个字段你就传江苏省
-     * @apiParam {string} city   如果你选到省级一下了 比如江苏省 南京市  这个字段你就传南京市  其实江苏省也可以不传传最好 保证唯一性
+     * @apiParam {string} directly   不传默认省  枚举 只能是 省 地市 区级三种
+     * @apiParam {string} province   如果你选到省一下了 比如江苏省  这个字段你就传江苏省
+     * @apiParam {string} city   如果你选到省一下了 比如江苏省 南京市  这个字段你就传南京市  其实江苏省也可以不传传最好 保证唯一性
      */
     async getListByWeb(req, res, next) {
 
@@ -96,10 +108,8 @@ class BasicData {
             if (!req.query.directly) {
                 let pam
                 if (req.query.year) {
-                    pam = {'province': '北京市', 'directly': '省级', year: req.query.year}
+                    pam = {'province': '北京市', 'directly': '省', year: req.query.year}
                 }
-                console.log('321')
-                console.log(req.query.directly)
                 let count = await cModel.aggregate([{
                         $match: {
                             province: '北京市', //匹配number>=100的记录m
@@ -112,19 +122,19 @@ class BasicData {
                     }]
                 )
                 models = await Model.find(pam)
-                console.log('count')
-                console.log(count)
                 if (count.length > 0) {
-                    console.log(models)
-                    models[0].count = count[0].count
+                    if (models.length > 0) {
+                        models[0].count = count[0].count
+                    }
+                    else {
+                        models = {count: count[0].count}
+                    }
 
-                    console.log(models[0].count)
                 }
                 else {
-                    console.log('coun11t')
-                    models[0].count = 0
+                    models = {count: 0}
                 }
-                model = await Model.find({year: req.query.year, 'directly': '省级'})
+                model = await Model.find({year: req.query.year, 'directly': '省'})
                 for (let index = 0; index < model.length; index++) {
                     let count = await cModel.aggregate([{
                             $match: {
@@ -138,18 +148,19 @@ class BasicData {
                         }]
                     )
                     if (count.length > 0) {
-                        model[index].count = count[0].count
+                        if (model.length > 0) {
+                            model[index].count = count[0].count
+                        }
+                        else {
+                            model = {count: count[0].count}
+                        }
                     }
                     else {
                         model[index].count = 0
                     }
-
-
                 }
-
-
-            }
-            else if (req.query.directly == '省级') {
+            }//初始化
+            else if (req.query.directly == '省') {
                 let count = await cModel.aggregate([{
                         $match: {
                             province: req.query.province, //匹配number>=100的记录m
@@ -161,15 +172,20 @@ class BasicData {
                         }
                     }]
                 )
-                models = await Model.find({directly: '省级', year: req.query.year, province: req.query.province})
+                models = await Model.find({directly: '省', year: req.query.year, province: req.query.province})
                 if (count.length > 0) {
-                    models[0].count = count[0].count
+                    if (models.length > 0) {
+                        models[0].count = count[0].count
+                    }
+                    else {
+                        models = {count: count[0].count}
+                    }
 
                 }
                 else {
-                    models[0].count = 0
+                    models = [{count: 0}]
                 }
-                model = await Model.find({year: req.query.year, 'directly': '市级', province: req.query.province})
+                model = await Model.find({year: req.query.year, 'directly': '地市', province: req.query.province})
                 for (let index = 0; index < model.length; index++) {
                     let count = await cModel.aggregate([{
                             $match: {
@@ -191,8 +207,8 @@ class BasicData {
 
 
                 }
-            }
-            else if (req.query.directly == '市级') {
+            } //一级
+            else if (req.query.directly == '地市') {
                 let count = await cModel.aggregate([{
                         $match: {
                             city: req.query.city, //匹配number>=100的记录m
@@ -204,15 +220,14 @@ class BasicData {
                         }
                     }]
                 )
-                models = await Model.find({directly: '市级', year: req.query.year, city: req.query.city})
+                models = await Model.find({directly: '地市', year: req.query.year, city: req.query.city})
                 if (count.length > 0) {
                     models[0].count = count[0].count
-
                 }
                 else {
                     models[0].count = 0
                 }
-                model = await Model.find({year: req.query.year, 'directly': '区级', city: req.query.city})
+                model = await Model.find({year: req.query.year, 'directly': '区县', city: req.query.city})
                 for (let index = 0; index < model.length; index++) {
                     let count = await cModel.aggregate([{
                             $match: {
@@ -234,14 +249,62 @@ class BasicData {
 
 
                 }
+            }//二级
+            else if (req.query.directly == '区县') {
+                let count = await cModel.aggregate([{
+                        $match: {
+                            city: req.query.district, //匹配number>=100的记录m
+                        }
+                    }, {
+                        $group: {
+                            _id: 'id',
+                            count: {$sum: 1},
+                        }
+                    }]
+                )
+                models = await Model.find({directly: '区县', year: req.query.year, district: req.query.district})
+                if (count.length > 0) {
+                    models[0].count = count[0].count
+                }
+                else {
+                    models[0].count = 0
+                }
+                model = await Model.find({year: req.query.year, 'directly': '区县', city: req.query.city})
+                for (let index = 0; index < model.length; index++) {
+                    let count = await cModel.aggregate([{
+                            $match: {
+                                district: model[index].district, //匹配number>=100的记录
+                            }
+                        }, {
+                            $group: {
+                                _id: 'id',
+                                count: {$sum: 1},
+                            }
+                        }]
+                    )
+                    if (model.length > 0) {
+                        if (count.length > 0) {
+
+                            model[index].count = count[0].count
+                        }
+                        else {
+
+                        }
+                    }
+                    else {
+                        model[index].count = 0
+                    }
+                }
             }
+
+
+            //三级}
             let data = {
-                list: model,
-                base: models[0]
-            }
-            res.send(siteFunc.renderApiData(req, 200, 'ok', data))
-        }
-        catch (err) {
+                    list: model,
+                    base: models[0]
+                }
+            res.send(siteFunc.renderApiData(req, 200, 'ok', data))}
+            catch (err) {
             res.send(siteFunc.renderApiErr(req, res, 500, err))
         }
     }
@@ -255,7 +318,8 @@ class BasicData {
      */
     async getDetails(req, res, next) {
         try {
-            let model = await Model.find({'_id': req.query.id})
+            let model = await
+                Model.find({'_id': req.query.id})
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
         }
         catch (err) {
@@ -271,7 +335,8 @@ class BasicData {
      */
     async delById(req, res, next) {
         try {
-            let model = await Model.remove({'_id': req.body.id})
+            let model = await
+                Model.remove({'_id': req.body.id})
             res.send(siteFunc.renderApiData(req, 200, 'ok'))
         }
         catch (err) {
@@ -290,7 +355,8 @@ class BasicData {
     async updateById(req, res, next) {
         try {
             req.body.releaseTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
-            let model = await Model.findByIdAndUpdate(req.body.id, req.body)
+            let model = await
+                Model.findByIdAndUpdate(req.body.id, req.body)
             res.send(siteFunc.renderApiData(req, 200, 'ok'))
         }
         catch (err) {
@@ -300,7 +366,8 @@ class BasicData {
 
     async getBaseListByCity(req, res, next) {
         try {
-            let model = await Model.find(req.query)
+            let model = await
+                Model.find(req.query)
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
         }
         catch (err) {

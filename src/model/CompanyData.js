@@ -20,6 +20,12 @@ var CompanyDataSchema = new Schema({
         default:0
         //0待审核  1审核通过  2审核未通过
     },
+    companyStatus:{
+        type:Number,
+        default:0
+        //0待审核  1审核通过  2审核未通过
+    }
+    ,
     name:String,//公司名称
     province:String,//省
     city:String,//市
@@ -34,7 +40,7 @@ var CompanyDataSchema = new Schema({
     },//创建时间
     level:String,//行政级别
     info:String,//企业概况
-    registerCapital:String,//注册资本
+    registerCapital:Number,//注册资本
     photos:String,//企业图片
     financial:[],//
     belongGovernment:String,//所属政府
@@ -50,26 +56,7 @@ var CompanyDataSchema = new Schema({
     rate:[
     ],
     //
-    financing:[
-        {
-            year:String,//年份
-            //此处由于前端表单不好判断 为方便前端处理列多个字段管理
-            enterpriseBond:Object,//企业
-            companyBond:Object,//公司
-            middleBond:Object,//中小
-            unpublicBond:Object,//非公开
-            enterpriseAssetBond:Object,//企业资产
-            credit:Object,//信贷
-            SCP:Object,//超短期融资券（SCP）
-            CP:Object,//短期融资券（CP）
-            MTN:Object,//中期票据（MTN）
-            PPN:Object,//定向工具（PPN）
-            ABN:Object,//资产支持票据（ABN）
-            PRN:Object,//项目收益票据（PRN）
-            DFI:Object,//债务融资工具（DFI）
-            GN:Object,//绿色债务融资工具（GN）
-        }
-    ],
+    financing:Array,
     other:[],
     releaseTime:{
         type:String,
