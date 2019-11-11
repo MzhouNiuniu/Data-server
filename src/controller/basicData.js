@@ -108,7 +108,7 @@ class BasicData {
             if (!req.query.directly) {
                 let pam
                 if (req.query.year) {
-                    pam = {'province': '北京市', 'directly': '省', year: req.query.year}
+                    pam = {'province': '北京市', 'directly': '省级', year: req.query.year}
                 }
                 let count = await cModel.aggregate([{
                         $match: {
@@ -122,6 +122,7 @@ class BasicData {
                     }]
                 )
                 models = await Model.find(pam)
+                console.log(models)
                 if (count.length > 0) {
                     if (models.length > 0) {
                         models[0].count = count[0].count
@@ -134,7 +135,8 @@ class BasicData {
                 else {
                     models = {count: 0}
                 }
-                model = await Model.find({year: req.query.year, 'directly': '省'})
+                model = await Model.find({year: req.query.year, 'directly': '省级'})
+                console.log(model)
                 for (let index = 0; index < model.length; index++) {
                     let count = await cModel.aggregate([{
                             $match: {
@@ -160,7 +162,7 @@ class BasicData {
                     }
                 }
             }//初始化
-            else if (req.query.directly == '省') {
+            else if (req.query.directly == '省级') {
                 let count = await cModel.aggregate([{
                         $match: {
                             province: req.query.province, //匹配number>=100的记录m
@@ -172,7 +174,7 @@ class BasicData {
                         }
                     }]
                 )
-                models = await Model.find({directly: '省', year: req.query.year, province: req.query.province})
+                models = await Model.find({directly: '省级', year: req.query.year, province: req.query.province})
                 if (count.length > 0) {
                     if (models.length > 0) {
                         models[0].count = count[0].count
@@ -185,7 +187,7 @@ class BasicData {
                 else {
                     models = [{count: 0}]
                 }
-                model = await Model.find({year: req.query.year, 'directly': '地市', province: req.query.province})
+                model = await Model.find({year: req.query.year, 'directly': '地市级', province: req.query.province})
                 for (let index = 0; index < model.length; index++) {
                     let count = await cModel.aggregate([{
                             $match: {
@@ -208,7 +210,7 @@ class BasicData {
 
                 }
             } //一级
-            else if (req.query.directly == '地市') {
+            else if (req.query.directly == '地市级') {
                 let count = await cModel.aggregate([{
                         $match: {
                             city: req.query.city, //匹配number>=100的记录m
@@ -220,14 +222,14 @@ class BasicData {
                         }
                     }]
                 )
-                models = await Model.find({directly: '地市', year: req.query.year, city: req.query.city})
+                models = await Model.find({directly: '地市级', year: req.query.year, city: req.query.city})
                 if (count.length > 0) {
                     models[0].count = count[0].count
                 }
                 else {
                     models[0].count = 0
                 }
-                model = await Model.find({year: req.query.year, 'directly': '区县', city: req.query.city})
+                model = await Model.find({year: req.query.year, 'directly': '区县级', city: req.query.city})
                 for (let index = 0; index < model.length; index++) {
                     let count = await cModel.aggregate([{
                             $match: {
@@ -250,7 +252,7 @@ class BasicData {
 
                 }
             }//二级
-            else if (req.query.directly == '区县') {
+            else if (req.query.directly == '区县级') {
                 let count = await cModel.aggregate([{
                         $match: {
                             city: req.query.district, //匹配number>=100的记录m
@@ -262,14 +264,14 @@ class BasicData {
                         }
                     }]
                 )
-                models = await Model.find({directly: '区县', year: req.query.year, district: req.query.district})
+                models = await Model.find({directly: '区县级', year: req.query.year, district: req.query.district})
                 if (count.length > 0) {
                     models[0].count = count[0].count
                 }
                 else {
                     models[0].count = 0
                 }
-                model = await Model.find({year: req.query.year, 'directly': '区县', city: req.query.city})
+                model = await Model.find({year: req.query.year, 'directly': '区县级', city: req.query.city})
                 for (let index = 0; index < model.length; index++) {
                     let count = await cModel.aggregate([{
                             $match: {

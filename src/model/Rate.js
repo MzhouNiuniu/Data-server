@@ -19,7 +19,6 @@ var RateSchema = new Schema({
         type: String
     },
     wish: {//展望评级
-        enum: ['AAA', 'AA+', 'AA', '其他'],
         type: String
     },
 

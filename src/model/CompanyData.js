@@ -46,9 +46,10 @@ var CompanyDataSchema = new Schema({
     belongGovernment:String,//所属政府
     businessScope:String,//企业经营范围
     incomeInfo:[],//新增业务数据
-    totalAsset:Number,
+    totalAsset:Number,//总资产
     news:Array,
-    businessCount:Number,
+    operatingReceipt:Number,//营业收入
+    businessCount:Number,//主营收入
     rateMain:{//评级
         enum : ['AAA','AA+','AA','其他'],
         type:String

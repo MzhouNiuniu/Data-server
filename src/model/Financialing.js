@@ -11,6 +11,12 @@ var FinancialingSchema = new Schema({
     financingType:{
         type: String,
     },//融资种类
+    auditList:Array, //审核记录
+    status:{
+        type:Number,
+        default:0
+        //0待审核  1审核通过  2审核未通过
+    },
     DataName: {
         type: String,
         index: true

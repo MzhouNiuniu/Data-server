@@ -29,9 +29,9 @@ class CompanyData {
      */
     async publish(req, res, next) {
         try {
-            let fmodel =  await Model.find({name:req.body.name})
-            if (fmodel.length>0){
-                res.send(siteFunc.renderApiErr(req, res, 500,'公司名称重复'))
+            let fmodel = await Model.find({name: req.body.name})
+            if (fmodel.length > 0) {
+                res.send(siteFunc.renderApiErr(req, res, 500, '公司名称重复'))
                 return
             }
             const id = mongoose.Types.ObjectId()
@@ -45,7 +45,8 @@ class CompanyData {
                     if (year < item.year) {
                         year = item.year
                         model.totalAsset = item.totalAsset
-                        model.businessCount = item.business
+                        model.businessCount = item.mainBusiness //主营收入
+                        model.operatingReceipt = item.business //营业收入
                     }
                     let fModel = new FModel(item)
                     fModel.DataId = id
@@ -143,16 +144,10 @@ class CompanyData {
                 ]
             )
 
-            let
-                nmodel = await
-                    NModel
-                        .find({
-                                'source': model[0]
-
-                                    .name
-                            }
-                        )
-// source
+            let nmodel = await NModel.find({
+                    'source': model[0].name
+                }
+            )// source
 
             model[0].financial = fModel
             model[0].financing = fiModel
@@ -208,7 +203,8 @@ class CompanyData {
                     if (year < item.year) {
                         year = item.year
                         req.body.totalAsset = item.totalAsset
-                        req.body.businessCount = item.business
+                        req.body.businessCount = item.mainBusiness
+                        req.body.operatingReceipt=item.business //营业收入
                     }
                     let fModel = new FModel(item)
                     fModel.DataId = req.body.id
@@ -283,7 +279,7 @@ class CompanyData {
      * @apiParam {string} limit  本页多少条
      * @apiParam {string} page  第几页    （现成框架字段忍受一下）
      * @apiParam {string} keyWords  关键字
-     * @apiParam {string} province  省
+     * @apiParam {string} province  省级
      * @apiParam {string} mainType  主体类型
      * @apiParam {string} rateMain  评级
      * @apiParam {string} totalAsset  总资产  实例    如果  0-100 那么传参   0,100
@@ -421,7 +417,7 @@ class CompanyData {
 
         }
 
-        else if (req.query.directly == '省') {
+        else if (req.query.directly == '省级') {
             model = await
                 Model.paginate({
                     name: {$regex: keyWords, $options: 'i'},
@@ -432,7 +428,7 @@ class CompanyData {
                     sort: {stick: -1}
                 })
         }
-        else if (req.query.directly == '地市') {
+        else if (req.query.directly == '地市级') {
             model = await
                 Model.paginate({
                     name: {$regex: keyWords, $options: 'i'},
@@ -443,7 +439,7 @@ class CompanyData {
                     sort: {stick: -1}
                 })
         }
-        else if (req.query.directly == '区县') {
+        else if (req.query.directly == '区县级') {
             model = await
                 Model.paginate({
                     name: {$regex: keyWords, $options: 'i'},

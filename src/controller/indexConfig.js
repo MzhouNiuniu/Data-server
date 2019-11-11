@@ -85,9 +85,9 @@ class IndexConfig {
     }
 
     async getBigData(req, res) {
-        let p = await CModel.find({level: '省', status: 1}).count()
-        let c = await CModel.find({level: '地市', status: 1}).count()
-        let d = await CModel.find({level: '区县', status: 1}).count()
+        let p = await CModel.find({level: '省级', status: 1}).count()
+        let c = await CModel.find({level: '地市级', status: 1}).count()
+        let d = await CModel.find({level: '区县级', status: 1}).count()
 
         let mainType = await CModel.aggregate([{
                 $match: {
@@ -132,7 +132,7 @@ class IndexConfig {
             }, {
                 $group: {
                     _id: '$mainType',
-                    totalAsset: {$sum: '$totalAsset'}
+                    totalAsset: {$sum: '$operatingReceipt'}
                 }
             }]
         )
@@ -156,10 +156,10 @@ class IndexConfig {
                 if(items=='城投'){
                     ct++
                 }
-                if(items=='新区城投'){
+                else if(items=='新区城投'){
                     xq++
                 }
-                if(items=='其他'){
+                else {
                     qt++
                 }
 

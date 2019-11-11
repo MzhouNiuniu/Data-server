@@ -20,6 +20,7 @@ class Financialing {
         try {
             req.body.releaseTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
             let model = new Model(req.body)
+            console.log(model)
             model.save()
             res.send(siteFunc.renderApiData(res, 200, '插入成功'))
         }
@@ -41,7 +42,7 @@ class Financialing {
         var limit = Number(req.query.limit || 10)
         var page = Number(req.query.page || 1)
         try {
-            let model = await Model.paginate({abbreviation: {$regex: keyWords, $options: 'i'}}, {limit: limit, page: page,sort:{stick:-1,releaseTime:-1}})
+            let model = await Model.paginate({DataName: {$regex: keyWords, $options: 'i'}}, {limit: limit, page: page,sort:{stick:-1,releaseTime:-1}})
             res.send(siteFunc.renderApiData(req, 200, 'ok', model))
         }
         catch (err) {
@@ -139,7 +140,13 @@ class Financialing {
             if(req.body.status==2){
                 let model = await Model.findById(req.body.id)
                 model.status=req.body.status
-                model.auditList.push({author:req.session.adminUserInfo,message:req.body.message,releaseTime:moment(new Date()).format('YYYY-MM-DD HH:mm:ss')})
+                if(model.auditList){
+                    model.auditList.push({author:req.session.adminUserInfo,message:req.body.message,releaseTime:moment(new Date()).format('YYYY-MM-DD HH:mm:ss')})
+
+                }else{
+                    model.auditList=[{author:req.session.adminUserInfo,message:req.body.message,releaseTime:moment(new Date()).format('YYYY-MM-DD HH:mm:ss')}]
+
+                }
                 let models = await Model.findByIdAndUpdate(req.body.id, model)
             }
             else{
