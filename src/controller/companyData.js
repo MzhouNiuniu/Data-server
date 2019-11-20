@@ -294,7 +294,7 @@ class CompanyData {
         var province = req.query.province || ''
         var mainType = req.query.mainType || ''
         var totalAsset = req.query.totalAsset ? req.query.totalAsset.split(",") : [0, 99999999999999999999999]
-        var business = req.query.business ? req.query.business.split(",") : [0, 99999999999999999999999]
+        var operatingReceipt = req.query.operatingReceipt ? req.query.operatingReceipt.split(",") : [0, 99999999999999999999999]
         var rateMain = req.query.rateMain ? req.query.rateMain : null
         let params
         if (keyWords == '') {
@@ -313,25 +313,25 @@ class CompanyData {
         }
         // totalAsset: {$lte: totalAsset[1], $gte: totalAsset[0]},
         // business: {$lte: business[1], $gte: business[0]},            rateMain
-        switch (req.query.income) {
+        switch (req.query.operatingReceipt) {
             case '1':
-                business = [0, 10]
+                operatingReceipt = [0, 10]
                 break;
 
             case '2':
-                business = [10, 50]
+                operatingReceipt = [10, 50]
                 break;
             case '3':
-                business = [50, 100]
+                operatingReceipt = [50, 100]
                 break;
             case '4':
-                business = [100, 200]
+                operatingReceipt = [100, 200]
                 break;
             case '5':
-                business = [200, 99999999999999999999999]
+                operatingReceipt = [200, 99999999999999999999999]
                 break;
             default:
-                business = [0, 99999999999999999999999]
+                operatingReceipt = [0, 99999999999999999999999]
 
         }
         switch (req.query.scale) {
@@ -354,8 +354,8 @@ class CompanyData {
                 totalAsset = [0, 99999999999999999999999]
 
         }
-        if (req.query.income) {
-            params.business = {$lte: business[1], $gte: business[0]}
+        if (req.query.operatingReceipt) {
+            params.operatingReceipt = {$lte: operatingReceipt[1], $gte: operatingReceipt[0]}
         }
         if (req.query.province) {
             params.province = req.query.province

@@ -49,7 +49,7 @@ class Collaborate {
      */
     async getList(req, res, next) {
         var keyWords = req.query.keyWords || ''
-        var limit = Number(req.query.limit || 10)
+        var limit = Number(req.query.limit || 6)
         var page = Number(req.query.page || 1)
 
         try {

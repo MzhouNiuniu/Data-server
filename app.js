@@ -79,7 +79,7 @@ app.use(function (req, res, next) {
 // app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');//设置html为模板引擎 注意这里是html
 
-app.use(express.static(path.join(__dirname, 'public/dist')))
+app.use(express.static(path.join(__dirname, 'public/dist'),{maxAge:31557600}))
 app.engine('.html', require('ejs').__express); //设置ejs渲染html
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));

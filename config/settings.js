@@ -4,7 +4,7 @@
  */
 
 module.exports = {
-    ip:'192.168.9.105:3000',
+    ip:'http://47.110.10.44/',
     session_secret: 'doracms', // 务必修改
     auth_cookie_name: 'token',
     // 密码盐
@@ -18,9 +18,8 @@ module.exports = {
     PORT: 27017,
     USERNAME: 'doramart',
     PASSWORD: 'doramart',
-
     //文件系统配置
-    baseUrl:'http://192.168.9.105:3000/upload/',
+    baseUrl:'/upload/',
 };
 
 

@@ -6,7 +6,7 @@ var moment = require('moment')
 var node_xlsx = require('node-xlsx');
 const _ = require('lodash')
 import config from '../../config/settings'
-
+let pro=['北京市','上海市','重庆市','天津市']
 //考虑到资质文件图片很多 单独用一个表存放 提高读写效率
 class BasicData {
     constructor() {
@@ -36,7 +36,6 @@ class BasicData {
             req.body.author = req.session.adminUserInfo
             let model = new Model(req.body)
             model.save()
-            console.log(model)
             res.send(siteFunc.renderApiData(res, 200, '插入成功'))
         }
         catch (err) {
@@ -122,7 +121,6 @@ class BasicData {
                     }]
                 )
                 models = await Model.find(pam)
-                console.log(models)
                 if (count.length > 0) {
                     if (models.length > 0) {
                         models[0].count = count[0].count
@@ -133,10 +131,11 @@ class BasicData {
 
                 }
                 else {
-                    models = {count: 0}
+                    if(models.length>0){
+                        models[0].count=0
+                    }
                 }
                 model = await Model.find({year: req.query.year, 'directly': '省级'})
-                console.log(model)
                 for (let index = 0; index < model.length; index++) {
                     let count = await cModel.aggregate([{
                             $match: {
@@ -163,6 +162,8 @@ class BasicData {
                 }
             }//初始化
             else if (req.query.directly == '省级') {
+
+
                 let count = await cModel.aggregate([{
                         $match: {
                             province: req.query.province, //匹配number>=100的记录m
@@ -185,14 +186,19 @@ class BasicData {
 
                 }
                 else {
-                    models = [{count: 0}]
+                    if(models.length>0){
+                        models[0].count=0
+                    }
                 }
                 model = await Model.find({year: req.query.year, 'directly': '地市级', province: req.query.province})
                 for (let index = 0; index < model.length; index++) {
+                    let match = {city:model[index].city}
+
+                    if(pro.indexOf(req.query.province)>-1){
+                        match={district:model[index].city}
+                    }
                     let count = await cModel.aggregate([{
-                            $match: {
-                                city: model[index].city, //匹配number>=100的记录
-                            }
+                            $match: match, //匹配number>=100的记录
                         }, {
                             $group: {
                                 _id: 'id',
@@ -227,7 +233,9 @@ class BasicData {
                     models[0].count = count[0].count
                 }
                 else {
-                    models[0].count = 0
+                    if(models.length>0){
+                        models[0].count=0
+                    }
                 }
                 model = await Model.find({year: req.query.year, 'directly': '区县级', city: req.query.city})
                 for (let index = 0; index < model.length; index++) {
@@ -255,7 +263,7 @@ class BasicData {
             else if (req.query.directly == '区县级') {
                 let count = await cModel.aggregate([{
                         $match: {
-                            city: req.query.district, //匹配number>=100的记录m
+                            district: req.query.district, //匹配number>=100的记录m
                         }
                     }, {
                         $group: {
@@ -271,7 +279,7 @@ class BasicData {
                 else {
                     models[0].count = 0
                 }
-                model = await Model.find({year: req.query.year, 'directly': '区县级', city: req.query.city})
+                model = await Model.find({year: req.query.year, 'directly': '区县级', district: req.query.district})
                 for (let index = 0; index < model.length; index++) {
                     let count = await cModel.aggregate([{
                             $match: {
@@ -286,11 +294,10 @@ class BasicData {
                     )
                     if (model.length > 0) {
                         if (count.length > 0) {
-
                             model[index].count = count[0].count
                         }
                         else {
-
+                            model[0].count=0
                         }
                     }
                     else {
