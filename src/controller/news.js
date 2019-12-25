@@ -82,7 +82,6 @@ class News {
      */
     async getDetails(req, res, next) {
         try {
-
             let news = await NewModel.find({'_id': req.query.id})
             res.send(siteFunc.renderApiData(req, 200, 'ok', news))
         }

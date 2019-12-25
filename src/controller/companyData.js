@@ -407,7 +407,7 @@ class CompanyData {
             model = await
                 Model.paginate({
                     name: {$regex: keyWords, $options: 'i'},
-
+                    province: {$regex: '北京市'}
                 }, {
                     limit: limit,
                     page: page,
